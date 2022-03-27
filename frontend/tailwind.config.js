@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ['Kanit', ...defaultTheme.fontFamily.sans],
+      sans: ['Prompt', ...defaultTheme.fontFamily.sans],
     },
   },
   plugins: [],
