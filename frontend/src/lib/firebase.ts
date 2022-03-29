@@ -1,6 +1,7 @@
-import { initializeApp } from 'firebase/app'
+import { initializeApp, getApps } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
-const config = {
+const firebaseConfig = {
     apiKey: process.env.NEXT_FIREBASE_APIKEY,
     authDomain: process.env.NEXT_FIREBASE_AUTHDOMAIN,
     projectId: process.env. NEXT_FIREBASE_PROJECTID,
@@ -10,6 +11,10 @@ const config = {
     measurementId: process.env.NEXT_FIREBASE_MEASUREMENTID
 }
 
-const app = initializeApp(config)
+if (!getApps().length) {
+    initializeApp(firebaseConfig)
+}
 
-export default app
+export const auth = getAuth()
+
+export default firebaseConfig

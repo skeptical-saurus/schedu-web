@@ -1,9 +1,11 @@
+import { useAuth } from '../../context/AuthContext'
+
 type Props = {}
 
 const SignIn: React.FC<Props> = () => {
 
     const signInWithGoogle = ():void => {
-        // TODO: connect to google sign-in
+        
     }
 
     return (
