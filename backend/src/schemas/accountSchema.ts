@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
+
 const Schema = mongoose.Schema
 
 const accountSchema = new Schema({
@@ -21,4 +22,4 @@ const accountSchema = new Schema({
   },
 })
 
-export = accountSchema
+export default accountSchema
