@@ -6,13 +6,13 @@ const provider = new GoogleAuthProvider()
 
 const signIn = async () => {
     try {
-        const result = await signInWithPopup(auth, provider)
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-        const token = credential?.accessToken
-        const user = result.user
-        console.log({credential, token, user})
-    } catch (error:any) {
-        const credential = GoogleAuthProvider.credentialFromError(error)
+      const result = await signInWithPopup(auth, provider)
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = credential?.accessToken
+      const user = result.user
+      console.log({ credential, token, user })
+    } catch (error: any) {
+      const credential = GoogleAuthProvider.credentialFromError(error)
     }
 }
 

@@ -5,12 +5,12 @@ import Head from 'next/head'
 const Home: NextPage = () => {
 
     return (
-        <div>
-            <Head>
-                <title>Schedu</title>
-            </Head>
-            Hello wern
-        </div>
+      <div>
+        <Head>
+          <title>Schedu</title>
+        </Head>
+        Hello wern
+      </div>
     )
 
 }
