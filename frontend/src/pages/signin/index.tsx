@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 
 type Props = {}
@@ -5,6 +6,10 @@ type Props = {}
 const SignIn: React.FC<Props> = () => {
 
     const {signIn} = useAuth()
+
+    useEffect(() => {
+      
+    }, [])
 
     return (
       <div className='min-h-screen bg-[color:var(--blue)] text-white'>
