@@ -2,9 +2,7 @@ import { getCookieValue } from 'lib/cookie'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'context/AuthContext'
 
-type Props = {}
-
-const SignIn: React.FC<Props> = () => {
+const SignIn: React.FC = () => {
 
   const [isSigned, updateSignState] = useState(false)
 
