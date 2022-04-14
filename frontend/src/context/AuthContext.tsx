@@ -6,6 +6,7 @@ const provider = new GoogleAuthProvider()
 
 const signInWithGoogle = async () => {
   try {
+
     const result = await signInWithPopup(auth, provider)
     const credential = GoogleAuthProvider.credentialFromResult(result)
     const token = credential?.idToken
@@ -25,7 +26,12 @@ const signInWithGoogle = async () => {
 
 const signOutFromGoogle = async () => {
   try {
+
     await signOut(auth)
+
+    // remove firebase idToken from cookies
+    document.cookie = `SCHEDU_FBIDTOKEN=;expires=Thu, 01 Jan 1970 00:00:01 GMT`
+
   } catch (error: any) {
     console.log(error.message)
   }

@@ -32,7 +32,7 @@ const SignIn: React.FC<Props> = () => {
                 เข้าสู่หน้าหลัก
               </button>
             </a>
-            <button className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'>
+            <button onClick={() => signOut()} className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'>
               ออกจากระบบ
             </button>
           </div>
