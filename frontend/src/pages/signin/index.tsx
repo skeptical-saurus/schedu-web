@@ -8,7 +8,7 @@ const SignIn: React.FC<Props> = () => {
 
   const [isSigned, updateSignState] = useState(false)
 
-  const {signIn} = useAuth()
+  const { signIn, signOut } = useAuth()
 
   useEffect(() => {
     const getToken = () => {
@@ -27,9 +27,11 @@ const SignIn: React.FC<Props> = () => {
             กำลังอยู่ในระบบ ต้องการเข้าสู่หน้าหลักหรือไม่
           </div>
           <div className='flex items-center'>
-            <button className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'>
-              เข้าสู่หน้าหลัก
-            </button>
+            <a href="/">
+              <button className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'>
+                เข้าสู่หน้าหลัก
+              </button>
+            </a>
             <button className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'>
               ออกจากระบบ
             </button>
