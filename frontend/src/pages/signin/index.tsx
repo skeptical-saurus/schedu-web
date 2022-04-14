@@ -18,6 +18,19 @@ const SignIn: React.FC<Props> = () => {
     getToken()
   }, [])
 
+  const signInHandler = async () => {
+    const result: Boolean =  await signIn()
+    if (result) {
+      updateSignState(true)
+      location.href = '/'
+    }
+  }
+
+  const signOutHandler = async () => {
+    const result: Boolean = await signOut()
+    if (result) updateSignState(false)
+  }
+
   const renderActionPanel = () => {
     // Already sign-in
     if (isSigned) {
@@ -32,7 +45,7 @@ const SignIn: React.FC<Props> = () => {
                 เข้าสู่หน้าหลัก
               </button>
             </a>
-            <button onClick={() => signOut()} className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'>
+            <button onClick={signOutHandler} className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'>
               ออกจากระบบ
             </button>
           </div>
@@ -43,7 +56,7 @@ const SignIn: React.FC<Props> = () => {
     // Anonymous user
     return (
       <button
-        onClick={() => signIn()}
+        onClick={signInHandler}
         className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'
       >
         เข้าสู่ระบบด้วยบัญชี ITKMITL

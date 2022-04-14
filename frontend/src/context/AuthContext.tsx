@@ -18,9 +18,12 @@ const signInWithGoogle = async () => {
     expireAt.setTime(nextOneHour)
     document.cookie = `SCHEDU_FBIDTOKEN=${token};expires=${expireAt};path=/`
 
+    return true
+
   } catch (error: any) {
     const credential = GoogleAuthProvider.credentialFromError(error)
     console.log(error.message)
+    return false
   }
 }
 
@@ -32,19 +35,22 @@ const signOutFromGoogle = async () => {
     // remove firebase idToken from cookies
     document.cookie = `SCHEDU_FBIDTOKEN=;expires=Thu, 01 Jan 1970 00:00:01 GMT`
 
+    return true
+
   } catch (error: any) {
     console.log(error.message)
+    return false
   }
 }
 
 type authContextType = {
-  signIn: () => void,
-  signOut: () => void
+  signIn: () => Promise<Boolean>,
+  signOut: () => Promise<Boolean>
 }
 
 const authContextDefaultValues: authContextType = {
-  signIn: () => { signInWithGoogle() },
-  signOut: () => { signOutFromGoogle() }
+  signIn: async () => { return await signInWithGoogle() },
+  signOut: async () => { return await signOutFromGoogle() }
 }
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues)
