@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { createContext, useContext } from 'react'
-import { auth } from '../lib/firebase'
+import { auth } from 'lib/firebase'
 
 const provider = new GoogleAuthProvider()
 
