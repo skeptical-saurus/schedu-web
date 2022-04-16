@@ -9,7 +9,7 @@ const Layout: React.FC = ({children}) => {
   return (
     <>
       { pagesWithoutNavbar.includes(router.asPath) ? '' : <Navbar /> }
-      <main>{children}</main>
+      <main className='container mx-auto px-8 pt-32 pb-8'>{children}</main>
     </>
   )
 }
