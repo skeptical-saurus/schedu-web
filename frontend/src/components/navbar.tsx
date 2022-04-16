@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <>
+    <div className='fixed w-full'>
       <div className='container mx-auto p-8'>
         <div className='shadow-xl bg-gray-50 rounded-full px-8 py-4 flex items-center justify-between'>
           <div className='text-xl'>
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
