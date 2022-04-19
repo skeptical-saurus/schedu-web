@@ -1,6 +1,8 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { createContext, useContext } from 'react'
+import ky from 'ky'
 import { auth } from 'lib/firebase'
+import env from 'lib/env'
 
 const provider = new GoogleAuthProvider()
 
@@ -11,7 +13,12 @@ const signInWithGoogle = async () => {
     const credential = GoogleAuthProvider.credentialFromResult(result)
     const token = credential?.idToken
     const user = result.user
-    
+
+    await ky.get(`${env.apiUrl}/auth/verify`, {
+      headers: {
+        'id-token': await user.getIdToken()
+      }
+    })
     // store a firebase idToken cookie with 1-hour ttl
     let expireAt = new Date()
     let nextOneHour = expireAt.getTime() + (3600 * 1000)
