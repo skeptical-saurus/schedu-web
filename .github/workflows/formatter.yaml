@@ -1,0 +1,15 @@
+name: Auto format
+on: pull_request
+jobs:
+  format:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: --write --config backend/.prettierrc {backend,frontend}/**/*.{js,ts,json}
+          commit_message: "style: make code prettier (format code)"
