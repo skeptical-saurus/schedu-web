@@ -1,8 +1,9 @@
+import { composeMongoose } from 'graphql-compose-mongoose'
 import mongoose from 'mongoose'
 
-const Schema = mongoose.Schema
+import type { Account } from 'types/schemas'
 
-const accountSchema = new Schema({
+const accountSchema = new mongoose.Schema<Account>({
   googleId: String,
   businessId: String,
   firstName: String,
@@ -22,4 +23,6 @@ const accountSchema = new Schema({
   },
 })
 
-export default accountSchema
+export const AccountModel = mongoose.model<Account>('Account', accountSchema)
+
+export const AccountTC = composeMongoose(AccountModel)

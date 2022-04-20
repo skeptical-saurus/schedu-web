@@ -1,10 +1,11 @@
-export interface account {
-  _id: string
+import mongoose from 'mongoose'
+
+export interface Account extends mongoose.Document {
   googleId: string
-  bussiness: string
+  businessId: string
   firstName: string
   lastName: string
-  contract: {
+  contact: {
     email: string
     tel: string
   }
