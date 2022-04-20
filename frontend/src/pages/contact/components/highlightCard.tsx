@@ -1,6 +1,6 @@
 type Props = {}
 
-const ContactCard: React.FC<Props> = () => {
+const HighlightCard: React.FC<Props> = () => {
   return (
     <>
       <div className='px-6 py-8 rounded-xl shadow-xl text-center bg-gray-50'>
@@ -14,4 +14,4 @@ const ContactCard: React.FC<Props> = () => {
   )
 }
 
-export default ContactCard
+export default HighlightCard

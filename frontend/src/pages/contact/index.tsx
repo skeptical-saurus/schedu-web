@@ -1,4 +1,5 @@
-import ContactCard from './components/contactCard'
+import HighlightCard from './components/highlightCard'
+import ContactRow from './components/contactRow'
 
 type Props = {}
 
@@ -16,10 +17,10 @@ const Contact: React.FC<Props> = () => {
         <span className='text-3xl'>ติดต่อล่าสุด</span>
       </div>
       <div className='grid grid-cols-4 gap-4 mb-12'>
-        <ContactCard />
-        <ContactCard />
-        <ContactCard />
-        <ContactCard />
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
       </div>
       <div className='flex justify-between items-center mb-6'>
         <div className='font-bold flex items-center'>
@@ -31,6 +32,21 @@ const Contact: React.FC<Props> = () => {
           <input onChange={searchHandler} type='text' placeholder='ค้นหาผู้ติดต่อ' className='w-96 focus:outline-none' />
         </div>
       </div>
+      <table className='table-auto w-full text-left'>
+        <thead>
+          <tr className='border-b text-lg'>
+            <th>ชื่อ-สกุล</th>
+            <th>ตำแหน่ง</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ContactRow />
+          <ContactRow />
+          <ContactRow />
+          <ContactRow />
+        </tbody>
+      </table>
     </>
   )
 }
