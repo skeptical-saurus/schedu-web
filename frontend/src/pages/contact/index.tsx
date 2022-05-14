@@ -54,23 +54,22 @@ const Contact: React.FC<Props> = () => {
           <input onChange={searchHandler} type='text' placeholder='ค้นหาผู้ติดต่อ' className='w-96 focus:outline-none' />
         </div>
       </div>
-      <table className='table-auto w-full text-left'>
-        <thead>
-          <tr className='border-b text-lg'>
-            <th>ชื่อ-สกุล</th>
-            <th>ตำแหน่ง</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          { filteredContacts.map(contact =>
-            <ContactRow
-              key={contact.id}
-              contact={contact}
-            />
-          )}
-        </tbody>
-      </table>
+      <div>
+        <div className='grid grid-cols-3 border-b font-bold py-3'>
+          <div>
+            ชื่อ-สกุล
+          </div>
+          <div>
+            ตำแหน่ง
+          </div>
+        </div>
+        { filteredContacts.map(contact =>
+          <ContactRow
+            key={contact.id}
+            contact={contact}
+          />
+        )}
+      </div>
     </>
   )
 }
