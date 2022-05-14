@@ -1,7 +1,5 @@
-import { Key } from 'react'
-
 export interface ContactInformation {
-  id: Key,
+  id: string,
   firstname: string,
   lastname: string,
   role: string

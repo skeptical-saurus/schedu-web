@@ -1,6 +1,6 @@
 import HighlightCard from './components/highlightCard'
 import ContactRow from './components/contactRow'
-import { Key, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ContactInformation } from 'interface/contact'
 
 type Props = {}
