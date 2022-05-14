@@ -1,15 +1,9 @@
 import HighlightCard from './components/highlightCard'
 import ContactRow from './components/contactRow'
 import { Key, useEffect, useState } from 'react'
+import { ContactInformation } from 'interface/contact'
 
 type Props = {}
-
-interface ContactInformation {
-  id: Key,
-  firstname: String,
-  lastname: String,
-  role: String
-}
 
 const Contact: React.FC<Props> = () => {
 
@@ -69,9 +63,7 @@ const Contact: React.FC<Props> = () => {
           { contacts.map(contact =>
             <ContactRow
               key={contact.id}
-              firstname={contact.firstname}
-              lastname={contact.lastname}
-              role={contact.role}
+              contact={contact}
             />
           )}
         </tbody>
