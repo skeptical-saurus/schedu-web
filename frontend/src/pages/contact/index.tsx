@@ -14,11 +14,11 @@ const Contact: React.FC<Props> = () => {
     const getContacts = async () => {
       // TODO: replace with contact request function
       const result = [
-        {id: 'ASDASDASDSAD', firstname: 'ไนน์แบคโฮ', lastname: 'ฮอตอาข่า', role: 'student'},
-        {id: 'QWEQWEQWEQWE', firstname: 'ไอซ์เวิลด์', lastname: 'แอสเตอร์', role: 'student'},
-        {id: 'AXCZXCASDFQW', firstname: 'ไนน์แซีนฮัลโหล', lastname: 'แรงผลักโหลยบคโฮ', role: 'student'},
-        {id: 'GWETWQWEQQWW', firstname: 'ไอซ์เวิลด์', lastname: 'แรงผลักโหลยบคโฮ', role: 'student'},
-        {id: 'JOAUSDOIASDS', firstname: 'ไนน์แบคโฮ', lastname: 'แอสเตอร์', role: 'student'}
+        {id: 'ASDASDASDSAD', firstname: 'ไนน์แบคโฮ', lastname: 'ฮอตอาข่า', role: 'std'},
+        {id: 'QWEQWEQWEQWE', firstname: 'ไอซ์เวิลด์', lastname: 'แอสเตอร์', role: 'std'},
+        {id: 'AXCZXCASDFQW', firstname: 'ไนน์แซีนฮัลโหล', lastname: 'แรงผลักโหลยบคโฮ', role: 'prof'},
+        {id: 'GWETWQWEQQWW', firstname: 'ไอซ์เวิลด์', lastname: 'แรงผลักโหลยบคโฮ', role: 'ofc'},
+        {id: 'JOAUSDOIASDS', firstname: 'ไนน์แบคโฮ', lastname: 'แอสเตอร์', role: 'std'}
       ]
       setContacts(result)
       setFilteredContacts(result)

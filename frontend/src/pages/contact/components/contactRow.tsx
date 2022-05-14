@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ContactInformation } from 'interface/contact'
+import { mapRoleTitle } from 'lib/contact'
 
 type Props = {
   contact: ContactInformation,
@@ -13,7 +14,7 @@ const ContactRow: React.FC<Props> = ({ contact }) => {
         {contact.firstname} {contact.lastname}
       </div>
       <div>
-        {contact.role}
+        {mapRoleTitle(contact.role)}
       </div>
       <div className='flex justify-end'>
         <Link href={`/contact/${contact.id}`} passHref>
@@ -25,6 +26,7 @@ const ContactRow: React.FC<Props> = ({ contact }) => {
       </div>
     </div>
   )
+
 }
 
 export default ContactRow
