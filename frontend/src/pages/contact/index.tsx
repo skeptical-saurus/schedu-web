@@ -8,6 +8,7 @@ type Props = {}
 const Contact: React.FC<Props> = () => {
 
   const [contacts, setContacts] = useState<ContactInformation[]>([])
+  const [filteredContacts, setFilteredContacts] = useState<ContactInformation[]>([])
 
   useEffect(() => {
     const getContacts = async () => {
@@ -20,13 +21,15 @@ const Contact: React.FC<Props> = () => {
         {id: 'JOAUSDOIASDS', firstname: 'ไนน์แบคโฮ', lastname: 'แอสเตอร์', role: 'student'}
       ]
       setContacts(result)
+      setFilteredContacts(result)
     }
     getContacts()
   }, [])
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let searchValue: String = event.target.value
-    // TODO: Filter the contact list
+    let searchValue: string = event.target.value
+    let filtered = contacts.filter(contact => `${contact.firstname} ${contact.lastname}`.includes(searchValue))
+    setFilteredContacts(filtered)
   }
 
   return (
@@ -60,7 +63,7 @@ const Contact: React.FC<Props> = () => {
           </tr>
         </thead>
         <tbody>
-          { contacts.map(contact =>
+          { filteredContacts.map(contact =>
             <ContactRow
               key={contact.id}
               contact={contact}
