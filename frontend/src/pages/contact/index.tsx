@@ -1,9 +1,34 @@
 import HighlightCard from './components/highlightCard'
 import ContactRow from './components/contactRow'
+import { Key, useEffect, useState } from 'react'
 
 type Props = {}
 
+interface ContactInformation {
+  id: Key,
+  firstname: String,
+  lastname: String,
+  role: String
+}
+
 const Contact: React.FC<Props> = () => {
+
+  const [contacts, setContacts] = useState<ContactInformation[]>([])
+
+  useEffect(() => {
+    const getContacts = async () => {
+      // TODO: replace with contact request function
+      const result = [
+        {id: 'ASDASDASDSAD', firstname: 'ไนน์แบคโฮ', lastname: 'ฮอตอาข่า', role: 'student'},
+        {id: 'QWEQWEQWEQWE', firstname: 'ไอซ์เวิลด์', lastname: 'แอสเตอร์', role: 'student'},
+        {id: 'AXCZXCASDFQW', firstname: 'ไนน์แซีนฮัลโหล', lastname: 'แรงผลักโหลยบคโฮ', role: 'student'},
+        {id: 'GWETWQWEQQWW', firstname: 'ไอซ์เวิลด์', lastname: 'แรงผลักโหลยบคโฮ', role: 'student'},
+        {id: 'JOAUSDOIASDS', firstname: 'ไนน์แบคโฮ', lastname: 'แอสเตอร์', role: 'student'}
+      ]
+      setContacts(result)
+    }
+    getContacts()
+  }, [])
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     let searchValue: String = event.target.value
@@ -41,10 +66,14 @@ const Contact: React.FC<Props> = () => {
           </tr>
         </thead>
         <tbody>
-          <ContactRow />
-          <ContactRow />
-          <ContactRow />
-          <ContactRow />
+          { contacts.map(contact =>
+            <ContactRow
+              key={contact.id}
+              firstname={contact.firstname}
+              lastname={contact.lastname}
+              role={contact.role}
+            />
+          )}
         </tbody>
       </table>
     </>
