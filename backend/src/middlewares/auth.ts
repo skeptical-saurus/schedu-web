@@ -17,4 +17,12 @@ const validateToken: RequestHandler = async (req, res, next) => {
   }
 }
 
-export { validateToken }
+const decodeTokenToUser: RequestHandler = async (req, res, next) => {
+  const idToken = req.header('id-token')
+  if (idToken) {
+    req.user = await auth.verifyIdToken(idToken)
+  }
+  next()
+}
+
+export { validateToken, decodeTokenToUser }
