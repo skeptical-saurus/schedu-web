@@ -4,6 +4,7 @@ import PersonalInfo from './components/info/personalInfo'
 import { ContactInformation } from 'interface/contact'
 
 import jsonUsers from 'mock/users.json'
+import EventCalendar from './components/info/eventCalendar'
 
 type Props = {}
 
@@ -34,11 +35,13 @@ const ContactInfo: React.FC<Props> = () => {
 
   return (
     <>
-      <div className='grid grid-cols-3'>
-        <div>
+      <div className='grid grid-cols-5 gap-16'>
+        <div className='col-span-2'>
           <PersonalInfo contact={contact!} />
         </div>
-        <div className='col-span-2'></div>
+        <div className='col-span-3'>
+          <EventCalendar />
+        </div>
       </div>
     </>
   )
