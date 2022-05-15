@@ -1,10 +1,10 @@
 import { schemaComposer } from 'graphql-compose'
 
 import * as queries from './query'
-// import * as mutations from './mutation'
+import * as mutations from './mutation'
 
 schemaComposer.Query.addFields(queries)
-// schemaComposer.Mutation.addFields(mutations)
+schemaComposer.Mutation.addFields(mutations)
 
 const schema = schemaComposer.buildSchema()
 

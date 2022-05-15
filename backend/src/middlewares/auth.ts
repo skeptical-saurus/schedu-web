@@ -17,4 +17,16 @@ const validateToken: RequestHandler = async (req, res, next) => {
   }
 }
 
-export { validateToken }
+const decodeTokenToUser: RequestHandler = async (req, res, next) => {
+  const idToken = req.header('id-token')
+  if (idToken) {
+    try {
+      req.user = await auth.verifyIdToken(idToken)
+    } catch {
+      return res.status(400).json({ message: 'Invalid Id-Token' })
+    }
+  }
+  next()
+}
+
+export { validateToken, decodeTokenToUser }
