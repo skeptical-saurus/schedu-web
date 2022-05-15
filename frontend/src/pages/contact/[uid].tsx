@@ -5,6 +5,7 @@ import { ContactInformation } from 'interface/contact'
 
 import jsonUsers from 'mock/users.json'
 import EventCalendar from './components/info/eventCalendar'
+import DateInfo from './components/info/dateInfo'
 
 type Props = {}
 
@@ -14,6 +15,7 @@ const ContactInfo: React.FC<Props> = () => {
   const { uid } = router.query
 
   const [contact, setContact] = useState<ContactInformation>()
+  const [selectedDate, setSelectedDate] = useState<Date>()
 
   useEffect(() => {
     const getContactInfo = async () => {
@@ -40,7 +42,8 @@ const ContactInfo: React.FC<Props> = () => {
           <PersonalInfo contact={contact!} />
         </div>
         <div className='col-span-3'>
-          <EventCalendar />
+          <EventCalendar onChangeDate={setSelectedDate} />
+          <DateInfo date={selectedDate} />
         </div>
       </div>
     </>

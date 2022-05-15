@@ -1,14 +1,17 @@
-import { useState } from 'react'
 import Calendar from 'react-calendar'
 
-const EventCalendar: React.FC = () => {
+type Props = {
+  onChangeDate: Function
+}
 
-  const [selected, changeDate] = useState<Date>()
+const EventCalendar: React.FC<Props> = ({ onChangeDate }) => {
+
+  const handleDateChange = (date: Date) => { onChangeDate(date) }
 
   return (
     <>
       <div className='p-6 rounded-2xl border'>
-        <Calendar onChange={changeDate} value={selected} />
+        <Calendar onChange={handleDateChange} />
       </div>
     </>
   )
