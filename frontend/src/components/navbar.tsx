@@ -37,10 +37,10 @@ const Navbar: React.FC = () => {
           <div className='flex items-center'>
             {renderNavigators()}
             <div className='border-l border-gray-400 pl-4'>
-              <span className='text-[color:var(--light-blue)] font-bold flex items-center'>
+              <a href='/user' className='text-[color:var(--light-blue)] font-bold flex items-center'>
                 <span className='material-icons mr-1'>person</span>
                 Foo Bar
-              </span>
+              </a>
             </div>
           </div>
         </div>
