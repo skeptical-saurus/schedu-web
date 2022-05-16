@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.1",
     "dayjs": "^1.11.2",
     "firebase": "^9.6.10",
     "ky": "^0.30.0",
