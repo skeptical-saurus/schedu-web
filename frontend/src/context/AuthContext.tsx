@@ -46,9 +46,17 @@ const signOutFromGoogle = async () => {
   }
 }
 
+// TODO: Reusable token getter
+const isSignedIn = () =>
+  !!document?.cookie
+    ?.split('; ')
+    ?.find((row) => row.startsWith('SCHEDU_FBIDTOKEN='))
+    ?.split('=')[1]
+
 type authContextType = {
-  signIn: () => Promise<Boolean>
-  signOut: () => Promise<Boolean>
+  signIn: () => Promise<boolean>
+  signOut: () => Promise<boolean>
+  isSignedIn: () => boolean
 }
 
 const authContextDefaultValues: authContextType = {
@@ -58,6 +66,7 @@ const authContextDefaultValues: authContextType = {
   signOut: async () => {
     return await signOutFromGoogle()
   },
+  isSignedIn: isSignedIn,
 }
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues)
