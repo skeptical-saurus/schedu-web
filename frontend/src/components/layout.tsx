@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router'
 import Navbar from './navbar'
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  children?: React.ReactNode
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const router = useRouter()
   const pagesWithoutNavbar = ['/signin']
   const aligner = 'container mx-auto px-8 pt-32 pb-8'

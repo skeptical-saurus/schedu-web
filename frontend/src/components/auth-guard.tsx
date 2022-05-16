@@ -4,9 +4,10 @@ import { useAuth } from 'context/AuthContext'
 
 interface AuthGuardProps {
   publicPages: string[]
+  children?: React.ReactNode
 }
 
-const AuthGuard: React.FC<AuthGuardProps> = ({ publicPages, children }) => {
+const AuthGuard = ({ publicPages, children }: AuthGuardProps) => {
   const [authorized, setAuthorized] = useState(false)
   const [delayed, setDelayed] = useState(false)
   const router = useRouter()
