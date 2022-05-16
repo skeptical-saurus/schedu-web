@@ -2,10 +2,7 @@ import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
 
 const UserDropdown: React.FC = () => {
-
-  const menus = [
-    { title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' },
-  ]
+  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' }]
 
   const { signOut } = useAuth()
 
@@ -33,12 +30,19 @@ const UserDropdown: React.FC = () => {
               </div>
             </div>
             {menus.map((menu, index) => (
-              <a href={menu.link} key={index} className='px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]'>
+              <a
+                href={menu.link}
+                key={index}
+                className='px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]'
+              >
                 <span className='material-icons text-xl mr-2'>{menu.icon}</span>
                 <span>{menu.title}</span>
               </a>
             ))}
-            <button onClick={signOutHandler} className='w-full px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-rose-500 hover:text-rose-700'>
+            <button
+              onClick={signOutHandler}
+              className='w-full px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-rose-500 hover:text-rose-700'
+            >
               <span className='material-icons text-xl mr-2'>logout</span>
               <span>ออกจากระบบ</span>
             </button>
