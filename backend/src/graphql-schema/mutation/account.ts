@@ -1,4 +1,8 @@
 import { AccountTC } from 'models/account'
 
-export const createAccount = AccountTC.mongooseResolvers.createOne()
-export const updateAccount = AccountTC.mongooseResolvers.updateById()
+export const updateAccount = AccountTC.mongooseResolvers.updateOne().wrapResolve((next) => (rp) => {
+  rp.args.filter = {
+    googleId: rp.context.user.uid,
+  }
+  return next(rp)
+})

@@ -10,7 +10,7 @@ import 'config/firebase'
 import 'config/mongoose-connect'
 import env from 'config/env'
 import authRouter from 'routes/auth'
-import { validateToken } from 'middlewares/auth'
+import { validateToken, decodeTokenToUser } from 'middlewares/auth'
 
 import schema from 'graphql-schema'
 
@@ -26,11 +26,14 @@ if (env.NODE_ENV !== 'production') {
   )
 }
 
-app.use('/auth', validateToken, authRouter)
+app.use('/auth', validateToken, decodeTokenToUser, authRouter)
 
 const startServer = async () => {
   const apolloServer = new ApolloServer({
     schema: schema,
+    context: ({ req }) => ({
+      user: req.user,
+    }),
     plugins: [
       env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageDisabled()
@@ -39,6 +42,7 @@ const startServer = async () => {
   })
 
   await apolloServer.start()
+  app.use(decodeTokenToUser)
   apolloServer.applyMiddleware({ app })
 
   app.listen(env.port, () => {

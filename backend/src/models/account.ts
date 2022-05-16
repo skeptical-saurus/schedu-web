@@ -4,12 +4,18 @@ import mongoose from 'mongoose'
 import type { Account } from 'types/schemas'
 
 const accountSchema = new mongoose.Schema<Account>({
-  googleId: String,
+  googleId: {
+    type: String,
+    unique: true,
+  },
   businessId: String,
   firstName: String,
   lastName: String,
   contact: {
-    email: String,
+    email: {
+      type: String,
+      unique: true,
+    },
     tel: String,
   },
   image: String,
