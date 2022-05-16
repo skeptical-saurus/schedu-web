@@ -32,9 +32,7 @@ const UserDropdown: React.FC = () => {
             </div>
             {menus.map((menu, index) => (
               <Link href={menu.link} key={index}>
-                <a
-                  className='px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]'
-                >
+                <a className='px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]'>
                   <span className='material-icons text-xl mr-2'>{menu.icon}</span>
                   <span>{menu.title}</span>
                 </a>
