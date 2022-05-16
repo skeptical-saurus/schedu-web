@@ -25,6 +25,10 @@ const DateInfo: React.FC<Props> = ({ date }) => {
     else setRange(parseInt(selected))
   }
 
+  const checkSelected = (comparator: number) => {
+    return range === comparator
+  }
+
   return (
     <>
       <div className='grid grid-cols-3 my-8'>
@@ -59,7 +63,8 @@ const DateInfo: React.FC<Props> = ({ date }) => {
                 onClick={handleRangeSelect}
                 key={index}
                 data-range={range}
-                className='border px-3 py-2 rounded-xl font-light'
+                className={`border px-3 py-2 rounded-xl font-light duration-100 disabled:cursor-not-allowed disabled:text-gray-400 ${checkSelected(range) ? 'border-emerald-600 text-emerald-600' : null}`}
+                disabled
               >
                 {range} นาที
               </button>
