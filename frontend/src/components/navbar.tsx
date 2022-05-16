@@ -1,3 +1,4 @@
+import Link from 'next/link'
 const Navbar: React.FC = () => {
   const navigators = [
     { path: '/', title: 'Home' },
@@ -12,13 +13,11 @@ const Navbar: React.FC = () => {
         <div className='flex items-center'>
           {navigators.map((nav, index) => {
             return (
-              <a
-                href={nav.path}
-                key={index}
-                className='mr-6 font-light hover:text-[color:var(--light-blue)] duration-100'
-              >
-                {nav.title}
-              </a>
+              <Link key={index} href={nav.path}>
+                <a className='mr-6 font-light hover:text-[color:var(--light-blue)] duration-100'>
+                  {nav.title}
+                </a>
+              </Link>
             )
           })}
         </div>

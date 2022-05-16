@@ -1,11 +1,14 @@
 import { getCookieValue } from 'lib/cookie'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'context/AuthContext'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const SignIn: React.FC = () => {
   const [isSigned, updateSignState] = useState(false)
 
   const { signIn, signOut } = useAuth()
+  const router = useRouter()
 
   useEffect(() => {
     const getToken = () => {
@@ -19,7 +22,7 @@ const SignIn: React.FC = () => {
     const result: Boolean = await signIn()
     if (result) {
       updateSignState(true)
-      location.href = '/'
+      router.push('/')
     }
   }
 
@@ -35,11 +38,13 @@ const SignIn: React.FC = () => {
         <>
           <div className='mb-6'>กำลังอยู่ในระบบ ต้องการเข้าสู่หน้าหลักหรือไม่</div>
           <div className='flex items-center'>
-            <a href='/'>
-              <button className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'>
-                เข้าสู่หน้าหลัก
-              </button>
-            </a>
+            <Link href='/'>
+              <a>
+                <button className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'>
+                  เข้าสู่หน้าหลัก
+                </button>
+              </a>
+            </Link>
             <button
               onClick={signOutHandler}
               className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'
