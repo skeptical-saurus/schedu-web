@@ -1,9 +1,5 @@
 const EditProfile: React.FC = () => {
-    return (
-        <>
-            
-        </>
-    )
+  return <></>
 }
 
 export default EditProfile
