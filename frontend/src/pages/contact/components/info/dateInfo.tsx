@@ -7,14 +7,13 @@ type Props = {
 }
 
 const DateInfo: React.FC<Props> = ({ date }) => {
-
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
 
   const [hour, setHour] = useState<number>()
   const [minute, setMinute] = useState<number>()
   const [range, setRange] = useState<number>()
 
-  const hours = Array.from(Array(24).keys()).map(h => (h + 1))
+  const hours = Array.from(Array(24).keys()).map((h) => h + 1)
   const minutes = [0, 15, 30, 45]
 
   const ranges = [15, 30, 45, 60, 90]
@@ -69,7 +68,9 @@ const DateInfo: React.FC<Props> = ({ date }) => {
                 onClick={handleRangeSelect}
                 key={index}
                 data-range={range}
-                className={`border px-3 py-2 rounded-xl font-light duration-100 disabled:cursor-not-allowed disabled:text-gray-400 ${checkSelected(range) ? 'border-emerald-600 text-emerald-600' : null}`}
+                className={`border px-3 py-2 rounded-xl font-light duration-100 disabled:cursor-not-allowed disabled:text-gray-400 ${
+                  checkSelected(range) ? 'border-emerald-600 text-emerald-600' : null
+                }`}
                 disabled
               >
                 {range} นาที
@@ -89,7 +90,6 @@ const DateInfo: React.FC<Props> = ({ date }) => {
       </div>
     </>
   )
-
 }
 
 export default DateInfo

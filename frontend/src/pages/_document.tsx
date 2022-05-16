@@ -5,7 +5,10 @@ const Document = () => {
     <Html>
       <Head>
         <link rel='preconnect' href='https://fonts.gstatic.com' />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Prompt:wght@100;300;400;500&display=swap' />
+        <link
+          rel='stylesheet'
+          href='https://fonts.googleapis.com/css2?family=Prompt:wght@100;300;400;500&display=swap'
+        />
         <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' />
       </Head>
       <body>

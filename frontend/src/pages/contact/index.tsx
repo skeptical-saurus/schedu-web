@@ -8,7 +8,6 @@ import jsonUsers from 'mock/users.json'
 type Props = {}
 
 const Contact: React.FC<Props> = () => {
-
   const [contacts, setContacts] = useState<ContactInformation[]>([])
   const [filteredContacts, setFilteredContacts] = useState<ContactInformation[]>([])
 
@@ -24,7 +23,9 @@ const Contact: React.FC<Props> = () => {
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     let searchValue: string = event.target.value
-    let filtered = contacts.filter(contact => `${contact.firstname} ${contact.lastname}`.includes(searchValue))
+    let filtered = contacts.filter((contact) =>
+      `${contact.firstname} ${contact.lastname}`.includes(searchValue)
+    )
     setFilteredContacts(filtered)
   }
 
@@ -47,24 +48,22 @@ const Contact: React.FC<Props> = () => {
         </div>
         <div className='border rounded-full px-4 py-3 flex'>
           <span className='material-icons mr-2'>search</span>
-          <input onChange={searchHandler} type='text' placeholder='ค้นหาผู้ติดต่อ' className='w-96 focus:outline-none' />
+          <input
+            onChange={searchHandler}
+            type='text'
+            placeholder='ค้นหาผู้ติดต่อ'
+            className='w-96 focus:outline-none'
+          />
         </div>
       </div>
       <div>
         <div className='grid grid-cols-3 border-b font-bold py-3'>
-          <div>
-            ชื่อ-สกุล
-          </div>
-          <div>
-            ตำแหน่ง
-          </div>
+          <div>ชื่อ-สกุล</div>
+          <div>ตำแหน่ง</div>
         </div>
-        { filteredContacts.map(contact =>
-          <ContactRow
-            key={contact.id}
-            contact={contact}
-          />
-        )}
+        {filteredContacts.map((contact) => (
+          <ContactRow key={contact.id} contact={contact} />
+        ))}
       </div>
     </>
   )

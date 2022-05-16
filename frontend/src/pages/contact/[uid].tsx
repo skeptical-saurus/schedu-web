@@ -10,7 +10,6 @@ import DateInfo from './components/info/dateInfo'
 type Props = {}
 
 const ContactInfo: React.FC<Props> = () => {
-
   const router = useRouter()
   const { uid } = router.query
 
@@ -19,21 +18,22 @@ const ContactInfo: React.FC<Props> = () => {
 
   useEffect(() => {
     const getContactInfo = async () => {
-      const result = jsonUsers.find(user => user.id === uid)
+      const result = jsonUsers.find((user) => user.id === uid)
       setContact(result)
     }
     getContactInfo()
   }, [uid])
 
   // Contact is not successfully loaded or not found any
-  if (!contact) return (
-    <>
-      <div className='text-center py-16 text-gray-500'>
-        <span className='material-icons text-9xl animate-spin'>autorenew</span>
-        <div className='font-light text-xl'>Loading ...</div>
-      </div>
-    </>
-  )
+  if (!contact)
+    return (
+      <>
+        <div className='text-center py-16 text-gray-500'>
+          <span className='material-icons text-9xl animate-spin'>autorenew</span>
+          <div className='font-light text-xl'>Loading ...</div>
+        </div>
+      </>
+    )
 
   return (
     <>
