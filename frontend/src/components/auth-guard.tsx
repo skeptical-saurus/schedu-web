@@ -25,7 +25,17 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ publicPages, children }) => {
     setAuthorized(isAccessible)
   }, [router, isSignedIn, publicPages])
 
-  return <>{delayed && authorized ? children : <>Loading...</>}</>
+  return (
+    <>
+      {delayed && authorized ? (
+        children
+      ) : (
+        <div className='flex justify-center items-center w-full h-screen'>
+          <div className='animate-spin'>Loading...</div>
+        </div>
+      )}
+    </>
+  )
 }
 
 export default AuthGuard
