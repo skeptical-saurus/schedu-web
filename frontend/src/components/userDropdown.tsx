@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
+import Link from 'next/link'
 
 const UserDropdown: React.FC = () => {
   const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' }]
