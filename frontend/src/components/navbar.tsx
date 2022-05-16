@@ -1,3 +1,5 @@
+import UserDropdown from './userDropdown'
+
 const Navbar: React.FC = () => {
   const navigators = [
     { path: '/', title: 'Home' },
@@ -37,10 +39,7 @@ const Navbar: React.FC = () => {
           <div className='flex items-center'>
             {renderNavigators()}
             <div className='border-l border-gray-400 pl-4'>
-              <a href='/user' className='text-[color:var(--light-blue)] font-bold flex items-center'>
-                <span className='material-icons mr-1'>person</span>
-                Foo Bar
-              </a>
+              <UserDropdown />
             </div>
           </div>
         </div>
