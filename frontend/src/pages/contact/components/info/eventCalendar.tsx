@@ -5,8 +5,9 @@ type Props = {
 }
 
 const EventCalendar: React.FC<Props> = ({ onChangeDate }) => {
-
-  const handleDateChange = (date: Date) => { onChangeDate(date) }
+  const handleDateChange = (date: Date) => {
+    onChangeDate(date)
+  }
 
   return (
     <>
@@ -15,7 +16,6 @@ const EventCalendar: React.FC<Props> = ({ onChangeDate }) => {
       </div>
     </>
   )
-
 }
 
 export default EventCalendar

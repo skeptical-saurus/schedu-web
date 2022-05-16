@@ -6,13 +6,14 @@ type Props = {
 }
 
 const PersonalInfo: React.FC<Props> = ({ contact }) => {
-
   return (
     <>
       <div className='flex items-center mb-8'>
         <span className='material-icons text-7xl text-gray-600'>account_circle</span>
         <div className='ml-3 font-light'>
-          <div className='text-lg'>{contact.firstname} {contact.lastname}</div>
+          <div className='text-lg'>
+            {contact.firstname} {contact.lastname}
+          </div>
           <div className='text-sm text-gray-600'>{mapRoleTitle(contact.role)}</div>
         </div>
       </div>
@@ -24,7 +25,6 @@ const PersonalInfo: React.FC<Props> = ({ contact }) => {
       </div>
     </>
   )
-
 }
 
 export default PersonalInfo
