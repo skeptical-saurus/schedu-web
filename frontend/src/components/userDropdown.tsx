@@ -1,4 +1,5 @@
 import { Menu } from '@headlessui/react'
+import { useAuth } from 'context/AuthContext'
 
 const UserDropdown: React.FC = () => {
 
@@ -6,8 +7,11 @@ const UserDropdown: React.FC = () => {
     { title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' },
   ]
 
-  const signOut = () => {
-    // TODO: Sign out function
+  const { signOut } = useAuth()
+
+  const signOutHandler = async () => {
+    const result: Boolean = await signOut()
+    if (result) location.href = '/signin'
   }
 
   return (
@@ -34,7 +38,7 @@ const UserDropdown: React.FC = () => {
                 <span>{menu.title}</span>
               </a>
             ))}
-            <button onClick={signOut} className='w-full px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-rose-500 hover:text-rose-700'>
+            <button onClick={signOutHandler} className='w-full px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-rose-500 hover:text-rose-700'>
               <span className='material-icons text-xl mr-2'>logout</span>
               <span>ออกจากระบบ</span>
             </button>
