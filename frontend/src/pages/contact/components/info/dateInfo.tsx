@@ -29,6 +29,12 @@ const DateInfo: React.FC<Props> = ({ date }) => {
     return range === comparator
   }
 
+  let validAppointmentDetail = !false
+
+  const submit = () => {
+    // TODO: Submit appointment request
+  }
+
   return (
     <>
       <div className='grid grid-cols-3 my-8'>
@@ -71,6 +77,15 @@ const DateInfo: React.FC<Props> = ({ date }) => {
             ))}
           </div>
         </div>
+      </div>
+      <div className='text-right'>
+        <button
+          onClick={submit}
+          className='px-16 py-4 rounded-xl shadow bg-[color:var(--light-blue)] hover:bg-[color:var(--blue)] disabled:bg-gray-400 disabled:opacity-75 disabled:cursor-not-allowed text-white duration-100 font-light'
+          disabled={validAppointmentDetail}
+        >
+          ส่งคำขอ
+        </button>
       </div>
     </>
   )
