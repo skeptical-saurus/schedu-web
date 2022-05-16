@@ -26,7 +26,7 @@ if (env.NODE_ENV !== 'production') {
   )
 }
 
-app.use('/auth', validateToken, authRouter)
+app.use('/auth', validateToken, decodeTokenToUser, authRouter)
 
 const startServer = async () => {
   const apolloServer = new ApolloServer({
