@@ -1,5 +1,4 @@
 import { composeMongoose } from 'graphql-compose-mongoose'
-import { partialCloneSubpath } from 'graphql-compose/lib/utils/filterByDotPaths'
 import mongoose from 'mongoose'
 
 import type { Appointment, Participant } from 'types/schemas'

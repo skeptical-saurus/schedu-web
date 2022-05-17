@@ -1,6 +1,5 @@
 import { AppointmentTC } from 'models/appointment'
 import { AccountModel } from 'models/account'
-import { count } from 'graphql-compose-mongoose/lib/resolvers/count'
 
 export const appointments = AppointmentTC.mongooseResolvers
   .findMany()
