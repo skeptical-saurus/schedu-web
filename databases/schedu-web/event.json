@@ -1,0 +1,176 @@
+[
+    {
+        "title": "รับไทค์ประดับเข็ม",
+        "type": "ประเพณีของคณะ",
+        "comm_method": "nothing",
+        "participants": ["teacher1", "teacher2", "staff1"],
+        "td_participants": ["student1", "student2"]
+    },
+    {
+        "title": "วันไหว้ครู",
+        "type": "วันสำคัญ",
+        "comm_method": "nothing",
+        "participants": ["teacher1", "teacher2", "staff1"],
+        "td_participants": ["student1", "student2"]
+    },
+    {
+        "title": "วันขึ้นปีใหม่",
+        "type": "วันหยุดราชการ",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null,
+        "date": "2021-02-12"
+    },
+    {
+        "title": "วันตรุษจีน",
+        "type": "วันหยุดราชการ",
+        "date": "2021-01-01",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันมาฆบูชา",
+        "type": "วันหยุดราชการ",
+        "date": "2021-02-26",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันพระบาทสมเด็จพระพุทธยอดฟ้าจุฬาโลกมหาราช และวันที่ระลึกมหาจักรีบรมราชวงศ์",
+        "type": "วันหยุดราชการ",
+        "date": "2021-04-06",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันสงกรานต์",
+        "type": "วันหยุดราชการ",
+        "date": "2021-04-13",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันสงกรานต์",
+        "type": "วันหยุดราชการ",
+        "date": "2021-04-14",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันสงกรานต์",
+        "type": "วันหยุดราชการ",
+        "date": "2021-04-15",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันฉัตรมงคล",
+        "type": "วันหยุดราชการ",
+        "date": "2021-05-04",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันพระราชพิธีมงคลจรดพระบังคัลแรกนาขวัญ",
+        "type": "วันหยุดราชการ",
+        "date": "2021-05-10",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันวืสาขบูชา",
+        "type": "วันหยุดราชการ",
+        "date": "2021-05-26",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระนางเจ้าสุทิตา พัชรสุธาพิมลลักษณ พระบรมราชินี",
+        "type": "วันหยุดราชการ",
+        "date": "2021-06-03",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันอาสาฬหบูชา",
+        "type": "วันหยุดราชการ",
+        "date": "2021-07-24",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว",
+        "type": "วันหยุดราชการ",
+        "date": "2021-07-28",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง และวันแม่แห่งชาติ",
+        "type": "วันหยุดราชการ",
+        "date": "2021-08-12",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันมหิดล",
+        "type": "วันหยุดราชการ",
+        "date": "2021-09-24",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันคล้ายวันสวรรคตพระบาทสมเด็จพระบรมชนกาธิเบศมหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร",
+        "type": "วันหยุดราชการ",
+        "date": "2021-10-13",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันปิยมหาราช",
+        "type": "วันหยุดราชการ",
+        "date": "2021-10-23",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันพ่อแห่งชาติ",
+        "type": "วันหยุดราชการ",
+        "date": "2021-12-05",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันรัฐธรรมนูญ",
+        "type": "วันหยุดราชการ",
+        "date": "2021-12-10",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    },
+    {
+        "title": "วันสิ้นปี",
+        "type": "วันหยุดราชการ",
+        "date": "2021-12-31",
+        "comm_method": "nothing",
+        "participants": null,
+        "td_participants": null
+    }
+]
