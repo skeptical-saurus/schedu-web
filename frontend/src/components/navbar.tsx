@@ -4,9 +4,7 @@ import Link from 'next/link'
 const Navbar: React.FC = () => {
   const navigators = [
     { path: '/', title: 'Home' },
-    { path: '/contact', title: 'Contact' },
-    { path: '/calendar', title: 'Calendar' },
-    { path: '/notification', title: 'Notification' },
+    { path: '/contact', title: 'Contact' }
   ]
 
   const renderNavigators = () => {
