@@ -2,7 +2,7 @@ name: Backend Build & Deploy
 on:
   push:
     branches:
-      - feature/containerization # dev
+      - dev
     paths:
       - backend/**
 
