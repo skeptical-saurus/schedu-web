@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import UserDropdown from './userDropdown'
+import Link from 'next/link'
 
 const Navbar: React.FC = () => {
   const navigators = [

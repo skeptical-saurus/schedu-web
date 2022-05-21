@@ -2,24 +2,39 @@
 
 ```
 {
-    googleId
-    businessId
-    firstName
-    lastName
-    contact {
-      email
-      tel
-    }
-    image
-    setting {
-      displayTel
-      weekendReceive
-      activeTime {
-        startAt
-        endAt
-      }
+  googleId
+  businessId
+  firstName
+  lastName
+  contact {
+    email
+    tel
+  }
+  image
+  setting {
+    displayTel
+    weekendReceive
+    activeTime {
+      startAt
+      endAt
     }
   }
+}
+```
+
+# All field in appointment
+
+```
+{
+  subject
+  status
+  sender
+  participants {userId, main, confirmed}
+  startAt
+  endAt
+  commMethod
+  note
+}
 ```
 
 # Example how to query all accounts
@@ -49,7 +64,7 @@ query {
 }
 ```
 
-# Example how to create new account using mutation updateAccount
+# Example how to update account data using mutation updateAccount
 
 ```
 mutation {

@@ -19,3 +19,27 @@ export interface Account extends mongoose.Document {
     }
   }
 }
+
+export interface Participant {
+  userId: string
+  main: boolean
+  confirmed: boolean
+  join: boolean
+}
+
+export interface Appointment extends mongoose.Document {
+  subject: string
+  status: string
+  sender: string
+  participants: Participant[]
+  startAt: date
+  endAt: date
+  commMethod: string
+  commUrl: string
+  note: string
+}
+
+export interface Event extends mongoose.Document {
+  title: string
+  date: date
+}
