@@ -5,6 +5,7 @@ const auth = getAuth()
 
 const validateToken: RequestHandler = async (req, res, next) => {
   try {
+    if (req.method === 'OPTIONS') return res.sendStatus(204)
     const idToken = req.header('id-token')
     if (!idToken) return res.status(400).json({ message: 'Missing Id-Token header' })
 
