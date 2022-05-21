@@ -15,6 +15,7 @@ jobs:
         run: |
           cat > frontend/.env.production << EOF
           NODE_ENV=production
+          BASE_PATH=/schedu
           NEXT_PUBLIC_APP_URL=${{ secrets.APP_URL }}
           NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}
           NEXT_PUBLIC_FIREBASE_CONFIG=${{ secrets.FIREBASE_CONFIG }}
