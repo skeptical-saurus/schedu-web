@@ -5,6 +5,7 @@ const nextConfig = {
   experimental: {
     outputStandalone: true,
   },
+  basePath: process.env.BASE_PATH ?? '/',
 }
 
 module.exports = nextConfig
