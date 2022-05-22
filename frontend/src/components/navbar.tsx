@@ -6,7 +6,6 @@ const TRIGGER_DIFF = 64
 let lastPos = 0
 
 const Navbar: React.FC = () => {
-
   const navigators = [
     { path: '/', title: 'Home' },
     { path: '/contact', title: 'Contact' },

@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 
 const UserDropdown: React.FC = () => {
-
   const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' }]
 
   const router = useRouter()
@@ -13,7 +12,9 @@ const UserDropdown: React.FC = () => {
 
   const [mount, setMount] = useState(false)
 
-  router.events.on('routeChangeStart', () => { setMount(false) })
+  router.events.on('routeChangeStart', () => {
+    setMount(false)
+  })
 
   const signOutHandler = async () => {
     const result: Boolean = await signOut()
@@ -24,12 +25,20 @@ const UserDropdown: React.FC = () => {
     <>
       <Menu>
         <div className='relative'>
-          <Menu.Button onClick={() => {setMount(!mount)}} className='text-[color:var(--light-blue)] font-bold flex items-center'>
+          <Menu.Button
+            onClick={() => {
+              setMount(!mount)
+            }}
+            className='text-[color:var(--light-blue)] font-bold flex items-center'
+          >
             <span className='material-icons mr-1'>person</span>
             <span>Foo Bar</span>
           </Menu.Button>
           {mount && (
-            <Menu.Items static className='absolute -right-8 mt-8 w-80 bg-white text-gray-800 shadow-xl rounded-xl'>
+            <Menu.Items
+              static
+              className='absolute -right-8 mt-8 w-80 bg-white text-gray-800 shadow-xl rounded-xl'
+            >
               <div className='flex items-center p-4'>
                 <span className='w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full'>
                   <span className='material-icons'>collections</span>
