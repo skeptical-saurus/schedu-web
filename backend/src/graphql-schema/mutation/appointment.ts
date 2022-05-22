@@ -4,4 +4,4 @@ export const createAppointment = AppointmentTC.mongooseResolvers.createOne()
 
 export const updateAppointment = AppointmentTC.mongooseResolvers.updateOne()
 
-export const deleteAppointment = AppointmentTC.mongooseResolvers.removeOne()
+export const deleteAppointment = AppointmentTC.mongooseResolvers.removeById()
