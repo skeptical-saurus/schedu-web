@@ -1,5 +1,6 @@
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import { createContext, useContext } from 'react'
+import { GoogleAuthProvider, signInWithPopup, signOut, User } from 'firebase/auth'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import ky from 'ky'
 import { auth } from 'lib/firebase'
 import env from 'lib/env'
@@ -46,31 +47,66 @@ const signOutFromGoogle = async () => {
   }
 }
 
-// TODO: Reusable token getter
-const isSignedIn = () =>
-  !!document?.cookie
-    ?.split('; ')
-    ?.find((row) => row.startsWith('SCHEDU_FBIDTOKEN='))
-    ?.split('=')[1]
-
 type authContextType = {
   signIn: () => Promise<boolean>
   signOut: () => Promise<boolean>
-  isSignedIn: () => boolean
+  user: User | null
 }
 
 const authContextDefaultValues: authContextType = {
-  signIn: async () => {
-    return await signInWithGoogle()
-  },
-  signOut: async () => {
-    return await signOutFromGoogle()
-  },
-  isSignedIn: isSignedIn,
+  signIn: signInWithGoogle,
+  signOut: signOutFromGoogle,
+  user: null,
 }
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues)
 
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext)
+}
+
+interface AuthProviderProps {
+  publicPages: string[]
+  children?: React.ReactNode
+}
+
+export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(null)
+  const [authorized, setAuthorized] = useState(false)
+  const [delayed, setDelayed] = useState(false)
+  const router = useRouter()
+
+  auth.onAuthStateChanged(setUser)
+  auth.onIdTokenChanged(setUser)
+
+  const hasAuthCookie = () =>
+    !!document?.cookie
+      ?.split('; ')
+      ?.find((row) => row.startsWith('SCHEDU_FBIDTOKEN='))
+      ?.split('=')[1]
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setDelayed(true), 500)
+    return () => clearTimeout(timeout)
+  })
+
+  useEffect(() => {
+    const isAccessible = publicPages.includes(router.asPath) || !!user || hasAuthCookie()
+    if (!isAccessible) {
+      router.push('/signin')
+    }
+    setAuthorized(isAccessible)
+  }, [router, user, publicPages])
+
+  return (
+    <AuthContext.Provider value={{ user, signIn: signInWithGoogle, signOut: signOutFromGoogle }}>
+      {delayed && authorized ? (
+        children
+      ) : (
+        <div className='flex justify-center items-center w-full h-screen'>
+          <div className='animate-spin'>Loading...</div>
+        </div>
+      )}
+    </AuthContext.Provider>
+  )
 }
