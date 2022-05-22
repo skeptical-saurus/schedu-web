@@ -1,5 +1,5 @@
 import Layout from 'components/layout'
-import AuthGuard from 'components/auth-guard'
+import { AuthProvider } from 'context/AuthContext'
 import type { AppProps } from 'next/app'
 
 import 'styles/globals.css'
@@ -8,11 +8,11 @@ import 'styles/calendar.css'
 const App = ({ Component, pageProps }: AppProps) => {
   const publicPages = ['/signin']
   return (
-    <AuthGuard publicPages={publicPages}>
+    <AuthProvider publicPages={publicPages}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </AuthGuard>
+    </AuthProvider>
   )
 }
 
