@@ -3,7 +3,8 @@ import ContactRow from './components/index/contactRow'
 import { useEffect, useState } from 'react'
 import { ContactInformation } from 'interface/contact'
 
-import jsonUsers from 'mock/users.json'
+import { GET_ACCOUNTS } from 'lib/queries'
+import { useQuery } from '@apollo/client'
 
 type Props = {}
 
@@ -11,20 +12,24 @@ const Contact: React.FC<Props> = () => {
   const [contacts, setContacts] = useState<ContactInformation[]>([])
   const [filteredContacts, setFilteredContacts] = useState<ContactInformation[]>([])
 
+  const { loading, error, data } = useQuery(GET_ACCOUNTS)
+
   useEffect(() => {
     const getContacts = async () => {
       // TODO: replace with contact request function
-      const result = jsonUsers
-      setContacts(result)
-      setFilteredContacts(result)
+      // query all users
+      if (!loading) {
+        setContacts(data.accounts)
+        setFilteredContacts(data.accounts)
+      }
     }
     getContacts()
-  }, [])
+  }, [data, loading])
 
   const searchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     let searchValue: string = event.target.value
     let filtered = contacts.filter((contact) =>
-      `${contact.firstname} ${contact.lastname}`.includes(searchValue)
+      `${contact.firstName} ${contact.lastName}`.includes(searchValue)
     )
     setFilteredContacts(filtered)
   }
@@ -62,7 +67,7 @@ const Contact: React.FC<Props> = () => {
           <div>ตำแหน่ง</div>
         </div>
         {filteredContacts.map((contact) => (
-          <ContactRow key={contact.id} contact={contact} />
+          <ContactRow key={contact._id} contact={contact} />
         ))}
       </div>
     </>
