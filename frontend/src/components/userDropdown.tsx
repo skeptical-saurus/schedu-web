@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const UserDropdown: React.FC = () => {
-  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' }]
+  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' }]
 
   const router = useRouter()
   const { signOut } = useAuth()
@@ -28,7 +28,11 @@ const UserDropdown: React.FC = () => {
                 <span className='material-icons'>collections</span>
               </span>
               <div className='my-auto ml-3'>
-                <div className='text-[color:var(--light-blue)]'>Dora Hudson</div>
+                <Link href='/profile'>
+                  <a className='text-[color:var(--light-blue)] hover:underline underline-offset-1 duration-100'>
+                    Dora Hudson
+                  </a>
+                </Link>
                 <div className='text-sm font-light text-gray-500'>นักศึกษา</div>
               </div>
             </div>
