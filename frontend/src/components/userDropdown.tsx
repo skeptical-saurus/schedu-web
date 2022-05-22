@@ -1,15 +1,17 @@
 import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const UserDropdown: React.FC = () => {
   const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' }]
 
+  const router = useRouter()
   const { signOut } = useAuth()
 
   const signOutHandler = async () => {
     const result: Boolean = await signOut()
-    if (result) location.href = '/signin'
+    if (result) router.push('/signin')
   }
 
   return (
