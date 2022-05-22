@@ -9,4 +9,11 @@ export const accounts = AccountTC.mongooseResolvers.findMany().wrapResolve((next
   return next(rp)
 })
 
-export const account = AccountTC.mongooseResolvers.findOne()
+export const account = AccountTC.mongooseResolvers.findById()
+
+export const currentAccount = AccountTC.mongooseResolvers.findOne().wrapResolve((next) => (rp) => {
+  rp.args.filter = {
+    googleId: rp.context.user.uid,
+  }
+  return next(rp)
+})
