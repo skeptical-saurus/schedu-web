@@ -1,5 +1,5 @@
-import PersonalCalendar from "./components/personalCalendar"
-import UserInfo from "./components/userInfo"
+import PersonalCalendar from './components/personalCalendar'
+import UserInfo from './components/userInfo'
 
 const Profile: React.FC = () => {
   return (
