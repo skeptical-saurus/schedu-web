@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 type Props = {
-  user: ContactInformation
+  user?: ContactInformation
 }
 
 const UserForm: React.FC<Props> = ({ user }) => {
@@ -22,7 +22,7 @@ const UserForm: React.FC<Props> = ({ user }) => {
   })
 
   const submit = () => {
-    
+    // TODO: send update of the user information
   }
 
   return (

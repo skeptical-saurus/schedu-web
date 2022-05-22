@@ -3,7 +3,7 @@ import { useAuth } from 'context/AuthContext'
 import Link from 'next/link'
 
 const UserDropdown: React.FC = () => {
-  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/user/edit' }]
+  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' }]
 
   const { signOut } = useAuth()
 
