@@ -7,7 +7,6 @@ type Props = {
 }
 
 const UserForm: React.FC<Props> = ({ user }) => {
-
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
@@ -37,20 +36,64 @@ const UserForm: React.FC<Props> = ({ user }) => {
           </div>
           <div className='grid grid-cols-2 gap-x-8 gap-y-6 py-8'>
             <div>
-              <label htmlFor='firstname' className='text-sm'>ชื่อจริง</label>
-              <input onChange={event => {setFirstname(event.target.value)}} id='firstname' type='text' placeholder='สุปกิต' value={firstname} className='border-b font-light w-full mt-1' />
+              <label htmlFor='firstname' className='text-sm'>
+                ชื่อจริง
+              </label>
+              <input
+                onChange={(event) => {
+                  setFirstname(event.target.value)
+                }}
+                id='firstname'
+                type='text'
+                placeholder='สุปกิต'
+                value={firstname}
+                className='border-b font-light w-full mt-1'
+              />
             </div>
             <div>
-              <label htmlFor='lastname' className='text-sm'>นามสกุล</label>
-              <input onChange={event => {setLastname(event.target.value)}} id='lastname' type='text' placeholder='ดอทซีซี' value={lastname} className='border-b font-light w-full mt-1' />
+              <label htmlFor='lastname' className='text-sm'>
+                นามสกุล
+              </label>
+              <input
+                onChange={(event) => {
+                  setLastname(event.target.value)
+                }}
+                id='lastname'
+                type='text'
+                placeholder='ดอทซีซี'
+                value={lastname}
+                className='border-b font-light w-full mt-1'
+              />
             </div>
             <div className='col-span-2'>
-              <label htmlFor='email' className='text-sm'>E-mail</label>
-              <input onChange={event => {setEmail(event.target.value)}} id='email' type='text' placeholder='supkit@cc.com' value={email} className='border-b font-light w-full mt-1' />
+              <label htmlFor='email' className='text-sm'>
+                E-mail
+              </label>
+              <input
+                onChange={(event) => {
+                  setEmail(event.target.value)
+                }}
+                id='email'
+                type='text'
+                placeholder='supkit@cc.com'
+                value={email}
+                className='border-b font-light w-full mt-1'
+              />
             </div>
             <div className='col-span-2'>
-              <label htmlFor='tel' className='text-sm'>เบอร์ติดต่อ</label>
-              <input onChange={event => {setTel(event.target.value)}} id='tel' type='text' placeholder='012 234 4567' value={tel} className='border-b font-light w-full mt-1' />
+              <label htmlFor='tel' className='text-sm'>
+                เบอร์ติดต่อ
+              </label>
+              <input
+                onChange={(event) => {
+                  setTel(event.target.value)
+                }}
+                id='tel'
+                type='text'
+                placeholder='012 234 4567'
+                value={tel}
+                className='border-b font-light w-full mt-1'
+              />
             </div>
           </div>
           <div className='grid grid-cols-2 gap-8'>
@@ -59,7 +102,10 @@ const UserForm: React.FC<Props> = ({ user }) => {
                 ยกเลิก
               </button>
             </Link>
-            <button onClick={submit} className='w-full p-3 rounded-xl bg-green-300 hover:bg-green-400 duration-100'>
+            <button
+              onClick={submit}
+              className='w-full p-3 rounded-xl bg-green-300 hover:bg-green-400 duration-100'
+            >
               บันทึก
             </button>
           </div>
