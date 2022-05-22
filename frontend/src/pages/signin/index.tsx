@@ -19,7 +19,7 @@ const SignIn: React.FC = () => {
   }, [])
 
   const signInHandler = async () => {
-    const result: Boolean = await signIn()
+    const result = await signIn()
     if (result) {
       updateSignState(true)
       router.push('/')
@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
   }
 
   const signOutHandler = async () => {
-    const result: Boolean = await signOut()
+    const result = await signOut()
     if (result) updateSignState(false)
   }
 
