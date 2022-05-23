@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import TimeInput from './timeInput'
 
@@ -17,6 +17,9 @@ const DateInfo: React.FC<Props> = ({ date }) => {
   const [minute, setMinute] = useState<number>()
   const [range, setRange] = useState<number>()
 
+  const [valid, setValid] = useState(false)
+  const [validTime, setValidTime] = useState(false)
+
   const hours = Array.from(Array(24).keys()).map((h) => h + 1)
   const minutes = [0, 15, 30, 45]
 
@@ -32,7 +35,19 @@ const DateInfo: React.FC<Props> = ({ date }) => {
     return range === comparator
   }
 
-  let validAppointmentDetail = !false
+  useEffect(() => {
+    setValid(
+      date != undefined &&
+      subject != '' &&
+      hour != undefined &&
+      minute != undefined &&
+      range != undefined
+    )
+    setValidTime(
+      hour != undefined &&
+      minute != undefined
+    )
+  }, [date, subject, note, hour, minute, range])
 
   const submit = () => {
     // TODO: Submit appointment request
@@ -86,7 +101,7 @@ const DateInfo: React.FC<Props> = ({ date }) => {
                 className={`border px-3 py-2 rounded-xl font-light duration-100 disabled:cursor-not-allowed disabled:text-gray-400 ${
                   checkSelected(range) ? 'border-emerald-600 text-emerald-600' : null
                 }`}
-                disabled
+                disabled={!validTime}
               >
                 {range} นาที
               </button>
@@ -107,7 +122,7 @@ const DateInfo: React.FC<Props> = ({ date }) => {
         <button
           onClick={submit}
           className='px-20 py-3 rounded-full shadow bg-[color:var(--light-blue)] hover:bg-[color:var(--blue)] disabled:bg-gray-400 disabled:opacity-75 disabled:cursor-not-allowed text-white duration-100 font-light'
-          disabled={validAppointmentDetail}
+          disabled={!valid}
         >
           ส่งคำขอ
         </button>
