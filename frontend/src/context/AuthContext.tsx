@@ -2,6 +2,9 @@ import { GoogleAuthProvider, signInWithPopup, signOut, User } from 'firebase/aut
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import ky from 'ky'
+import Cookies from 'js-cookie'
+import dayjs from 'dayjs'
+
 import { auth } from 'lib/firebase'
 import env from 'lib/env'
 
@@ -10,8 +13,6 @@ const provider = new GoogleAuthProvider()
 const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider)
-    const credential = GoogleAuthProvider.credentialFromResult(result)
-    const token = credential?.idToken
     const user = result.user
 
     await ky.get(`${env.apiUrl}/auth/verify`, {
@@ -19,11 +20,6 @@ const signInWithGoogle = async () => {
         'id-token': await user.getIdToken(),
       },
     })
-    // store a firebase idToken cookie with 1-hour ttl
-    let expireAt = new Date()
-    let nextOneHour = expireAt.getTime() + 3600 * 1000
-    expireAt.setTime(nextOneHour)
-    document.cookie = `SCHEDU_FBIDTOKEN=${token};expires=${expireAt};path=/`
 
     return true
   } catch (error: any) {
@@ -36,10 +32,6 @@ const signInWithGoogle = async () => {
 const signOutFromGoogle = async () => {
   try {
     await signOut(auth)
-
-    // remove firebase idToken from cookies
-    document.cookie = `SCHEDU_FBIDTOKEN=;expires=Thu, 01 Jan 1970 00:00:01 GMT`
-
     return true
   } catch (error: any) {
     console.log(error.message)
@@ -50,13 +42,11 @@ const signOutFromGoogle = async () => {
 type authContextType = {
   signIn: () => Promise<boolean>
   signOut: () => Promise<boolean>
-  user: User | null
 }
 
 const authContextDefaultValues: authContextType = {
   signIn: signInWithGoogle,
   signOut: signOutFromGoogle,
-  user: null,
 }
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues)
@@ -71,42 +61,51 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null)
-  const [authorized, setAuthorized] = useState(false)
-  const [delayed, setDelayed] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false)
   const router = useRouter()
 
-  auth.onAuthStateChanged(setUser)
-  auth.onIdTokenChanged(setUser)
-
-  const hasAuthCookie = () =>
-    !!document?.cookie
-      ?.split('; ')
-      ?.find((row) => row.startsWith('SCHEDU_FBIDTOKEN='))
-      ?.split('=')[1]
+  const handleStateChanged = async (user: User | null) => {
+    if (user) {
+      // store a firebase idToken cookie with 1-hour ttl
+      let expireAt = dayjs().add(1, 'hour').toDate()
+      Cookies.set('SCHEDU_FBIDTOKEN', await user.getIdToken(), { expires: expireAt })
+      setLoading(false)
+      setAuthenticated(true)
+    } else {
+      // remove firebase idToken from cookies
+      Cookies.remove('SCHEDU_FBIDTOKEN')
+      setLoading(false)
+      setAuthenticated(false)
+    }
+  }
 
   useEffect(() => {
-    const timeout = setTimeout(() => setDelayed(true), 500)
-    return () => clearTimeout(timeout)
-  })
+    const unSubscribeStateChanged = auth.onAuthStateChanged(handleStateChanged)
+    const unSubscribeTokenChanged = auth.onIdTokenChanged(handleStateChanged)
+
+    return () => {
+      unSubscribeStateChanged()
+      unSubscribeTokenChanged()
+    }
+  }, [])
 
   useEffect(() => {
-    const isAccessible = publicPages.includes(router.asPath) || !!user || hasAuthCookie()
+    const isAccessible = publicPages.includes(router.asPath) || authenticated || loading
     if (!isAccessible) {
       router.push('/signin')
     }
-    setAuthorized(isAccessible)
-  }, [router, user, publicPages])
+  }, [router, publicPages, authenticated, loading])
 
   return (
-    <AuthContext.Provider value={{ user, signIn: signInWithGoogle, signOut: signOutFromGoogle }}>
-      {delayed && authorized ? (
+    <>
+      {!loading ? (
         children
       ) : (
         <div className='flex justify-center items-center w-full h-screen'>
           <div className='animate-spin'>Loading...</div>
         </div>
       )}
-    </AuthContext.Provider>
+    </>
   )
 }
