@@ -1,9 +1,23 @@
+import { useEffect, useState } from 'react'
+import { AppointmentInformation } from 'types/appointment'
 import AppointmentList from './components/AppointmentList'
 import PersonalCalendar from './components/personalCalendar'
 import RequestList from './components/RequestList'
 import UserInfo from './components/userInfo'
 
+import mockedAppointments from 'mock/appointments.json'
+
 const Profile: React.FC = () => {
+
+  const [requests, setRequests] = useState<AppointmentInformation[]>()
+  const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
+
+  useEffect(() => {
+    // TODO: Filter request out of ongoing appointments
+    setOngoings(mockedAppointments)
+    setRequests(mockedAppointments)
+  })
+
   return (
     <>
       <UserInfo />
@@ -13,10 +27,12 @@ const Profile: React.FC = () => {
           <span className='ml-2 text-2xl font-light'>ปฏิทินของคุณ</span>
         </div>
         <div className='grid grid-cols-2 gap-8'>
-          <PersonalCalendar />
           <div>
-            <RequestList />
-            <AppointmentList />
+            <PersonalCalendar />
+          </div>
+          <div>
+            <RequestList appointments={requests} />
+            <AppointmentList appointments={ongoings} />
           </div>
         </div>
       </div>

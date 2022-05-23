@@ -1,15 +1,10 @@
-import { MouseEventHandler, useEffect, useState } from 'react'
 import { AppointmentInformation } from 'types/appointment'
 
-import mockedAppointments from 'mock/appointments.json'
+type Props = {
+  appointments?: AppointmentInformation[]
+}
 
-const AppointmentList: React.FC = () => {
-
-  const [appointments, setAppointments] = useState<AppointmentInformation[]>()
-
-  useEffect(() => {
-    setAppointments(mockedAppointments)
-  })
+const AppointmentList: React.FC<Props> = ({ appointments }) => {
 
   const calculateDuration = (startAt: Date | string, endAt: Date | string) => {
     // TODO: Calculate duration of the event
