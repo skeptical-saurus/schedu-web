@@ -42,17 +42,11 @@ const DenyModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
-                  <Dialog.Title className='text-2xl mb-6'>
+                <Dialog.Panel className='flex items-center justify-between w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
+                  <Dialog.Title className='text-2xl'>
                     ปฏิเสธการเข้าร่วม
                   </Dialog.Title>
-                  <div className='font-light my-6'>
-                    <div className='text-lg font-medium mb-2'>{apm?.subject}</div>
-                    <div className='text-sm mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
-                    <div className='mb-1'>11 Aug 2022 เวลา 10:30AM - 11:00AM</div>
-                    <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
-                  </div>
-                  <div className='mt-4 text-right'>
+                  <div className='text-right'>
                     <button onClick={handleSubmit} className='px-8 py-2 rounded-full bg-rose-200  text-rose-800 hover:bg-rose-300 shadow-md duration-150'>
                       ส่งคำปฏิเสธ
                     </button>
