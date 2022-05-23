@@ -45,7 +45,7 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title className='flex items-start justify-between text-2xl mb-6'>
                     <span>{apm?.subject}</span>
-                    <span onClick={close} className='material-icons text-gray-500 hover:text-gray-700 duration-150 text-2xl cursor-pointer'>close</span>
+                    <button onClick={close} className='material-icons text-gray-500 hover:text-gray-700 duration-150 text-2xl cursor-pointer'>close</button>
                   </Dialog.Title>
                   <div className='font-light'>
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
