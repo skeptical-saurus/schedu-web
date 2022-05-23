@@ -11,7 +11,6 @@ const EditProfile: React.FC = () => {
   const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
 
   useEffect(() => {
-    // TODO: get user information
     if (!loading) {
       setUser(data.currentAccount)
     }
