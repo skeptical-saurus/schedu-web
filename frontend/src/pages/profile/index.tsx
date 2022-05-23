@@ -3,7 +3,7 @@ import { AppointmentInformation } from 'types/appointment'
 import { ContactInformation } from 'types/contact'
 import { GET_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
-        
+
 import OngoingList from './components/ongoingList'
 import RequestList from './components/RequestList'
 import PersonalCalendar from './components/personalCalendar'
@@ -11,14 +11,13 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
-        
+
 import mockedAppointments from 'mock/appointments.json'
 
 const Profile: React.FC = () => {
-    
   const [user, setUser] = useState<ContactInformation>()
   const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
-    
+
   const [requests, setRequests] = useState<AppointmentInformation[]>()
   const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
   const [selected, setSelected] = useState<AppointmentInformation>()
@@ -32,7 +31,7 @@ const Profile: React.FC = () => {
     setOngoings(mockedAppointments)
     setRequests(mockedAppointments)
   })
-    
+
   useEffect(() => {
     if (!loading) {
       setUser(data.currentAccount)
