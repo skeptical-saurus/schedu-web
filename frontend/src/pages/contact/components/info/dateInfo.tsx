@@ -1,17 +1,28 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import TimeInput from './timeInput'
+import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
-  date?: Date
+  date?: Date,
+  appoint: (apm: AppointmentInformation) => void
 }
 
-const DateInfo: React.FC<Props> = ({ date }) => {
+const commChoices = [
+  {comm: 'F2F', title: 'Face-to-Face'},
+  {comm: 'TEL', title: 'โทรศัพท์'},
+  {comm: 'GM', title: 'Google Meet'},
+  {comm: 'ZM', title: 'Zoom Meeting'},
+  {comm: 'MT', title: 'Microsoft Teams'}
+]
+
+const DateInfo: React.FC<Props> = ({ date, appoint }) => {
 
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
 
   const [subject, setSubject] = useState('')
   const [note, setNote] = useState('')
+  const [commMethod, setCommMethod] = useState('F2F')
 
   const [hour, setHour] = useState<number>()
   const [minute, setMinute] = useState<number>()
@@ -51,6 +62,16 @@ const DateInfo: React.FC<Props> = ({ date }) => {
 
   const submit = () => {
     // TODO: Submit appointment request
+    if (!hour || !minute || !range) return
+    let startAt = dayjs(date).set('hour', hour).set('minute', minute).set('second', 0)
+    let endAt = startAt.add(range, 'minutes')
+    appoint({
+      subject,
+      note,
+      startAt: startAt.format(),
+      endAt: endAt.format(),
+      commMethod
+    })
   }
 
   return (
