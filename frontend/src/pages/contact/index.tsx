@@ -16,8 +16,6 @@ const Contact: React.FC<Props> = () => {
 
   useEffect(() => {
     const getContacts = async () => {
-      // TODO: replace with contact request function
-      // query all users
       if (!loading) {
         setContacts(data.accounts)
         setFilteredContacts(data.accounts)

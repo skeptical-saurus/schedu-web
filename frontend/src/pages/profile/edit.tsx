@@ -1,13 +1,20 @@
 import { ContactInformation } from 'types/contact'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserForm from './components/userForm'
+
+import { GET_CURRENT_ACCOUNT } from 'lib/queries'
+import { useQuery } from '@apollo/client'
 
 const EditProfile: React.FC = () => {
   const [user, setUser] = useState<ContactInformation>()
 
-  useState(() => {
-    // TODO: get user information
-  })
+  const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
+
+  useEffect(() => {
+    if (!loading) {
+      setUser(data.currentAccount)
+    }
+  }, [loading, data])
 
   return (
     <>
