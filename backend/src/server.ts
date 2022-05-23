@@ -43,7 +43,7 @@ const startServer = async () => {
 
   await apolloServer.start()
   app.use(decodeTokenToUser)
-  apolloServer.applyMiddleware({ app })
+  apolloServer.applyMiddleware({ ...(env.NODE_ENV === 'production' && { cors: false }), app })
 
   app.listen(env.port, () => {
     console.log(`Server is listening on port ${env.port}`)
