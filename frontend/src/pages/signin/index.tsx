@@ -1,4 +1,3 @@
-import { getCookieValue } from 'lib/cookie'
 import { useEffect, useState } from 'react'
 import { useAuth } from 'context/AuthContext'
 import Link from 'next/link'
@@ -7,29 +6,15 @@ import { useRouter } from 'next/router'
 const SignIn: React.FC = () => {
   const [isSigned, updateSignState] = useState(false)
 
-  const { signIn, signOut } = useAuth()
+  const { signIn, signOut, authenticated } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    const getToken = () => {
-      const token = getCookieValue(document.cookie, 'SCHEDU_FBIDTOKEN')
-      if (token) updateSignState(true)
-    }
-    getToken()
-  }, [])
-
-  const signInHandler = async () => {
-    const result = await signIn()
-    if (result) {
-      updateSignState(true)
+    if (authenticated) {
+      updateSignState(authenticated)
       router.push('/')
     }
-  }
-
-  const signOutHandler = async () => {
-    const result = await signOut()
-    if (result) updateSignState(false)
-  }
+  }, [authenticated, router])
 
   const renderActionPanel = () => {
     // Already sign-in
@@ -46,7 +31,7 @@ const SignIn: React.FC = () => {
               </a>
             </Link>
             <button
-              onClick={signOutHandler}
+              onClick={signOut}
               className='rounded-full px-8 py-2 text-sm font-light border bg-rose-700 border-rose-700 hover:bg-rose-800 hover:border-rose-800 duration-100 ml-4'
             >
               ออกจากระบบ
@@ -59,7 +44,7 @@ const SignIn: React.FC = () => {
     // Anonymous user
     return (
       <button
-        onClick={signInHandler}
+        onClick={signIn}
         className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'
       >
         เข้าสู่ระบบด้วยบัญชี ITKMITL

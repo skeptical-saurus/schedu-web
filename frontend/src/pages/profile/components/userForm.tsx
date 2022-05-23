@@ -1,6 +1,11 @@
 import { ContactInformation } from 'types/contact'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+
+import { GET_CURRENT_ACCOUNT } from 'lib/queries'
+import { UPDATE_USER_PROFILE } from 'lib/mutations'
+import { useMutation } from '@apollo/client'
 
 type Props = {
   user?: ContactInformation
@@ -11,17 +16,81 @@ const UserForm: React.FC<Props> = ({ user }) => {
   const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [tel, setTel] = useState('')
+  const [image, setImage] = useState('')
+  const [formError, setFormError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const router = useRouter()
+
+  const [updateProfile] = useMutation(UPDATE_USER_PROFILE, {
+    refetchQueries: [GET_CURRENT_ACCOUNT],
+    onCompleted: (data) => {
+      const user = data.updateAccount.record
+      setFirstname(user.firstName)
+      setLastname(user.lastName)
+      setTel(user.tel)
+    },
+  })
 
   useEffect(() => {
     if (!user) return
+
     setFirstname(user.firstName ?? '')
     setLastname(user.lastName ?? '')
     setEmail(user.contact.email ?? '')
-    setTel(user.contact.tel ?? '')
+    setTel(user.contact.tel ?? '-')
+    setImage(user.image ?? '')
   }, [user])
 
-  const submit = () => {
-    // TODO: send update of the user information
+  const formValidator = () => {
+    if (!firstname) {
+      setFormError(true)
+      setErrorMessage('โปรดระบุชื่อจริง')
+    } else if (!lastname) {
+      setErrorMessage('โปรดระบุนามสกุล')
+      setFormError(true)
+    } else {
+      setFormError(false)
+      setErrorMessage('')
+    }
+  }
+
+  const submit = async () => {
+    if (firstname && lastname) {
+      updateProfile({
+        variables: {
+          record: {
+            firstName: firstname,
+            lastName: lastname,
+            contact: {
+              email,
+              tel,
+            },
+          },
+        },
+      }).then(() => {
+        router.replace('/profile')
+      })
+    } else {
+      formValidator()
+    }
+  }
+
+  const haveimage = () => {
+    if (image) {
+      return (
+        <img
+          className='w-24 text-gray-600 rounded-full'
+          src={image}
+          alt={`${firstname} ${lastname}`}
+        />
+      )
+    }
+    return (
+      <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full'>
+        <span className='material-icons text-8xl text-gray-600'>account_circle</span>
+      </span>
+    )
   }
 
   return (
@@ -29,9 +98,7 @@ const UserForm: React.FC<Props> = ({ user }) => {
       <div className='flex justify-center my-8'>
         <div className='relative p-8 border shadow-2xl w-2/5 rounded-2xl'>
           <div className='flex items-center'>
-            <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full'>
-              <span className='material-icons text-4xl'>collections</span>
-            </span>
+            {haveimage()}
             <div className='ml-6 text-2xl font-bold'>แก้ไขข้อมูลโปรไฟล์</div>
           </div>
           <div className='grid grid-cols-2 gap-x-8 gap-y-6 py-8'>
@@ -77,7 +144,8 @@ const UserForm: React.FC<Props> = ({ user }) => {
                 type='text'
                 placeholder='supkit@cc.com'
                 value={email}
-                className='border-b font-light w-full mt-1'
+                className='border-b font-light w-full mt-1 text-stone-400 cursor-not-allowed'
+                disabled
               />
             </div>
             <div className='col-span-2'>
@@ -90,12 +158,19 @@ const UserForm: React.FC<Props> = ({ user }) => {
                 }}
                 id='tel'
                 type='text'
-                placeholder='012 234 4567'
+                placeholder='012 345 6789'
                 value={tel}
                 className='border-b font-light w-full mt-1'
               />
             </div>
           </div>
+
+          {formError && (
+            <div className='p-2 mb-4 mt-4 bg-red-200 rounded-xl'>
+              <span className='text-red-500'>{errorMessage}</span>
+            </div>
+          )}
+
           <div className='grid grid-cols-2 gap-8'>
             <Link href='/profile' passHref={true}>
               <button className='w-full p-3 rounded-xl bg-gray-300 hover:bg-gray-400 duration-100'>
