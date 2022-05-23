@@ -39,7 +39,7 @@ const startServer = async () => {
   await apolloServer.start()
   app.use(decodeTokenToUser)
   apolloServer.applyMiddleware({
-    cors: getCorsOptions(),
+    cors: false,
     app,
   })
 
