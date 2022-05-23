@@ -1,3 +1,4 @@
+import AppointmentList from './components/AppointmentList'
 import PersonalCalendar from './components/personalCalendar'
 import UserInfo from './components/userInfo'
 
@@ -10,7 +11,10 @@ const Profile: React.FC = () => {
           <span className='material-icons text-3xl'>calendar_month</span>
           <span className='ml-2 text-2xl font-light'>ปฏิทินของคุณ</span>
         </div>
-        <PersonalCalendar />
+        <div className='grid grid-cols-2 gap-8'>
+          <PersonalCalendar />
+          <AppointmentList />
+        </div>
       </div>
     </>
   )
