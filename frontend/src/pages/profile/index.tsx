@@ -28,7 +28,7 @@ const Profile: React.FC = () => {
 
   const openDetailModal = (apm: AppointmentInformation) => {
     setSelected(apm)
-    // TODO: open modal with appointment detail
+    setDetailOpen(true)
   }
 
   const openConfirmModal = (apm: AppointmentInformation, mode: string) => {
@@ -61,7 +61,7 @@ const Profile: React.FC = () => {
           </div>
         </div>
       </div>
-      <DetailModal appointment={selected} />
+      <DetailModal appointment={selected} isOpen={isDetailOpen} close={handleDetailClose} />
       <ApproveModal appointment={selected} isOpen={isApproveOpen} close={handleApproveClose} />
       <DenyModal appointment={selected} isOpen={isDenyOpen} close={handleDenyClose} />
     </>

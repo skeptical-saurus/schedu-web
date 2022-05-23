@@ -26,7 +26,7 @@ const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
                   <div className='mb-1'>
                     10 Aug 2022 เวลา 10:30AM - 11:00AM (ระยะเวลา: 30 นาที)
                   </div>
-                  <div>สถานะ: STARTING</div>
+                  <div>สถานะ: {apm.status}</div>
                 </div>
               </div>
               <div className='flex items-center justify-end ml-8'>
