@@ -33,3 +33,20 @@ export const GET_ACCOUNT_BY_ID = gql`
     }
   }
 `
+
+export const GET_CURRENT_ACCOUNT = gql`
+  query currentAccount {
+    currentAccount {
+      _id
+      googleId
+      businessId
+      firstName
+      lastName
+      image
+      contact {
+        email
+        tel
+      }
+    }
+  }
+`
