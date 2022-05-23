@@ -10,28 +10,11 @@ import env from 'lib/env'
 
 const provider = new GoogleAuthProvider()
 
-const verifyAndSetCookie = async (userIdToken: string) => {
-  await ky.get(`${env.apiUrl}/auth/verify`, {
-    headers: {
-      'id-token': userIdToken,
-    },
-  })
-  // store a firebase idToken cookie with 1-hour ttl
-  let expireAt = dayjs().add(1, 'hour').toDate()
-  Cookies.set('SCHEDU_FBIDTOKEN', userIdToken, { expires: expireAt })
-}
-
 const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, provider)
-    const user = result.user
-    const userIdToken = await user.getIdToken()
-
-    await verifyAndSetCookie(userIdToken)
-
+    await signInWithPopup(auth, provider)
     return true
   } catch (error: any) {
-    const credential = GoogleAuthProvider.credentialFromError(error)
     console.log(error.message)
     return false
   }
@@ -50,11 +33,13 @@ const signOutFromGoogle = async () => {
 type authContextType = {
   signIn: () => Promise<boolean>
   signOut: () => Promise<boolean>
+  authenticated: boolean
 }
 
 const authContextDefaultValues: authContextType = {
   signIn: signInWithGoogle,
   signOut: signOutFromGoogle,
+  authenticated: false,
 }
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues)
@@ -73,13 +58,19 @@ export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
   const [authenticated, setAuthenticated] = useState(false)
   const router = useRouter()
 
-  const handleStateChanged = async (user: User | null) => {
+  const idTokenChangeHandler = async (user: User | null) => {
     if (user) {
       try {
-        if (Cookies.get('SCHEDU_FBIDTOKEN')) {
-          const userIdToken = await user.getIdToken()
-          await verifyAndSetCookie(userIdToken)
-        }
+        const userIdToken = await user.getIdToken()
+        await ky.get(`${env.apiUrl}/auth/verify`, {
+          headers: {
+            'id-token': userIdToken,
+          },
+        })
+
+        // store a firebase idToken cookie with 1-hour ttl
+        let expireAt = dayjs().add(1, 'hour').toDate()
+        Cookies.set('SCHEDU_FBIDTOKEN', userIdToken, { expires: expireAt })
         setAuthenticated(true)
       } catch {
         await signOutFromGoogle()
@@ -96,12 +87,10 @@ export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
   }
 
   useEffect(() => {
-    const unSubscribeStateChanged = auth.onAuthStateChanged(handleStateChanged)
-    const unSubscribeTokenChanged = auth.onIdTokenChanged(handleStateChanged)
+    const unSubscribe = auth.onIdTokenChanged(idTokenChangeHandler)
 
     return () => {
-      unSubscribeStateChanged()
-      unSubscribeTokenChanged()
+      unSubscribe()
     }
   }, [])
 
@@ -113,7 +102,7 @@ export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
   }, [router, publicPages, authenticated, loading])
 
   return (
-    <>
+    <AuthContext.Provider value={{ ...authContextDefaultValues, authenticated }}>
       {!loading ? (
         children
       ) : (
@@ -121,6 +110,6 @@ export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
           <div className='animate-spin'>Loading...</div>
         </div>
       )}
-    </>
+    </AuthContext.Provider>
   )
 }
