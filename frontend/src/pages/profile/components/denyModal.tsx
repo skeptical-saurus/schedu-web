@@ -3,18 +3,17 @@ import { Fragment, useState } from 'react'
 import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
-  appointment?: AppointmentInformation,
-  isOpen: boolean,
+  appointment?: AppointmentInformation
+  isOpen: boolean
   close: () => void
 }
 
 const DenyModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
-
   const handleSubmit = () => {
     // TODO: do submit deny
     close()
   }
-  
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -43,11 +42,12 @@ const DenyModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='flex items-center justify-between w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
-                  <Dialog.Title className='text-2xl'>
-                    ปฏิเสธการเข้าร่วม
-                  </Dialog.Title>
+                  <Dialog.Title className='text-2xl'>ปฏิเสธการเข้าร่วม</Dialog.Title>
                   <div className='text-right'>
-                    <button onClick={handleSubmit} className='px-8 py-2 rounded-full bg-rose-200  text-rose-800 hover:bg-rose-300 shadow-md duration-150'>
+                    <button
+                      onClick={handleSubmit}
+                      className='px-8 py-2 rounded-full bg-rose-200  text-rose-800 hover:bg-rose-300 shadow-md duration-150'
+                    >
                       ส่งคำปฏิเสธ
                     </button>
                   </div>

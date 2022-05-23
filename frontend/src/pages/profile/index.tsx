@@ -11,7 +11,6 @@ import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
 
 const Profile: React.FC = () => {
-
   const [requests, setRequests] = useState<AppointmentInformation[]>()
   const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
   const [selected, setSelected] = useState<AppointmentInformation>()
@@ -34,14 +33,22 @@ const Profile: React.FC = () => {
   const openConfirmModal = (apm: AppointmentInformation, mode: string) => {
     setSelected(apm)
     switch (mode) {
-      case 'APPROVE': return setApproveOpen(true)
-      case 'DENY': return setDenyOpen(true)
+      case 'APPROVE':
+        return setApproveOpen(true)
+      case 'DENY':
+        return setDenyOpen(true)
     }
   }
 
-  const handleDetailClose = () => { setDetailOpen(false) }
-  const handleApproveClose = () => { setApproveOpen(false) }
-  const handleDenyClose = () => { setDenyOpen(false) }
+  const handleDetailClose = () => {
+    setDetailOpen(false)
+  }
+  const handleApproveClose = () => {
+    setApproveOpen(false)
+  }
+  const handleDenyClose = () => {
+    setDenyOpen(false)
+  }
 
   return (
     <>
@@ -56,7 +63,11 @@ const Profile: React.FC = () => {
             <PersonalCalendar />
           </div>
           <div>
-            <RequestList appointments={requests} moreDetail={openDetailModal} submit={openConfirmModal} />
+            <RequestList
+              appointments={requests}
+              moreDetail={openDetailModal}
+              submit={openConfirmModal}
+            />
             <OngoingList appointments={ongoings} moreDetail={openDetailModal} />
           </div>
         </div>

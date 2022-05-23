@@ -3,18 +3,17 @@ import { Fragment, useState } from 'react'
 import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
-  appointment?: AppointmentInformation,
-  isOpen: boolean,
+  appointment?: AppointmentInformation
+  isOpen: boolean
   close: () => void
 }
 
 const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
-
   const handleSubmit = () => {
     // TODO: do submit approval
     close()
   }
-  
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -45,7 +44,12 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title className='flex items-start justify-between text-2xl mb-6'>
                     <span>{apm?.subject}</span>
-                    <button onClick={close} className='material-icons text-gray-500 hover:text-gray-700 duration-150 text-2xl cursor-pointer'>close</button>
+                    <button
+                      onClick={close}
+                      className='material-icons text-gray-500 hover:text-gray-700 duration-150 text-2xl cursor-pointer'
+                    >
+                      close
+                    </button>
                   </Dialog.Title>
                   <div className='font-light'>
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>

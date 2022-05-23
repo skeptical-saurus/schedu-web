@@ -3,18 +3,17 @@ import { Fragment, useState } from 'react'
 import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
-  appointment?: AppointmentInformation,
-  isOpen: boolean,
+  appointment?: AppointmentInformation
+  isOpen: boolean
   close: () => void
 }
 
 const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
-
   const handleSubmit = () => {
     // TODO: do submit approval
     close()
   }
-  
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -43,17 +42,20 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
-                  <Dialog.Title className='text-2xl mb-6'>
-                    ยืนยันการเข้าร่วมนัดหมาย
-                  </Dialog.Title>
+                  <Dialog.Title className='text-2xl mb-6'>ยืนยันการเข้าร่วมนัดหมาย</Dialog.Title>
                   <div className='font-light my-6'>
                     <div className='text-lg font-medium mb-2'>{apm?.subject}</div>
-                    <div className='text-sm mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
+                    <div className='text-sm mb-6'>
+                      {apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}
+                    </div>
                     <div className='mb-1'>11 Aug 2022 เวลา 10:30AM - 11:00AM</div>
                     <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
                   </div>
                   <div className='mt-4 text-right'>
-                    <button onClick={handleSubmit} className='px-8 py-2 rounded-full bg-emerald-200  text-emerald-800 hover:bg-emerald-300 shadow-md duration-150'>
+                    <button
+                      onClick={handleSubmit}
+                      className='px-8 py-2 rounded-full bg-emerald-200  text-emerald-800 hover:bg-emerald-300 shadow-md duration-150'
+                    >
                       เข้าร่วม
                     </button>
                   </div>
