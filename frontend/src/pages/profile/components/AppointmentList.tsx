@@ -16,8 +16,8 @@ const AppointmentList: React.FC = () => {
               </div>
             </div>
             <div className='flex items-center justify-end ml-8'>
-              <button className='group w-8 h-8 flex border border-emerald-400 bg-emerald-400 hover:border-emerald-500 hover:bg-emerald-500 duration-100 rounded-full'>
-                <span className='material-icons m-auto text-sm text-white group-hover:border-emerald-500 duration-100'>done</span>
+              <button className='group w-8 h-8 flex border border-emerald-500 bg-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 duration-100 rounded-full'>
+                <span className='material-icons m-auto text-sm text-white group-hover:border-emerald-600 duration-100'>done</span>
               </button>
               <button className='group w-8 h-8 flex border border-rose-700 hover:border-rose-900 rounded-full ml-3 duration-100'>
                 <span className='material-icons m-auto text-sm text-rose-700 group-hover:border-rose-900 duration-100'>close</span>
