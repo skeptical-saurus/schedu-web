@@ -1,4 +1,4 @@
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 
 type Props = {
   contact: ContactInformation

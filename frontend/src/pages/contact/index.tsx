@@ -1,7 +1,7 @@
 import HighlightCard from './components/index/highlightCard'
 import ContactRow from './components/index/contactRow'
 import { useEffect, useState } from 'react'
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 
 import { GET_ACCOUNTS } from 'lib/queries'
 import { useQuery } from '@apollo/client'

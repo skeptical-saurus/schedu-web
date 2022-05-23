@@ -1,4 +1,4 @@
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 import { useState } from 'react'
 import UserForm from './components/userForm'
 

@@ -1,4 +1,4 @@
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
