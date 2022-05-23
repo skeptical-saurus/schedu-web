@@ -13,18 +13,13 @@ import authRouter from 'routes/auth'
 import { validateToken, decodeTokenToUser } from 'middlewares/auth'
 
 import schema from 'graphql-schema'
+import { getCorsOptions } from 'config/cors'
 
 const app = express()
 app.disable('x-powered-by')
 app.use(express.json())
 
-if (env.NODE_ENV !== 'production') {
-  app.use(
-    cors({
-      origin: 'http://localhost:3000',
-    })
-  )
-}
+app.use(cors(getCorsOptions()))
 
 app.use('/auth', validateToken, decodeTokenToUser, authRouter)
 
@@ -43,7 +38,10 @@ const startServer = async () => {
 
   await apolloServer.start()
   app.use(decodeTokenToUser)
-  apolloServer.applyMiddleware({ ...(env.NODE_ENV === 'production' && { cors: false }), app })
+  apolloServer.applyMiddleware({
+    cors: false,
+    app,
+  })
 
   app.listen(env.port, () => {
     console.log(`Server is listening on port ${env.port}`)
