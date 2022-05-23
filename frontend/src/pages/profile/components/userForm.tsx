@@ -45,9 +45,9 @@ const UserForm: React.FC<Props> = ({ user }) => {
   const formValidator = () => {
     if (!firstname) {
       setFormError(true)
-      setErrorMessage('ระบุชื่อจริงทีพลีส')
+      setErrorMessage('โปรดระบุชื่อจริง')
     } else if (!lastname) {
-      setErrorMessage('ระบุนามสกุลทีพลีส')
+      setErrorMessage('โปรดระบุนามสกุล')
       setFormError(true)
     } else {
       setFormError(false)
@@ -56,7 +56,6 @@ const UserForm: React.FC<Props> = ({ user }) => {
   }
 
   const submit = async () => {
-    // TODO: send update of the user information
     if (firstname && lastname) {
       updateProfile({
         variables: {
