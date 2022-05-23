@@ -1,10 +1,11 @@
 import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
-  appointments?: AppointmentInformation[]
+  appointments?: AppointmentInformation[],
+  moreDetail: Function
 }
 
-const AppointmentList: React.FC<Props> = ({ appointments }) => {
+const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
 
   const calculateDuration = (startAt: Date | string, endAt: Date | string) => {
     // TODO: Calculate duration of the event
@@ -28,7 +29,7 @@ const AppointmentList: React.FC<Props> = ({ appointments }) => {
                 </div>
               </div>
               <div className='flex items-center justify-end ml-8'>
-                <button className='px-3 py-1 border border-[color:var(--light-blue)] text-[color:var(--light-blue)] hover:border-[color:var(--blue)] hover:text-[color:var(--blue)] duration-100 rounded-full text-xs font-light'>
+                <button onClick={() => moreDetail(apm)} className='px-3 py-1 border border-[color:var(--light-blue)] text-[color:var(--light-blue)] hover:border-[color:var(--blue)] hover:text-[color:var(--blue)] duration-100 rounded-full text-xs font-light'>
                   รายละเอียด
                 </button>
               </div>
@@ -40,4 +41,4 @@ const AppointmentList: React.FC<Props> = ({ appointments }) => {
   )
 }
 
-export default AppointmentList
+export default OngoingList

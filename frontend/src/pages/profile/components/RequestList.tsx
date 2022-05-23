@@ -1,12 +1,12 @@
-import { AppointmentInformation } from "types/appointment"
+import { AppointmentInformation } from 'types/appointment'
 
 type Props = {
   appointments?: AppointmentInformation[],
-  needMoreDetail: Function,
+  moreDetail: Function,
   submit: Function,
 }
 
-const RequestList: React.FC<Props> = ({ appointments, needMoreDetail, submit }) => {
+const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
   return (
     <>
       <div className='border rounded-xl p-8 mb-8'>
@@ -18,14 +18,14 @@ const RequestList: React.FC<Props> = ({ appointments, needMoreDetail, submit }) 
                 <div className='truncate w-full mb-1'>
                   {apm.subject}
                 </div>
-                <div className="font-light text-sm text-gray-600">
+                <div className='font-light text-sm text-gray-600'>
                   <div>
                     10 Aug 2022 at 10:30AM - 11:00AM (ระยะเวลา: 30 นาที)
                   </div>
                 </div>
               </div>
               <div className='col-span-2 flex items-center justify-end ml-8'>
-                <button onClick={() => needMoreDetail(apm)} className='px-3 py-1 border border-[color:var(--light-blue)] text-[color:var(--light-blue)] hover:border-[color:var(--blue)] hover:text-[color:var(--blue)] duration-100 rounded-full text-xs font-light'>
+                <button onClick={() => moreDetail(apm)} className='px-3 py-1 border border-[color:var(--light-blue)] text-[color:var(--light-blue)] hover:border-[color:var(--blue)] hover:text-[color:var(--blue)] duration-100 rounded-full text-xs font-light'>
                   รายละเอียด
                 </button>
                 <button onClick={() => submit(apm, 'APPROVE')} className='group w-8 h-8 flex border border-emerald-500 bg-emerald-500 hover:border-emerald-600 hover:bg-emerald-600 ml-3 duration-100 rounded-full'>
