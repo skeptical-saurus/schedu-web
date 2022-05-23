@@ -16,7 +16,7 @@ const AppointmentList: React.FC<Props> = ({ appointments }) => {
         <div className='text-xl font-bold mb-4'>รายการที่ยังดำเนินอยู่</div>
         <div>
           {appointments?.map(apm => (
-            <div className='grid grid-cols-5 py-3 border-b'>
+            <div key={apm._id} className='grid grid-cols-5 py-3 border-b'>
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>
                   {apm.subject}

@@ -18,6 +18,14 @@ const Profile: React.FC = () => {
     setRequests(mockedAppointments)
   })
 
+  const openDetailModal = (apm: AppointmentInformation) => {
+    // TODO: open modal with appointment detail
+  }
+
+  const openConfirmModal = (apm: AppointmentInformation, mode: string) => {
+    // TODO: open confirmation modal base on input mode (APPROVE/DENY)
+  }
+
   return (
     <>
       <UserInfo />
@@ -31,7 +39,7 @@ const Profile: React.FC = () => {
             <PersonalCalendar />
           </div>
           <div>
-            <RequestList appointments={requests} />
+            <RequestList appointments={requests} needMoreDetail={openDetailModal} submit={openConfirmModal} />
             <AppointmentList appointments={ongoings} />
           </div>
         </div>
