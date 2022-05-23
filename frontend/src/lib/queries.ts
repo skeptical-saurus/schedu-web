@@ -1,8 +1,20 @@
 import { gql } from '@apollo/client'
 
-export const GET_ACCOUNTS = gql`
-  query accounts {
+export const GET_ACCOUNTS_AND_CONTACTS = gql`
+  query {
     accounts {
+      _id
+      googleId
+      businessId
+      firstName
+      lastName
+      image
+      contact {
+        email
+        tel
+      }
+    }
+    recentContacts {
       _id
       googleId
       businessId
