@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import PersonalInfo from './components/info/personalInfo'
 import { ContactInformation } from 'interface/contact'
 
-import jsonUsers from 'mock/users.json'
 import EventCalendar from './components/info/eventCalendar'
 import DateInfo from './components/info/dateInfo'
+
+import { GET_ACCOUNT_BY_ID } from 'lib/queries'
+import { useQuery } from '@apollo/client'
 
 type Props = {}
 
@@ -16,13 +18,16 @@ const ContactInfo: React.FC<Props> = () => {
   const [contact, setContact] = useState<ContactInformation>()
   const [selectedDate, setSelectedDate] = useState<Date>()
 
+  const { loading, error, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
+
   useEffect(() => {
     const getContactInfo = async () => {
-      const result = jsonUsers.find((user) => user.id === uid)
-      setContact(result)
+      if (!loading) {
+        setContact(data.account)
+      }
     }
     getContactInfo()
-  }, [uid])
+  }, [loading, data])
 
   // Contact is not successfully loaded or not found any
   if (!contact)

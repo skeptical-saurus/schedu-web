@@ -1,8 +1,12 @@
 export interface ContactInformation {
-  id: string
-  firstname: string
-  lastname: string
-  email: string
-  tel: string
-  role: string
+  _id: string
+  googleId: string
+  businessId: string
+  firstName: string
+  lastName: string
+  image: string
+  contact: {
+    email: string
+    tel: string
+  }
 }
