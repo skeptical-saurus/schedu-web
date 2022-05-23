@@ -10,16 +10,24 @@ import env from 'lib/env'
 
 const provider = new GoogleAuthProvider()
 
+const verifyAndSetCookie = async (userIdToken: string) => {
+  await ky.get(`${env.apiUrl}/auth/verify`, {
+    headers: {
+      'id-token': userIdToken,
+    },
+  })
+  // store a firebase idToken cookie with 1-hour ttl
+  let expireAt = dayjs().add(1, 'hour').toDate()
+  Cookies.set('SCHEDU_FBIDTOKEN', userIdToken, { expires: expireAt })
+}
+
 const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider)
     const user = result.user
+    const userIdToken = await user.getIdToken()
 
-    await ky.get(`${env.apiUrl}/auth/verify`, {
-      headers: {
-        'id-token': await user.getIdToken(),
-      },
-    })
+    await verifyAndSetCookie(userIdToken)
 
     return true
   } catch (error: any) {
@@ -67,11 +75,18 @@ export const AuthProvider = ({ publicPages, children }: AuthProviderProps) => {
 
   const handleStateChanged = async (user: User | null) => {
     if (user) {
-      // store a firebase idToken cookie with 1-hour ttl
-      let expireAt = dayjs().add(1, 'hour').toDate()
-      Cookies.set('SCHEDU_FBIDTOKEN', await user.getIdToken(), { expires: expireAt })
-      setLoading(false)
-      setAuthenticated(true)
+      try {
+        if (Cookies.get('SCHEDU_FBIDTOKEN')) {
+          const userIdToken = await user.getIdToken()
+          await verifyAndSetCookie(userIdToken)
+        }
+        setAuthenticated(true)
+      } catch {
+        await signOutFromGoogle()
+        setAuthenticated(false)
+      } finally {
+        setLoading(false)
+      }
     } else {
       // remove firebase idToken from cookies
       Cookies.remove('SCHEDU_FBIDTOKEN')
