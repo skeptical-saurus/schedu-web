@@ -16,6 +16,10 @@ const Profile: React.FC = () => {
   const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
   const [selected, setSelected] = useState<AppointmentInformation>()
 
+  const [isDetailOpen, setDetailOpen] = useState(false)
+  const [isApproveOpen, setApproveOpen] = useState(false)
+  const [isDenyOpen, setDenyOpen] = useState(false)
+
   useEffect(() => {
     // TODO: Filter request out of ongoing appointments
     setOngoings(mockedAppointments)
@@ -23,12 +27,21 @@ const Profile: React.FC = () => {
   })
 
   const openDetailModal = (apm: AppointmentInformation) => {
+    setSelected(apm)
     // TODO: open modal with appointment detail
   }
 
   const openConfirmModal = (apm: AppointmentInformation, mode: string) => {
-    // TODO: open confirmation modal base on input mode (APPROVE/DENY)
+    setSelected(apm)
+    switch (mode) {
+      case 'APPROVE': return setApproveOpen(true)
+      case 'DENY': return setDenyOpen(true)
+    }
   }
+
+  const handleDetailClose = () => { setDetailOpen(false) }
+  const handleApproveClose = () => { setApproveOpen(false) }
+  const handleDenyClose = () => { setDenyOpen(false) }
 
   return (
     <>
@@ -48,8 +61,8 @@ const Profile: React.FC = () => {
           </div>
         </div>
       </div>
-      <DetailModal appointment={} />
-      <ApproveModal />
+      <DetailModal appointment={selected} />
+      <ApproveModal appointment={selected} isOpen={isApproveOpen} close={handleApproveClose} />
       <DenyModal />
     </>
   )
