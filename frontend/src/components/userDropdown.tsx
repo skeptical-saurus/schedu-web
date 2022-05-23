@@ -54,7 +54,9 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
             className='text-[color:var(--light-blue)] font-bold flex items-center'
           >
             <span className='material-icons mr-1'>person</span>
-            <span>{`${user?.firstName} ${user?.lastName}`}</span>
+            <span>
+              {user?.firstName} {user?.lastName}
+            </span>
           </Menu.Button>
           {mount && (
             <Menu.Items
@@ -66,7 +68,7 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
                 <div className='my-auto ml-3'>
                   <Link href='/profile'>
                     <a className='text-[color:var(--light-blue)] hover:underline underline-offset-1 duration-100'>
-                      {`${user?.firstName} ${user?.lastName}`}
+                      {user?.firstName} {user?.lastName}
                     </a>
                   </Link>
                   <div className='text-sm font-light text-gray-500'>นักศึกษา</div>
