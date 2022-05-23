@@ -1,5 +1,6 @@
 import AppointmentList from './components/AppointmentList'
 import PersonalCalendar from './components/personalCalendar'
+import RequestList from './components/RequestList'
 import UserInfo from './components/userInfo'
 
 const Profile: React.FC = () => {
@@ -13,7 +14,10 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <PersonalCalendar />
-          <AppointmentList />
+          <div>
+            <RequestList />
+            <AppointmentList />
+          </div>
         </div>
       </div>
     </>
