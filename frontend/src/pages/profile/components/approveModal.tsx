@@ -53,7 +53,7 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
                   </div>
                   <div className='mt-4 text-right'>
-                    <button onClick={handleSubmit} className='px-8 py-2 rounded-xl bg-emerald-200  text-emerald-800 hover:bg-emerald-300 shadow-md duration-150'>
+                    <button onClick={handleSubmit} className='px-8 py-2 rounded-full bg-emerald-200  text-emerald-800 hover:bg-emerald-300 shadow-md duration-150'>
                       เข้าร่วม
                     </button>
                   </div>

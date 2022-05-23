@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
       </div>
       <DetailModal appointment={selected} />
       <ApproveModal appointment={selected} isOpen={isApproveOpen} close={handleApproveClose} />
-      <DenyModal />
+      <DenyModal appointment={selected} isOpen={isDenyOpen} close={handleDenyClose} />
     </>
   )
 }
