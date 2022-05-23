@@ -36,7 +36,7 @@ const DateInfo: React.FC<Props> = ({ date }) => {
 
   return (
     <>
-      <div className='grid grid-cols-3 my-8'>
+      <div className='my-8'>
         <div>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>event_available</span>
@@ -44,6 +44,17 @@ const DateInfo: React.FC<Props> = ({ date }) => {
           </div>
           <div className='text-2xl font-light'>{shownDate}</div>
         </div>
+      </div>
+      <div className='my-8'>
+        <div>
+          <div className='text-sm mb-2 text-gray-500 flex items-center'>
+            <span className='material-icons text-lg'>drive_file_rename_outline</span>
+            <span className='ml-1'>หัวข้อการนัดหมาย</span>
+          </div>
+          <input type='text' placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว' className='w-full border rounded-xl p-3' />
+        </div>
+      </div>
+      <div className='grid grid-cols-3 my-8'>
         <div>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>schedule</span>
@@ -79,10 +90,19 @@ const DateInfo: React.FC<Props> = ({ date }) => {
           </div>
         </div>
       </div>
+      <div className='my-8'>
+        <div>
+          <div className='text-sm mb-2 text-gray-500 flex items-center'>
+            <span className='material-icons text-lg'>description</span>
+            <span className='ml-1'>รายละเอียดแนบ</span>
+          </div>
+          <textarea rows={6} placeholder='ขอให้เตรียมตัวกันมาให้พร้อม ต้องพร้อมนะ พร้อม ๆ เลย' className='w-full border rounded-xl p-3 resize-none font-light'></textarea>
+        </div>
+      </div>
       <div className='text-right'>
         <button
           onClick={submit}
-          className='px-16 py-4 rounded-xl shadow bg-[color:var(--light-blue)] hover:bg-[color:var(--blue)] disabled:bg-gray-400 disabled:opacity-75 disabled:cursor-not-allowed text-white duration-100 font-light'
+          className='px-20 py-3 rounded-full shadow bg-[color:var(--light-blue)] hover:bg-[color:var(--blue)] disabled:bg-gray-400 disabled:opacity-75 disabled:cursor-not-allowed text-white duration-100 font-light'
           disabled={validAppointmentDetail}
         >
           ส่งคำขอ

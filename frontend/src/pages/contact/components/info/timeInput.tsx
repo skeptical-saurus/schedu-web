@@ -19,7 +19,7 @@ const TimeInput: React.FC<Props> = ({ times, time, setTime }) => {
             <span>{time ? time : '—'}</span>
             <span className='material-icons text-gray-400'>expand_more</span>
           </Listbox.Button>
-          <Listbox.Options className='absolute w-20 max-h-48 overflow-y-scroll rounded-xl border mt-1'>
+          <Listbox.Options className='absolute w-20 max-h-48 overflow-y-scroll rounded-xl border mt-1 bg-white'>
             {times.map((time, index) => (
               <Listbox.Option
                 key={index}
