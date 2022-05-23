@@ -19,7 +19,7 @@ const Profile: React.FC = () => {
   }, [loading, data])
   return (
     <>
-      <UserInfo user={user}/>
+      <UserInfo user={user} />
       <div className='mt-24'>
         <div className='flex items-center mb-6'>
           <span className='material-icons text-3xl'>calendar_month</span>

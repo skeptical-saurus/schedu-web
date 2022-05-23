@@ -45,7 +45,9 @@ const UserInfo: React.FC<Props> = ({ user }) => {
             <div className='col-span-2 py-3 border-t'>E-mail</div>
             <div className='col-span-3 py-3 border-t font-light'>{user?.contact.email}</div>
             <div className='col-span-2 py-3 border-t'>เบอร์ติดต่อ</div>
-            <div className='col-span-3 py-3 border-t font-light'>{user?.contact.tel ? user?.contact.tel : '-'}</div>
+            <div className='col-span-3 py-3 border-t font-light'>
+              {user?.contact.tel ? user?.contact.tel : '-'}
+            </div>
           </div>
         </div>
       </div>
