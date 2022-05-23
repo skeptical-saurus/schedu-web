@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from 'react'
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import TimeInput from './timeInput'
 
@@ -7,7 +7,11 @@ type Props = {
 }
 
 const DateInfo: React.FC<Props> = ({ date }) => {
+
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
+
+  const [subject, setSubject] = useState('')
+  const [note, setNote] = useState('')
 
   const [hour, setHour] = useState<number>()
   const [minute, setMinute] = useState<number>()
@@ -51,7 +55,7 @@ const DateInfo: React.FC<Props> = ({ date }) => {
             <span className='material-icons text-lg'>drive_file_rename_outline</span>
             <span className='ml-1'>หัวข้อการนัดหมาย</span>
           </div>
-          <input type='text' placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว' className='w-full border rounded-xl p-3' />
+          <input onChange={event => setSubject(event.target.value)} type='text' placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว' value={subject} className='w-full border rounded-xl p-3' />
         </div>
       </div>
       <div className='grid grid-cols-3 my-8'>
@@ -96,7 +100,7 @@ const DateInfo: React.FC<Props> = ({ date }) => {
             <span className='material-icons text-lg'>description</span>
             <span className='ml-1'>รายละเอียดแนบ</span>
           </div>
-          <textarea rows={6} placeholder='ขอให้เตรียมตัวกันมาให้พร้อม ต้องพร้อมนะ พร้อม ๆ เลย' className='w-full border rounded-xl p-3 resize-none font-light'></textarea>
+          <textarea onChange={event => setNote(event.target.value)} rows={6} placeholder='ขอให้เตรียมตัวกันมาให้พร้อม ต้องพร้อมนะ พร้อม ๆ เลย' value={note} className='w-full border rounded-xl p-3 resize-none font-light'></textarea>
         </div>
       </div>
       <div className='text-right'>
