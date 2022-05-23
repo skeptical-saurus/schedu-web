@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 import { mapRoleTitle } from 'lib/contact'
 
 type Props = {

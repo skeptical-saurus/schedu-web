@@ -1,10 +1,18 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import Cookies from 'js-cookie'
 import env from './env'
 
+const httpLink = createHttpLink({ uri: `${env.apiUrl}/graphql` })
+const authLink = setContext(async () => {
+  return {
+    headers: {
+      'id-token': Cookies.get('SCHEDU_FBIDTOKEN') ?? '',
+    },
+  }
+})
+
 export const client = new ApolloClient({
-  uri: env.apiUrl + '/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  headers: {
-    'id-token': 'Input token here',
-  },
 })

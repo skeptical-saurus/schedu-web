@@ -1,4 +1,4 @@
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -14,11 +14,11 @@ const UserForm: React.FC<Props> = ({ user }) => {
 
   useEffect(() => {
     if (!user) return
-    setFirstname(user.firstname ? user.firstname : '')
-    setLastname(user.lastname ? user.lastname : '')
-    setEmail(user.email ? user.email : '')
-    setTel(user.tel ? user.tel : '')
-  })
+    setFirstname(user.firstName ?? '')
+    setLastname(user.lastName ?? '')
+    setEmail(user.contact.email ?? '')
+    setTel(user.contact.tel ?? '')
+  }, [user])
 
   const submit = () => {
     // TODO: send update of the user information
@@ -97,7 +97,7 @@ const UserForm: React.FC<Props> = ({ user }) => {
             </div>
           </div>
           <div className='grid grid-cols-2 gap-8'>
-            <Link href='/profile'>
+            <Link href='/profile' passHref={true}>
               <button className='w-full p-3 rounded-xl bg-gray-300 hover:bg-gray-400 duration-100'>
                 ยกเลิก
               </button>

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import PersonalInfo from './components/info/personalInfo'
-import { ContactInformation } from 'interface/contact'
+import { ContactInformation } from 'types/contact'
 
 import EventCalendar from './components/info/eventCalendar'
 import DateInfo from './components/info/dateInfo'
