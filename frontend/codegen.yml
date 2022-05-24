@@ -8,3 +8,7 @@ generates:
     config:
       declarationKind: interface
       defaultScalarType: unknown
+      maybeValue: T | undefined
+hooks:
+  afterAllFileWrite:
+    - prettier --write src/generated/graphql.d.ts
