@@ -50,7 +50,8 @@ const ConfirmModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                       {apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}
                     </div>
                     <div className='mb-1'>
-                      {dayjs(apm?.startAt).format('DD MMM YYYY')} เวลา {dayjs(apm?.startAt).format('HH:mmA')} - {dayjs(apm?.endAt).format('HH:mmA')}
+                      {dayjs(apm?.startAt).format('DD MMM YYYY')} เวลา{' '}
+                      {dayjs(apm?.startAt).format('HH:mmA')} - {dayjs(apm?.endAt).format('HH:mmA')}
                     </div>
                     <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
                   </div>

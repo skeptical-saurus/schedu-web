@@ -7,7 +7,6 @@ type Props = {
 }
 
 const TimeInput: React.FC<Props> = ({ times, time, setTime }) => {
-  
   const handleTimeChange = (time: number) => {
     setTime(time)
   }

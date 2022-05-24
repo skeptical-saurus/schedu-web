@@ -5,16 +5,16 @@ import { AppointmentInformation } from 'types/appointment'
 import CommInput from './commInput'
 
 type Props = {
-  date?: Date,
+  date?: Date
   appoint: (apm: AppointmentInformation) => void
 }
 
 const commChoices = [
-  {comm: 'F2F', title: 'Face-to-Face'},
-  {comm: 'TEL', title: 'โทรศัพท์'},
-  {comm: 'GM', title: 'Google Meet'},
-  {comm: 'ZM', title: 'Zoom Meeting'},
-  {comm: 'MT', title: 'Microsoft Teams'}
+  { comm: 'F2F', title: 'Face-to-Face' },
+  { comm: 'TEL', title: 'โทรศัพท์' },
+  { comm: 'GM', title: 'Google Meet' },
+  { comm: 'ZM', title: 'Zoom Meeting' },
+  { comm: 'MT', title: 'Microsoft Teams' },
 ]
 
 const hours = Array.from(Array(24).keys()).map((h) => h + 1)
@@ -22,7 +22,6 @@ const minutes = [0, 15, 30, 45]
 const ranges = [15, 30, 45, 60, 90]
 
 const DateInfo: React.FC<Props> = ({ date, appoint }) => {
-
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
 
   const [subject, setSubject] = useState('')
@@ -54,15 +53,12 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   useEffect(() => {
     setValid(
       date != undefined &&
-      subject != '' &&
-      hour != undefined &&
-      minute != undefined &&
-      range != undefined
+        subject != '' &&
+        hour != undefined &&
+        minute != undefined &&
+        range != undefined
     )
-    setValidTime(
-      hour != undefined &&
-      minute != undefined
-    )
+    setValidTime(hour != undefined && minute != undefined)
   }, [date, subject, note, hour, minute, range])
 
   const submit = () => {
@@ -76,7 +72,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
       startAt: startAt.format(),
       endAt: endAt.format(),
       commMethod,
-      commUrl
+      commUrl,
     })
   }
 
@@ -97,7 +93,13 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
             <span className='material-icons text-lg'>drive_file_rename_outline</span>
             <span className='ml-1'>หัวข้อการนัดหมาย</span>
           </div>
-          <input onChange={event => setSubject(event.target.value)} type='text' placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว' value={subject} className='w-full border rounded-xl p-3' />
+          <input
+            onChange={(event) => setSubject(event.target.value)}
+            type='text'
+            placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว'
+            value={subject}
+            className='w-full border rounded-xl p-3'
+          />
         </div>
       </div>
       <div className='grid grid-cols-3 gap-8 my-8'>
@@ -142,14 +144,24 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
             <span className='material-icons text-lg'>email</span>
             <span className='ml-1'>ช่องทางสื่อสาร</span>
           </div>
-          <CommInput methods={commChoices} method={commChoices.find(comm => comm.comm === commMethod)} setMethod={handleMethodChange} />
+          <CommInput
+            methods={commChoices}
+            method={commChoices.find((comm) => comm.comm === commMethod)}
+            setMethod={handleMethodChange}
+          />
         </div>
         <div className='col-span-3'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>link</span>
             <span className='ml-1'>ลิงก์แนบ (ถ้ามี)</span>
           </div>
-          <input onChange={event => setCommUrl(event.target.value)} type='text' placeholder='https://iamkanz.com/meet/example' value={commUrl} className='w-full border rounded-xl p-3' />
+          <input
+            onChange={(event) => setCommUrl(event.target.value)}
+            type='text'
+            placeholder='https://iamkanz.com/meet/example'
+            value={commUrl}
+            className='w-full border rounded-xl p-3'
+          />
         </div>
       </div>
       <div className='my-8'>
@@ -158,7 +170,13 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
             <span className='material-icons text-lg'>description</span>
             <span className='ml-1'>รายละเอียดแนบ</span>
           </div>
-          <textarea onChange={event => setNote(event.target.value)} rows={6} placeholder='ขอให้เตรียมตัวกันมาให้พร้อม ต้องพร้อมนะ พร้อม ๆ เลย' value={note} className='w-full border rounded-xl p-3 resize-none font-light'></textarea>
+          <textarea
+            onChange={(event) => setNote(event.target.value)}
+            rows={6}
+            placeholder='ขอให้เตรียมตัวกันมาให้พร้อม ต้องพร้อมนะ พร้อม ๆ เลย'
+            value={note}
+            className='w-full border rounded-xl p-3 resize-none font-light'
+          ></textarea>
         </div>
       </div>
       <div className='text-right'>

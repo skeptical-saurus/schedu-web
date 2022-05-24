@@ -65,7 +65,11 @@ const ContactInfo: React.FC<Props> = () => {
           <DateInfo date={selectedDate} appoint={handleAppoint} />
         </div>
       </div>
-      <ConfirmModal appointment={newAppointment} isOpen={isConfirmOpen} close={handleConfirmClose} />
+      <ConfirmModal
+        appointment={newAppointment}
+        isOpen={isConfirmOpen}
+        close={handleConfirmClose}
+      />
     </>
   )
 }

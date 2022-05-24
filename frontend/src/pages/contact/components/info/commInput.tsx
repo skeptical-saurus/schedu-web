@@ -1,14 +1,13 @@
 import { Listbox } from '@headlessui/react'
 
 type Props = {
-  methods: {comm: string, title: string}[],
-  method?: {comm: string, title: string},
+  methods: { comm: string; title: string }[]
+  method?: { comm: string; title: string }
   setMethod: Function
 }
 
 const CommInput: React.FC<Props> = ({ methods, method, setMethod }) => {
-  
-  const handleMethodChange = (method: {comm: string, title: string}) => {
+  const handleMethodChange = (method: { comm: string; title: string }) => {
     setMethod(method.comm)
   }
 
