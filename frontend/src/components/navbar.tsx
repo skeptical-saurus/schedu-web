@@ -1,6 +1,10 @@
 import UserDropdown from './userDropdown'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ContactInformation } from 'types/contact'
+
+import { GET_CURRENT_ACCOUNT } from 'lib/queries'
+import { useQuery } from '@apollo/client'
 
 const TRIGGER_DIFF = 64
 let lastPos = 0
@@ -12,6 +16,15 @@ const Navbar: React.FC = () => {
   ]
 
   const [shown, setShown] = useState(true)
+  const [user, setUser] = useState<ContactInformation>()
+
+  const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
+
+  useEffect(() => {
+    if (!loading) {
+      setUser(data.currentAccount)
+    }
+  }, [loading, data, user])
 
   const renderNavigators = () => {
     return (
@@ -49,7 +62,7 @@ const Navbar: React.FC = () => {
           <div className='flex items-center'>
             {renderNavigators()}
             <div className='border-l border-gray-400 pl-4'>
-              <UserDropdown />
+              <UserDropdown user={user} />
             </div>
           </div>
         </div>

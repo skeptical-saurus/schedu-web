@@ -18,7 +18,7 @@ const ContactInfo: React.FC<Props> = () => {
   const [contact, setContact] = useState<ContactInformation>()
   const [selectedDate, setSelectedDate] = useState<Date>()
 
-  const { loading, error, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
+  const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
 
   useEffect(() => {
     const getContactInfo = async () => {
