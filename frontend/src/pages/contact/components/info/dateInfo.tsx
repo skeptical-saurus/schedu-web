@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import TimeInput from './timeInput'
 import { AppointmentInformation } from 'types/appointment'
+import CommInput from './commInput'
 
 type Props = {
   date?: Date,
@@ -16,6 +17,10 @@ const commChoices = [
   {comm: 'MT', title: 'Microsoft Teams'}
 ]
 
+const hours = Array.from(Array(24).keys()).map((h) => h + 1)
+const minutes = [0, 15, 30, 45]
+const ranges = [15, 30, 45, 60, 90]
+
 const DateInfo: React.FC<Props> = ({ date, appoint }) => {
 
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
@@ -23,6 +28,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   const [subject, setSubject] = useState('')
   const [note, setNote] = useState('')
   const [commMethod, setCommMethod] = useState('F2F')
+  const [commUrl, setCommUrl] = useState('')
 
   const [hour, setHour] = useState<number>()
   const [minute, setMinute] = useState<number>()
@@ -31,10 +37,9 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   const [valid, setValid] = useState(false)
   const [validTime, setValidTime] = useState(false)
 
-  const hours = Array.from(Array(24).keys()).map((h) => h + 1)
-  const minutes = [0, 15, 30, 45]
-
-  const ranges = [15, 30, 45, 60, 90]
+  const handleMethodChange = (method: string) => {
+    setCommMethod(method)
+  }
 
   const handleRangeSelect = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     let selected = event.currentTarget.dataset['range']
@@ -94,7 +99,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
           <input onChange={event => setSubject(event.target.value)} type='text' placeholder='ประชุมโปรเจคด่วน จะส่งแล้ว' value={subject} className='w-full border rounded-xl p-3' />
         </div>
       </div>
-      <div className='grid grid-cols-3 my-8'>
+      <div className='grid grid-cols-3 gap-8 my-8'>
         <div>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>schedule</span>
@@ -128,6 +133,22 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
               </button>
             ))}
           </div>
+        </div>
+      </div>
+      <div className='grid grid-cols-5 gap-8 my-8'>
+        <div className='col-span-2'>
+          <div className='text-sm mb-2 text-gray-500 flex items-center'>
+            <span className='material-icons text-lg'>email</span>
+            <span className='ml-1'>ช่องทางสื่อสาร</span>
+          </div>
+          <CommInput methods={commChoices} method={commChoices.find(comm => comm.comm === commMethod)} setMethod={handleMethodChange} />
+        </div>
+        <div className='col-span-3'>
+          <div className='text-sm mb-2 text-gray-500 flex items-center'>
+            <span className='material-icons text-lg'>link</span>
+            <span className='ml-1'>ลิงก์แนบ</span>
+          </div>
+          <input onChange={event => setCommUrl(event.target.value)} type='text' placeholder='https://iamkanz.com/meet/example' value={commUrl} className='w-full border rounded-xl p-3' />
         </div>
       </div>
       <div className='my-8'>
