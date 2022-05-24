@@ -20,7 +20,7 @@ const CommInput: React.FC<Props> = ({ methods, method, setMethod }) => {
             <span>{method != undefined ? method.title : '—'}</span>
             <span className='material-icons text-gray-400'>expand_more</span>
           </Listbox.Button>
-          <Listbox.Options className='absolute w-full max-h-48 overflow-y-scroll rounded-xl border mt-1 bg-white'>
+          <Listbox.Options className='absolute w-full max-h-48 overflow-y-scroll rounded-xl border mt-1 bg-white z-10'>
             {methods.map((method, index) => (
               <Listbox.Option
                 key={index}
