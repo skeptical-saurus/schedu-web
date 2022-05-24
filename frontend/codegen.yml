@@ -9,6 +9,8 @@ generates:
       declarationKind: interface
       defaultScalarType: unknown
       maybeValue: T | undefined
+      scalars:
+        Date: Date | string
 hooks:
   afterAllFileWrite:
     - prettier --write src/generated/graphql.d.ts
