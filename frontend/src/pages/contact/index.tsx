@@ -1,7 +1,7 @@
 import HighlightCard from './components/index/highlightCard'
 import ContactRow from './components/index/contactRow'
 import { useEffect, useState } from 'react'
-import { ContactInformation } from 'types/contact'
+import { Account, Query } from 'types'
 
 import { GET_ACCOUNTS_AND_CONTACTS } from 'lib/queries'
 import { useQuery } from '@apollo/client'
@@ -9,13 +9,13 @@ import { useQuery } from '@apollo/client'
 type Props = {}
 
 const Contact: React.FC<Props> = () => {
-  const [contacts, setContacts] = useState<ContactInformation[]>([])
-  const [filteredContacts, setFilteredContacts] = useState<ContactInformation[]>([])
+  const [contacts, setContacts] = useState<Account[]>([])
+  const [filteredContacts, setFilteredContacts] = useState<Account[]>([])
 
-  const { loading, error, data } = useQuery(GET_ACCOUNTS_AND_CONTACTS)
+  const { loading, data } = useQuery<Query>(GET_ACCOUNTS_AND_CONTACTS)
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && data?.accounts) {
       setContacts(data.accounts)
       setFilteredContacts(data.accounts)
     }
@@ -37,7 +37,7 @@ const Contact: React.FC<Props> = () => {
       </div>
       {data?.recentContacts?.length ? (
         <div className='grid grid-cols-4 gap-4 mb-12'>
-          {data.recentContacts.map((recentContact: ContactInformation) => (
+          {data.recentContacts.map((recentContact: Account) => (
             <HighlightCard key={`recent-${recentContact._id}`} contact={recentContact} />
           ))}
         </div>
@@ -68,7 +68,7 @@ const Contact: React.FC<Props> = () => {
           <div>ตำแหน่ง</div>
         </div>
         {filteredContacts.map((contact) => (
-          <ContactRow key={contact._id} contact={contact} />
+          <ContactRow key={`contact-${contact._id}`} contact={contact} />
         ))}
       </div>
     </>

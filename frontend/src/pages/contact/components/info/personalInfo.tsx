@@ -1,12 +1,12 @@
-import { ContactInformation } from 'types/contact'
+import { Account } from 'types'
 
 type Props = {
-  contact: ContactInformation
+  contact?: Account
 }
 
 const PersonalInfo: React.FC<Props> = ({ contact }) => {
   const haveimage = () => {
-    if (contact.image) {
+    if (contact?.image) {
       return (
         <img
           className='w-24 text-gray-600 rounded-full'
@@ -24,20 +24,20 @@ const PersonalInfo: React.FC<Props> = ({ contact }) => {
         {haveimage()}
         <div className='ml-3 font-light'>
           <div className='text-lg'>
-            {contact.firstName} {contact.lastName}
+            {contact?.firstName} {contact?.lastName}
           </div>
           {/* Comment until contact have role */}
-          {/* <div className='text-sm text-gray-600'>{mapRoleTitle(contact.role)}</div> */}
+          {/* <div className='text-sm text-gray-600'>{mapRoleTitle(contact?.role)}</div> */}
         </div>
       </div>
       <div className='grid grid-cols-5'>
         <div className='col-span-2 py-3 border-b'>E-mail</div>
         <div className='col-span-3 py-3 border-b font-light'>
-          {contact.contact.email ? contact.contact.email : '-'}
+          {contact?.contact?.email ? contact?.contact?.email : '-'}
         </div>
         <div className='col-span-2 py-3 border-b'>เบอร์ติดต่อ</div>
         <div className='col-span-3 py-3 border-b font-light'>
-          {contact.contact.tel ? contact.contact.tel : '-'}
+          {contact?.contact?.tel ? contact?.contact?.tel : '-'}
         </div>
       </div>
     </>

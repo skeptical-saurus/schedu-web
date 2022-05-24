@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import PersonalInfo from './components/info/personalInfo'
-import { ContactInformation } from 'types/contact'
+import { Account, Query } from 'types'
 
 import EventCalendar from './components/info/eventCalendar'
 import DateInfo from './components/info/dateInfo'
@@ -15,22 +15,12 @@ const ContactInfo: React.FC<Props> = () => {
   const router = useRouter()
   const { uid } = router.query
 
-  const [contact, setContact] = useState<ContactInformation>()
   const [selectedDate, setSelectedDate] = useState<Date>()
 
-  const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
-
-  useEffect(() => {
-    const getContactInfo = async () => {
-      if (!loading) {
-        setContact(data.account)
-      }
-    }
-    getContactInfo()
-  }, [loading, data])
+  const { loading, data } = useQuery<Query>(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
 
   // Contact is not successfully loaded or not found any
-  if (!contact)
+  if (loading && !data?.account)
     return (
       <>
         <div className='text-center py-16 text-gray-500'>
@@ -44,7 +34,7 @@ const ContactInfo: React.FC<Props> = () => {
     <>
       <div className='grid grid-cols-5 gap-16'>
         <div className='col-span-2'>
-          <PersonalInfo contact={contact!} />
+          <PersonalInfo contact={data?.account} />
         </div>
         <div className='col-span-3'>
           <EventCalendar onChangeDate={setSelectedDate} />

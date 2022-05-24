@@ -1,7 +1,7 @@
 import UserDropdown from './userDropdown'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { ContactInformation } from 'types/contact'
+import { useState } from 'react'
+import { Query } from 'types'
 
 import { GET_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
@@ -16,15 +16,8 @@ const Navbar: React.FC = () => {
   ]
 
   const [shown, setShown] = useState(true)
-  const [user, setUser] = useState<ContactInformation>()
 
-  const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
-
-  useEffect(() => {
-    if (!loading) {
-      setUser(data.currentAccount)
-    }
-  }, [loading, data, user])
+  const { loading, data } = useQuery<Query>(GET_CURRENT_ACCOUNT)
 
   const renderNavigators = () => {
     return (
@@ -62,7 +55,7 @@ const Navbar: React.FC = () => {
           <div className='flex items-center'>
             {renderNavigators()}
             <div className='border-l border-gray-400 pl-4'>
-              <UserDropdown user={user} />
+              <UserDropdown user={data?.currentAccount} />
             </div>
           </div>
         </div>

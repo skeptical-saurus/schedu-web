@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_ACCOUNTS_AND_CONTACTS = gql`
-  query {
+  query accountAndContacts {
     accounts {
       _id
       googleId
