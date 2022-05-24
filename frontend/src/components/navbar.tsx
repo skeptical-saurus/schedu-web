@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           <div className='flex items-center'>
             {renderNavigators()}
             <div className='border-l border-gray-400 pl-4'>
-              <UserDropdown user={user} />
+              <UserDropdown user={user!} />
             </div>
           </div>
         </div>
