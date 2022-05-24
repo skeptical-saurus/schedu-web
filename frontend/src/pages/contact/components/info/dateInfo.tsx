@@ -75,7 +75,8 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
       note,
       startAt: startAt.format(),
       endAt: endAt.format(),
-      commMethod
+      commMethod,
+      commUrl
     })
   }
 
@@ -146,7 +147,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
         <div className='col-span-3'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>link</span>
-            <span className='ml-1'>ลิงก์แนบ</span>
+            <span className='ml-1'>ลิงก์แนบ (ถ้ามี)</span>
           </div>
           <input onChange={event => setCommUrl(event.target.value)} type='text' placeholder='https://iamkanz.com/meet/example' value={commUrl} className='w-full border rounded-xl p-3' />
         </div>
