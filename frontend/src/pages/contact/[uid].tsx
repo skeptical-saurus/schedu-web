@@ -20,7 +20,9 @@ const ContactInfo: React.FC<Props> = () => {
   const [newAppointment, setNewAppointment] = useState<CreateOneAppointmentInput>()
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
-  const { loading, data } = useQuery<Query, QueryAccountArgs>(GET_ACCOUNT_BY_ID, { variables: { _id: uid } })
+  const { loading, data } = useQuery<Query, QueryAccountArgs>(GET_ACCOUNT_BY_ID, {
+    variables: { _id: uid },
+  })
 
   const handleAppoint = (apm: CreateOneAppointmentInput) => {
     setNewAppointment(apm)
