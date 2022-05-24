@@ -27,10 +27,9 @@ const Profile: React.FC = () => {
   const [isDenyOpen, setDenyOpen] = useState(false)
 
   useEffect(() => {
-    // TODO: Filter request out of ongoing appointments
     setOngoings(mockedAppointments)
     setRequests(mockedAppointments)
-  })
+  }, [])
 
   useEffect(() => {
     if (!loading) {

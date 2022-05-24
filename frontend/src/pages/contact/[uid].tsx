@@ -23,7 +23,7 @@ const ContactInfo: React.FC<Props> = () => {
   const [newAppointment, setNewAppointment] = useState<AppointmentInformation>()
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
-  const { loading, error, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
+  const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
 
   useEffect(() => {
     const getContactInfo = async () => {

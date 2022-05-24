@@ -2,9 +2,14 @@ import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { ContactInformation } from 'types/contact'
 
-const UserDropdown: React.FC = () => {
+type Props = {
+  user: ContactInformation
+}
+
+const UserDropdown: React.FC<Props> = ({ user }) => {
   const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' }]
 
   const router = useRouter()
@@ -21,6 +26,23 @@ const UserDropdown: React.FC = () => {
     if (result) router.push('/signin')
   }
 
+  const haveimage = () => {
+    if (user.image) {
+      return (
+        <img
+          className='w-16 text-gray-600 rounded-full'
+          src={user.image}
+          alt={`${user.firstName} ${user.lastName}`}
+        />
+      )
+    }
+    return (
+      <span className='w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full'>
+        <span className='material-icons'>account_circle</span>
+      </span>
+    )
+  }
+
   return (
     <>
       <Menu>
@@ -32,7 +54,9 @@ const UserDropdown: React.FC = () => {
             className='text-[color:var(--light-blue)] font-bold flex items-center'
           >
             <span className='material-icons mr-1'>person</span>
-            <span>Foo Bar</span>
+            <span>
+              {user?.firstName} {user?.lastName}
+            </span>
           </Menu.Button>
           {mount && (
             <Menu.Items
@@ -40,13 +64,11 @@ const UserDropdown: React.FC = () => {
               className='absolute -right-8 mt-8 w-80 bg-white text-gray-800 shadow-xl rounded-xl'
             >
               <div className='flex items-center p-4'>
-                <span className='w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full'>
-                  <span className='material-icons'>collections</span>
-                </span>
+                {haveimage()}
                 <div className='my-auto ml-3'>
                   <Link href='/profile'>
                     <a className='text-[color:var(--light-blue)] hover:underline underline-offset-1 duration-100'>
-                      Dora Hudson
+                      {user?.firstName} {user?.lastName}
                     </a>
                   </Link>
                   <div className='text-sm font-light text-gray-500'>นักศึกษา</div>
