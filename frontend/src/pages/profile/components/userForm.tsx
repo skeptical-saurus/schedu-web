@@ -1,4 +1,4 @@
-import { Account } from 'types'
+import { Account, Mutation, MutationUpdateAccountArgs, UpdateOneAccountInput } from 'types'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -22,13 +22,13 @@ const UserForm: React.FC<Props> = ({ user }) => {
 
   const router = useRouter()
 
-  const [updateProfile] = useMutation(UPDATE_USER_PROFILE, {
+  const [updateProfile] = useMutation<Mutation, MutationUpdateAccountArgs>(UPDATE_USER_PROFILE, {
     refetchQueries: [GET_CURRENT_ACCOUNT],
     onCompleted: (data) => {
-      const user = data.updateAccount.record
-      setFirstname(user.firstName)
-      setLastname(user.lastName)
-      setTel(user.tel)
+      const user = data?.updateAccount?.record
+      setFirstname(user?.firstName ?? firstname)
+      setLastname(user?.lastName ?? lastname)
+      setTel(user?.contact?.tel ?? tel)
     },
   })
 

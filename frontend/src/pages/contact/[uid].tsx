@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import PersonalInfo from './components/info/personalInfo'
-import { Account, Query } from 'types'
+import { Query, QueryAccountArgs } from 'types'
 
 import EventCalendar from './components/info/eventCalendar'
 import DateInfo from './components/info/dateInfo'
@@ -17,7 +17,7 @@ const ContactInfo: React.FC<Props> = () => {
 
   const [selectedDate, setSelectedDate] = useState<Date>()
 
-  const { loading, data } = useQuery<Query>(GET_ACCOUNT_BY_ID, { variables: { accountId: uid } })
+  const { loading, data } = useQuery<Query, QueryAccountArgs>(GET_ACCOUNT_BY_ID, { variables: { _id: uid } })
 
   // Contact is not successfully loaded or not found any
   if (loading && !data?.account)

@@ -30,8 +30,8 @@ export const GET_ACCOUNTS_AND_CONTACTS = gql`
 `
 
 export const GET_ACCOUNT_BY_ID = gql`
-  query account($accountId: MongoID!) {
-    account(_id: $accountId) {
+  query account($_id: MongoID!) {
+    account(_id: $_id) {
       _id
       googleId
       businessId
