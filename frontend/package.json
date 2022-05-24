@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "yarn generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.6.4",
@@ -23,6 +25,9 @@
     "react-dom": "18.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "^2.4.11",
+    "@graphql-codegen/typescript-operations": "^2.4.0",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "17.0.23",
     "@types/react": "^18.0.0",
