@@ -9,9 +9,9 @@ export const appointments = AppointmentTC.mongooseResolvers
 
     const target = await AccountModel.findOne({ googleId })
 
-    // rp.args.filter = {
-    //   $or: [{ sender: target?._id }, { 'participants.userId': target?._id }],
-    // }
+    rp.args.filter = {
+      $or: [{ sender: target?._id }, { 'participants.userId': target?._id }],
+    }
 
     return next(rp)
   })
