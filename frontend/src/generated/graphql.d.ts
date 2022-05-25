@@ -28,7 +28,7 @@ export interface Account {
   googleId?: Maybe<Scalars['String']>
   image?: Maybe<Scalars['String']>
   lastName?: Maybe<Scalars['String']>
-  setting?: Maybe<AccountSetting>
+  setting: AccountSetting
 }
 
 export interface AccountContact {
@@ -39,15 +39,17 @@ export interface AccountContact {
 
 export interface AccountSetting {
   __typename?: 'AccountSetting'
-  activeTime?: Maybe<AccountSettingActiveTime>
+  _id?: Maybe<Scalars['MongoID']>
+  activeTime: AccountSettingActiveTime
   displayTel?: Maybe<Scalars['Boolean']>
   weekendReceive?: Maybe<Scalars['Boolean']>
 }
 
 export interface AccountSettingActiveTime {
   __typename?: 'AccountSettingActiveTime'
-  endAt?: Maybe<Scalars['String']>
-  startAt?: Maybe<Scalars['String']>
+  _id?: Maybe<Scalars['MongoID']>
+  endAt: Scalars['String']
+  startAt: Scalars['String']
 }
 
 export interface Appointment {
@@ -218,11 +220,13 @@ export interface FilterFindManyAccountOperatorsInput {
 }
 
 export interface FilterFindManyAccountSettingActiveTimeInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   endAt?: InputMaybe<Scalars['String']>
   startAt?: InputMaybe<Scalars['String']>
 }
 
 export interface FilterFindManyAccountSettingInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   activeTime?: InputMaybe<FilterFindManyAccountSettingActiveTimeInput>
   displayTel?: InputMaybe<Scalars['Boolean']>
   weekendReceive?: InputMaybe<Scalars['Boolean']>
@@ -364,11 +368,13 @@ export interface FilterFindOneAccountOperatorsInput {
 }
 
 export interface FilterFindOneAccountSettingActiveTimeInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   endAt?: InputMaybe<Scalars['String']>
   startAt?: InputMaybe<Scalars['String']>
 }
 
 export interface FilterFindOneAccountSettingInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   activeTime?: InputMaybe<FilterFindOneAccountSettingActiveTimeInput>
   displayTel?: InputMaybe<Scalars['Boolean']>
   weekendReceive?: InputMaybe<Scalars['Boolean']>
@@ -510,11 +516,13 @@ export interface FilterUpdateOneAccountOperatorsInput {
 }
 
 export interface FilterUpdateOneAccountSettingActiveTimeInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   endAt?: InputMaybe<Scalars['String']>
   startAt?: InputMaybe<Scalars['String']>
 }
 
 export interface FilterUpdateOneAccountSettingInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   activeTime?: InputMaybe<FilterUpdateOneAccountSettingActiveTimeInput>
   displayTel?: InputMaybe<Scalars['Boolean']>
   weekendReceive?: InputMaybe<Scalars['Boolean']>
@@ -770,11 +778,13 @@ export interface UpdateOneAccountPayload {
 }
 
 export interface UpdateOneAccountSettingActiveTimeInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   endAt?: InputMaybe<Scalars['String']>
   startAt?: InputMaybe<Scalars['String']>
 }
 
 export interface UpdateOneAccountSettingInput {
+  _id?: InputMaybe<Scalars['MongoID']>
   activeTime?: InputMaybe<UpdateOneAccountSettingActiveTimeInput>
   displayTel?: InputMaybe<Scalars['Boolean']>
   weekendReceive?: InputMaybe<Scalars['Boolean']>

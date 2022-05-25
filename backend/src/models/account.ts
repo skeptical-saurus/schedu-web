@@ -20,12 +20,24 @@ const accountSchema = new mongoose.Schema<Account>({
   },
   image: String,
   setting: {
-    displayTel: Boolean,
-    weekendReceive: Boolean,
-    activeTime: {
-      startAt: String,
-      endAt: String,
+    type: {
+      displayTel: Boolean,
+      weekendReceive: Boolean,
+      activeTime: {
+        type: {
+          startAt: {
+            type: String,
+            required: true,
+          },
+          endAt: {
+            type: String,
+            required: true,
+          },
+        },
+        required: true,
+      },
     },
+    required: true,
   },
 })
 
