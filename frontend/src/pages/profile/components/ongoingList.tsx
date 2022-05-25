@@ -7,7 +7,6 @@ type Props = {
 }
 
 const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
-
   const renderList = () => {
     return appointments?.map((apm) => (
       <div key={`ongoing-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
