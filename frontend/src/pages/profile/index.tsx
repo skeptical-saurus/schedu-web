@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Appointment, Query } from 'types'
-import { GET_CURRENT_ACCOUNT } from 'lib/queries'
+import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
@@ -11,10 +11,8 @@ import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
 
-import mockedAppointments from 'mock/appointments.json'
-
 const Profile: React.FC = () => {
-  const { loading, data } = useQuery<Query>(GET_CURRENT_ACCOUNT)
+  const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
 
   const [requests, setRequests] = useState<Appointment[]>()
   const [ongoings, setOngoings] = useState<Appointment[]>()
@@ -25,9 +23,28 @@ const Profile: React.FC = () => {
   const [isDenyOpen, setDenyOpen] = useState(false)
 
   useEffect(() => {
-    setOngoings(mockedAppointments)
-    setRequests(mockedAppointments)
-  }, [])
+    const appointmentFilter = () => {
+      const ongoingsFiltered = data?.appointments?.filter(
+        (appointment) => appointment.sender === data.currentAccount?._id
+      )
+
+      const requestsFiltered = data?.appointments?.filter((appointment) => {
+        console.log(appointment)
+        const isParticipant = appointment.participants?.find(
+          (userId) => userId === data.currentAccount?._id
+        )
+
+        return appointment.sender !== data.currentAccount?._id && isParticipant
+      })
+
+      setOngoings(ongoingsFiltered)
+      setRequests(requestsFiltered)
+    }
+
+    if (!loading) {
+      appointmentFilter()
+    }
+  }, [loading, data])
 
   const openDetailModal = (apm: Appointment) => {
     setSelected(apm)

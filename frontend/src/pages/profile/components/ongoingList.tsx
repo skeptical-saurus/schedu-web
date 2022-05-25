@@ -1,4 +1,5 @@
 import { Appointment } from 'types'
+import { formatTime, apmDuration } from 'lib/timeFormatter'
 
 type Props = {
   appointments?: Appointment[]
@@ -6,17 +7,15 @@ type Props = {
 }
 
 const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
-  const calculateDuration = (startAt: Date | string, endAt: Date | string) => {
-    // TODO: Calculate duration of the event
-  }
-
   const renderList = () => {
     return appointments?.map((apm) => (
       <div key={`ongoing-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
         <div className='col-span-4'>
           <div className='truncate w-full mb-1'>{apm.subject}</div>
           <div className='font-light text-sm text-gray-600'>
-            <div className='mb-1'>10 Aug 2022 เวลา 10:30AM - 11:00AM (ระยะเวลา: 30 นาที)</div>
+            <div className='mb-1'>
+              {formatTime(apm)} {apmDuration(apm)}
+            </div>
             <div>สถานะ: {apm.status}</div>
           </div>
         </div>

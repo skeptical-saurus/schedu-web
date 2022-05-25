@@ -1,4 +1,5 @@
 import { Appointment } from 'types'
+import { formatTime, apmDuration } from 'lib/timeFormatter'
 
 type Props = {
   appointments?: Appointment[]
@@ -13,7 +14,7 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
         <div className='col-span-4'>
           <div className='truncate w-full mb-1'>{apm.subject}</div>
           <div className='font-light text-sm text-gray-600'>
-            <div>10 Aug 2022 at 10:30AM - 11:00AM (ระยะเวลา: 30 นาที)</div>
+            {formatTime(apm)} {apmDuration(apm)}
           </div>
         </div>
         <div className='col-span-2 flex items-center justify-end ml-8'>

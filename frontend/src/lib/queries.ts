@@ -62,3 +62,59 @@ export const GET_CURRENT_ACCOUNT = gql`
     }
   }
 `
+
+export const GET_APPOINTMENTS = gql`
+  query appointments {
+    appointments {
+      _id
+      subject
+      status
+      sender
+      participants {
+        userId
+        main
+        confirmed
+        join
+      }
+      startAt
+      endAt
+      commMethod
+      commUrl
+      note
+    }
+  }
+`
+
+export const GET_APPOINTMENTS_AND_CURRENT_ACCOUNT = gql`
+  query appointmentsAndCurrentAccount {
+    appointments {
+      _id
+      subject
+      status
+      sender
+      participants {
+        userId
+        main
+        confirmed
+        join
+      }
+      startAt
+      endAt
+      commMethod
+      commUrl
+      note
+    }
+    currentAccount {
+      _id
+      googleId
+      businessId
+      firstName
+      lastName
+      image
+      contact {
+        email
+        tel
+      }
+    }
+  }
+`
