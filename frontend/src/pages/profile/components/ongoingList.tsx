@@ -1,7 +1,7 @@
-import { AppointmentInformation } from 'types/appointment'
+import { Appointment } from 'types'
 
 type Props = {
-  appointments?: AppointmentInformation[]
+  appointments?: Appointment[]
   moreDetail: Function
 }
 
@@ -16,7 +16,7 @@ const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
         <div className='text-xl font-bold mb-4'>รายการที่ยังดำเนินอยู่</div>
         <div>
           {appointments?.map((apm) => (
-            <div key={apm._id} className='grid grid-cols-5 py-3 border-b'>
+            <div key={`ongoing-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>

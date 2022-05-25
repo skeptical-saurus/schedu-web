@@ -1,14 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react'
+import dayjs from 'dayjs'
 import { Fragment } from 'react'
-import { Appointment } from 'types'
+import { CreateOneAppointmentInput } from 'types'
 
 type Props = {
-  appointment?: Appointment
+  appointment?: CreateOneAppointmentInput
   isOpen: boolean
   close: () => void
 }
 
-const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
+const ConfirmModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   const handleSubmit = () => {
     // TODO: do submit approval
     close()
@@ -42,19 +43,25 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all'>
-                  <Dialog.Title className='flex items-start justify-between text-2xl mb-6'>
-                    <span>{apm?.subject}</span>
-                    <button
-                      onClick={close}
-                      className='material-icons text-gray-500 hover:text-gray-700 duration-150 text-2xl cursor-pointer'
-                    >
-                      close
-                    </button>
-                  </Dialog.Title>
-                  <div className='font-light'>
-                    <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
-                    <div className='mb-1'>11 Aug 2022 เวลา 10:30AM - 11:00AM</div>
+                  <Dialog.Title className='text-2xl mb-6'>ยืนยันรายละเอียดนัดหมาย</Dialog.Title>
+                  <div className='font-light my-6'>
+                    <div className='text-lg font-medium mb-2'>{apm?.subject}</div>
+                    <div className='text-sm mb-6'>
+                      {apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}
+                    </div>
+                    <div className='mb-1'>
+                      {dayjs(apm?.startAt).format('DD MMM YYYY')} เวลา{' '}
+                      {dayjs(apm?.startAt).format('HH:mmA')} - {dayjs(apm?.endAt).format('HH:mmA')}
+                    </div>
                     <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
+                  </div>
+                  <div className='mt-4 text-right'>
+                    <button
+                      onClick={handleSubmit}
+                      className='px-8 py-2 rounded-full bg-emerald-200  text-emerald-800 hover:bg-emerald-300 shadow-md duration-150'
+                    >
+                      ส่งคำขอนัดหมาย
+                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -66,4 +73,4 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   )
 }
 
-export default DetailModal
+export default ConfirmModal

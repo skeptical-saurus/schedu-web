@@ -1,15 +1,15 @@
-import { AppointmentInformation } from 'types/appointment'
+import { Appointment } from 'types'
 import dayjs from 'dayjs'
 
 type Props = {
-  appointments?: AppointmentInformation[]
+  appointments?: Appointment[]
   moreDetail: Function
   submit: Function
 }
 
 const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
 
-  const formatTIme = (apm : AppointmentInformation) => {
+  const formatTIme = (apm : Appointment) => {
 
     const duration = dayjs(apm.endAt).diff(dayjs(apm.startAt), 'minutes')
     return `${dayjs(apm.startAt).format('DD MMM YYYY [at] hh:mmA')} - ${dayjs(apm.endAt).format('hh:mmA')} (ระยะเวลา: ${duration} นาที)`
@@ -21,7 +21,7 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
         <div className='text-xl font-bold mb-4'>รายการร้องขอ</div>
         <div>
           {appointments?.map((apm) => (
-            <div key={apm._id} className='grid grid-cols-6 py-3 border-b'>
+            <div key={`request-${apm._id}`} className='grid grid-cols-6 py-3 border-b'>
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>

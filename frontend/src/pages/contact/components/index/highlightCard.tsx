@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { ContactInformation } from 'types/contact'
+import { Account } from 'types'
 import { mapRoleTitle } from 'lib/contact'
 
 type Props = {
-  contact: ContactInformation
+  contact: Account
 }
 
 const HighlightCard: React.FC<Props> = ({ contact }) => {
@@ -16,7 +16,9 @@ const HighlightCard: React.FC<Props> = ({ contact }) => {
         <div className='mb-1'>
           {contact.firstName} {contact.lastName}
         </div>
-        <div className='font-light text-sm text-gray-700'>{mapRoleTitle(contact.businessId)}</div>
+        <div className='font-light text-sm text-gray-700'>
+          {mapRoleTitle(contact.businessId ?? '')}
+        </div>
       </div>
     </Link>
   )

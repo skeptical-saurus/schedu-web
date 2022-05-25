@@ -1,4 +1,4 @@
-import { ContactInformation } from 'types/contact'
+import { Account, Mutation, MutationUpdateAccountArgs, UpdateOneAccountInput } from 'types'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ import { UPDATE_USER_PROFILE } from 'lib/mutations'
 import { useMutation } from '@apollo/client'
 
 type Props = {
-  user?: ContactInformation
+  user?: Account
 }
 
 const UserForm: React.FC<Props> = ({ user }) => {
@@ -22,13 +22,13 @@ const UserForm: React.FC<Props> = ({ user }) => {
 
   const router = useRouter()
 
-  const [updateProfile] = useMutation(UPDATE_USER_PROFILE, {
+  const [updateProfile] = useMutation<Mutation, MutationUpdateAccountArgs>(UPDATE_USER_PROFILE, {
     refetchQueries: [GET_CURRENT_ACCOUNT],
     onCompleted: (data) => {
-      const user = data.updateAccount.record
-      setFirstname(user.firstName)
-      setLastname(user.lastName)
-      setTel(user.tel)
+      const user = data?.updateAccount?.record
+      setFirstname(user?.firstName ?? firstname)
+      setLastname(user?.lastName ?? lastname)
+      setTel(user?.contact?.tel ?? tel)
     },
   })
 
@@ -37,8 +37,8 @@ const UserForm: React.FC<Props> = ({ user }) => {
 
     setFirstname(user.firstName ?? '')
     setLastname(user.lastName ?? '')
-    setEmail(user.contact.email ?? '')
-    setTel(user.contact.tel ?? '-')
+    setEmail(user.contact?.email ?? '')
+    setTel(user.contact?.tel ?? '-')
     setImage(user.image ?? '')
   }, [user])
 
