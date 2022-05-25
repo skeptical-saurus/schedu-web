@@ -1,0 +1,398 @@
+[{
+  "_id": {
+    "$oid": "619bc52ab34c102af5b87a75"
+  },
+  "subject": "Project",
+  "status": "pending",
+  "sender": "6197c5d6dbeee47f5e6b6271",
+  "participants": [
+    {
+      "userId": "6189ea797b52117c02879274",
+      "main": true,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619bc52ab34c102af5b87a76"
+      }
+    },
+    {
+      "userId": "6197cc87287a783a4cf8b9dc",
+      "main": false,
+      "confirmed": true,
+      "join": true,
+      "_id": {
+        "$oid": "619cefca3faef14ac76c9aee"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1637644200000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1637644800000"
+    }
+  },
+  "commMethod": "msteam",
+  "note": "",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1637598506542"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1637674954280"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "619bc598b34c102af5b87abd"
+  },
+  "subject": "Test",
+  "status": "pending",
+  "sender": "6197c5d6dbeee47f5e6b6271",
+  "participants": [
+    {
+      "userId": "6189ea797b52117c02879274",
+      "main": true,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619bc598b34c102af5b87abe"
+      }
+    },
+    {
+      "userId": "6197cc87287a783a4cf8b9dc",
+      "main": false,
+      "confirmed": false,
+      "_id": {
+        "$oid": "6197cc87287a783a4cf8b9dc"
+      }
+    },
+    {
+      "userId": "619a1f92a0342b0a5a5863a9",
+      "main": false,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619a1f92a0342b0a5a5863a9"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1637633700000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1637634900000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1637598616123"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1637695566081"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "619cb8113faef14ac76c6a3c"
+  },
+  "subject": "Asdasd",
+  "status": "pending",
+  "sender": "6197c5d6dbeee47f5e6b6271",
+  "participants": [
+    {
+      "userId": "619a1f92a0342b0a5a5863a9",
+      "main": true,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619cb8113faef14ac76c6a3d"
+      }
+    },
+    {
+      "userId": "6197cc87287a783a4cf8b9dc",
+      "main": false,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619cb8113faef14ac76c6a3e"
+      }
+    },
+    {
+      "userId": "6189ea797b52117c02879274",
+      "main": false,
+      "confirmed": false,
+      "_id": {
+        "$oid": "619cb8113faef14ac76c6a3f"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1637741100000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1637753400000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1637660689456"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1637660689456"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8f7417a21c04f3bbab60e"
+  },
+  "subject": "Project meeting",
+  "status": "ongoing",
+  "sender": "61b8f7107a21c04f3bbab5fa",
+  "participants": [
+    {
+      "userId": "61b8e9a7ffd5fdc192fb629c",
+      "main": true,
+      "confirmed": true,
+      "join": true,
+      "_id": {
+        "$oid": "61b8f7777a21c04f3bbab64d"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1639621200000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1639630800000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639511873809"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639511927842"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8f79f7a21c04f3bbab66e"
+  },
+  "subject": "Test",
+  "status": "abandoned",
+  "sender": "61b8e9a7ffd5fdc192fb629c",
+  "participants": [
+    {
+      "userId": "61b8f7107a21c04f3bbab5fa",
+      "main": true,
+      "confirmed": true,
+      "join": false,
+      "_id": {
+        "$oid": "61b8f7b57a21c04f3bbab6a4"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1640154000000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1640160000000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639511967867"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639511989803"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8f8237a21c04f3bbab738"
+  },
+  "subject": "Test",
+  "status": "abandoned",
+  "sender": "61b8f7107a21c04f3bbab5fa",
+  "participants": [
+    {
+      "userId": "61b8e9a7ffd5fdc192fb629c",
+      "main": true,
+      "confirmed": false,
+      "_id": {
+        "$oid": "61b8f8237a21c04f3bbab739"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1639512000000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1639512300000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639512099845"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639512159067"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8f8457a21c04f3bbab75b"
+  },
+  "subject": "Hhhhhh",
+  "status": "abandoned",
+  "sender": "61b8f7107a21c04f3bbab5fa",
+  "participants": [
+    {
+      "userId": "61b8e9a7ffd5fdc192fb629c",
+      "main": true,
+      "confirmed": false,
+      "_id": {
+        "$oid": "61b8f8457a21c04f3bbab75c"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1639512300000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1639512600000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639512133823"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639512300095"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8f9847a21c04f3bbab7f2"
+  },
+  "subject": "Testttttt",
+  "status": "ongoing",
+  "sender": "61b8f7107a21c04f3bbab5fa",
+  "participants": [
+    {
+      "userId": "61b8e9a7ffd5fdc192fb629c",
+      "main": true,
+      "confirmed": true,
+      "join": true,
+      "_id": {
+        "$oid": "61b8fce57a21c04f3bbabb63"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1639520400000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1639530300000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639512452735"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639513317275"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61b8fa437a21c04f3bbab8a7"
+  },
+  "subject": "ะำหะะะะะ",
+  "status": "done",
+  "sender": "61b8f7107a21c04f3bbab5fa",
+  "participants": [
+    {
+      "userId": "61b8e9a7ffd5fdc192fb629c",
+      "main": true,
+      "confirmed": true,
+      "join": true,
+      "_id": {
+        "$oid": "61b8fa547a21c04f3bbab8e4"
+      }
+    }
+  ],
+  "startAt": {
+    "$date": {
+      "$numberLong": "1639512900000"
+    }
+  },
+  "endAt": {
+    "$date": {
+      "$numberLong": "1639513200000"
+    }
+  },
+  "commMethod": "face",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1639512643643"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1639513200123"
+    }
+  },
+  "__v": 0
+}]

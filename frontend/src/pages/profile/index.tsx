@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AppointmentInformation } from 'types/appointment'
 import { ContactInformation } from 'types/contact'
-import { GET_CURRENT_ACCOUNT } from 'lib/queries'
+import { GET_CURRENT_ACCOUNT, GET_APPOINTMENTS } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
@@ -12,11 +12,12 @@ import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
 
-import mockedAppointments from 'mock/appointments.json'
-
 const Profile: React.FC = () => {
   const [user, setUser] = useState<ContactInformation>()
-  const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
+  const [appointments, setAppointments] = useState<AppointmentInformation[]>()
+
+  const userQuery = useQuery(GET_CURRENT_ACCOUNT)
+  const appointmentQuery = useQuery(GET_APPOINTMENTS)
 
   const [requests, setRequests] = useState<AppointmentInformation[]>()
   const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
@@ -26,16 +27,38 @@ const Profile: React.FC = () => {
   const [isApproveOpen, setApproveOpen] = useState(false)
   const [isDenyOpen, setDenyOpen] = useState(false)
 
-  useEffect(() => {
-    setOngoings(mockedAppointments)
-    setRequests(mockedAppointments)
-  }, [])
+  // useEffect(() => {
+  //   setOngoings(mockedAppointments)
+  //   setRequests(mockedAppointments)
+  // }, [])
 
   useEffect(() => {
-    if (!loading) {
-      setUser(data.currentAccount)
+    const appointmentFilter = () => {
+      const ongoingsFiltered = appointments
+      // ?.filter(
+      //   (appointment) => appointment.sender === user?._id
+      // )
+
+      const requestsFiltered = appointments
+      // ?.filter((appointment) => {
+      //   const isParticipant = appointment.participants?.find(({ userId }) => userId === user?._id)
+
+      //   return appointment.sender !== user?._id && isParticipant
+      // })
+
+      setOngoings(ongoingsFiltered)
+      setRequests(requestsFiltered)
+      
+      console.log('requests', requestsFiltered)
     }
-  }, [loading, data])
+
+    if (!userQuery.loading && !appointmentQuery.loading) {
+      setUser(userQuery.data.currentAccount)
+      setAppointments(appointmentQuery.data.appointments)
+      appointmentFilter()
+    }
+    console.log(appointments)
+  }, [userQuery, appointmentQuery, appointments, user])
 
   const openDetailModal = (apm: AppointmentInformation) => {
     setSelected(apm)

@@ -1,4 +1,5 @@
 import { AppointmentInformation } from 'types/appointment'
+import dayjs from 'dayjs'
 
 type Props = {
   appointments?: AppointmentInformation[]
@@ -7,6 +8,13 @@ type Props = {
 }
 
 const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
+
+  const formatTIme = (apm : AppointmentInformation) => {
+
+    const duration = dayjs(apm.endAt).diff(dayjs(apm.startAt), 'minutes')
+    return `${dayjs(apm.startAt).format('DD MMM YYYY [at] hh:mmA')} - ${dayjs(apm.endAt).format('hh:mmA')} (ระยะเวลา: ${duration} นาที)`
+  }
+
   return (
     <>
       <div className='border rounded-xl p-8 mb-8'>
@@ -17,7 +25,7 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>
-                  <div>10 Aug 2022 at 10:30AM - 11:00AM (ระยะเวลา: 30 นาที)</div>
+                  <div>{formatTIme(apm)}</div>
                 </div>
               </div>
               <div className='col-span-2 flex items-center justify-end ml-8'>

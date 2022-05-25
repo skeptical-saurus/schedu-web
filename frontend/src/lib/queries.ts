@@ -62,3 +62,25 @@ export const GET_CURRENT_ACCOUNT = gql`
     }
   }
 `
+
+export const GET_APPOINTMENTS = gql`
+  query appointments {
+    appointments {
+      _id
+      subject
+      status
+      sender
+      participants {
+        userId
+        main
+        confirmed
+        join
+      }
+      startAt
+      endAt
+      commMethod
+      commUrl
+      note
+    }
+  }
+`
