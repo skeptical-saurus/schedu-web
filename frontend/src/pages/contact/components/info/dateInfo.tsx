@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import TimeInput from './timeInput'
-import { CreateOneAppointmentInput } from 'types'
+import { AccountSettingActiveTime, CreateOneAppointmentInput } from 'types'
 import CommInput from './commInput'
+
+dayjs.extend(isSameOrAfter)
+dayjs.extend(isSameOrBefore)
 
 type Props = {
   date?: Date
   appoint: (apm: CreateOneAppointmentInput) => void
+  activeTime: AccountSettingActiveTime
 }
 
 const commChoices = [
@@ -21,7 +27,7 @@ const hours = Array.from(Array(24).keys()).map((h) => h + 1)
 const minutes = [0, 15, 30, 45]
 const ranges = [15, 30, 45, 60, 90]
 
-const DateInfo: React.FC<Props> = ({ date, appoint }) => {
+const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
   let shownDate = date ? dayjs(date).format('DD MMMM YYYY') : '—'
 
   const [subject, setSubject] = useState('')
@@ -33,8 +39,12 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   const [minute, setMinute] = useState<number>()
   const [range, setRange] = useState<number>()
 
+  const [startAt, setStartAt] = useState<Dayjs>()
+  const [endAt, setEndAt] = useState<Dayjs>()
+
   const [valid, setValid] = useState(false)
   const [validTime, setValidTime] = useState(false)
+  const [validActiveTime, setValidActiveTime] = useState(true)
 
   const handleMethodChange = (method: string) => {
     setCommMethod(method)
@@ -51,20 +61,43 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   }
 
   useEffect(() => {
-    setValid(
+    const isValid =
       date != undefined &&
-        subject != '' &&
-        hour != undefined &&
-        minute != undefined &&
-        range != undefined
-    )
-    setValidTime(hour != undefined && minute != undefined)
-  }, [date, subject, note, hour, minute, range])
+      subject != '' &&
+      hour != undefined &&
+      minute != undefined &&
+      range != undefined
+
+    const isValidTime = hour != undefined && minute != undefined
+
+    setValid(isValid)
+    setValidTime(isValidTime)
+
+    if (isValid && isValidTime) {
+      const startAt = dayjs(date).set('hour', hour).set('minute', minute).set('second', 0)
+      const endAt = startAt.add(range, 'minutes')
+      setStartAt(startAt)
+      setEndAt(endAt)
+
+      const [startHour, startMinute] = activeTime.startAt.split(':').map(Number)
+      const [endHour, endMinute] = activeTime.endAt.split(':').map(Number)
+      const sameOrAfter = startAt.isSameOrAfter(
+        startAt.set('hour', startHour).set('minute', startMinute),
+        'minute'
+      )
+      const sameOrBefore = endAt.isSameOrBefore(
+        endAt.set('hour', endHour).set('minute', endMinute),
+        'minute'
+      )
+      setValidActiveTime(!startAt || !endAt || (sameOrAfter && sameOrBefore))
+    } else {
+      setStartAt(undefined)
+      setEndAt(undefined)
+    }
+  }, [date, subject, note, hour, minute, range, activeTime])
 
   const submit = () => {
-    if (!hour || !minute || !range) return
-    let startAt = dayjs(date).set('hour', hour).set('minute', minute).set('second', 0)
-    let endAt = startAt.add(range, 'minutes')
+    if (!hour || !minute || !range || !startAt || !endAt) return
     appoint({
       subject,
       note,
@@ -179,10 +212,15 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
         </div>
       </div>
       <div className='text-right'>
+        {!validActiveTime && activeTime && (
+          <span className='mr-5 text-red-800'>
+            เวลาที่เลือกไม่อยู่ในช่วงเวลาที่นัดได้ ({activeTime?.startAt} - {activeTime?.endAt})
+          </span>
+        )}
         <button
           onClick={submit}
           className='px-20 py-3 rounded-full shadow bg-[color:var(--light-blue)] hover:bg-[color:var(--blue)] disabled:bg-gray-400 disabled:opacity-75 disabled:cursor-not-allowed text-white duration-100 font-light'
-          disabled={!valid}
+          disabled={!valid || !validActiveTime}
         >
           ส่งคำขอ
         </button>

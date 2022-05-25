@@ -57,7 +57,11 @@ const ContactInfo: React.FC<Props> = () => {
         </div>
         <div className='col-span-3'>
           <EventCalendar onChangeDate={setSelectedDate} />
-          <DateInfo date={selectedDate} appoint={handleAppoint} />
+          <DateInfo
+            date={selectedDate}
+            activeTime={data?.account?.setting.activeTime!}
+            appoint={handleAppoint}
+          />
         </div>
       </div>
       {newAppointment && (
