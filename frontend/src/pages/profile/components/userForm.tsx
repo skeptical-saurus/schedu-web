@@ -49,14 +49,21 @@ const UserForm: React.FC<Props> = ({ user }) => {
     } else if (!lastname) {
       setErrorMessage('โปรดระบุนามสกุล')
       setFormError(true)
+    } else if (!tel || !telValidate(tel)) {
+      setFormError(true)
+      setErrorMessage('ไม่ได้กรอกเบอร์ติดต่อหรือกรอกไม่ถูกต้อง')
     } else {
       setFormError(false)
       setErrorMessage('')
     }
   }
 
+  const telValidate = (tel: string) => {
+    return /^\d{10}$/.test(tel)
+  }
+
   const submit = async () => {
-    if (firstname && lastname) {
+    if (firstname && lastname && telValidate(tel)) {
       updateProfile({
         variables: {
           record: {
