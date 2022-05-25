@@ -1,7 +1,6 @@
 import { AppointmentTC } from 'models/appointment'
 import { AccountModel } from 'models/account'
 
-
 export const appointments = AppointmentTC.mongooseResolvers
   .findMany()
   .wrapResolve((next) => async (rp) => {

@@ -21,7 +21,9 @@ const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>
-                  <div className='mb-1'>{formatTime(apm)} {apmDuration(apm)}</div>
+                  <div className='mb-1'>
+                    {formatTime(apm)} {apmDuration(apm)}
+                  </div>
                   <div>สถานะ: {apm.status}</div>
                 </div>
               </div>

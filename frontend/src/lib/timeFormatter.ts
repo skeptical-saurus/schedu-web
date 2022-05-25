@@ -3,7 +3,9 @@ import dayjs from 'dayjs'
 
 export const formatTime = (apm: Appointment | undefined) => {
   if (!apm) return ''
-  return `${dayjs(apm.startAt).format('DD MMM YYYY [at] hh:mmA')} - ${dayjs(apm.endAt).format('hh:mmA')}`
+  return `${dayjs(apm.startAt).format('DD MMM YYYY [at] hh:mmA')} - ${dayjs(apm.endAt).format(
+    'hh:mmA'
+  )}`
 }
 
 export const apmDuration = (apm: Appointment | undefined) => {
