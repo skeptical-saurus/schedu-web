@@ -7,7 +7,6 @@ type Props = {
 }
 
 const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
-
   const renderList = () => {
     return appointments?.map((apm) => (
       <div key={`request-${apm._id}`} className='grid grid-cols-6 py-3 border-b'>
@@ -58,9 +57,7 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
     <>
       <div className='border rounded-xl p-8 mb-8'>
         <div className='text-xl font-bold mb-4'>รายการร้องขอ</div>
-        <div>
-          {appointments ? renderList(): renderEmpty()}
-        </div>
+        <div>{appointments ? renderList() : renderEmpty()}</div>
       </div>
     </>
   )
