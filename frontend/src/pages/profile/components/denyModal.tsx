@@ -1,9 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { AppointmentInformation } from 'types/appointment'
+import { Appointment } from 'types'
 
 type Props = {
-  appointment?: AppointmentInformation
+  appointment?: Appointment
   isOpen: boolean
   close: () => void
 }

@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { ContactInformation } from 'types/contact'
+import { Account } from 'types'
 
 type Props = {
-  user?: ContactInformation
+  user?: Account
 }
 
 const UserInfo: React.FC<Props> = ({ user }) => {
@@ -43,10 +43,10 @@ const UserInfo: React.FC<Props> = ({ user }) => {
           </div>
           <div className='grid grid-cols-5 mt-8 text-left'>
             <div className='col-span-2 py-3 border-t'>E-mail</div>
-            <div className='col-span-3 py-3 border-t font-light'>{user?.contact.email}</div>
+            <div className='col-span-3 py-3 border-t font-light'>{user?.contact?.email}</div>
             <div className='col-span-2 py-3 border-t'>เบอร์ติดต่อ</div>
             <div className='col-span-3 py-3 border-t font-light'>
-              {user?.contact.tel ? user?.contact.tel : '-'}
+              {user?.contact?.tel ? user?.contact.tel : '-'}
             </div>
           </div>
         </div>

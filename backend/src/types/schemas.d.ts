@@ -32,8 +32,8 @@ export interface Appointment extends mongoose.Document {
   status: string
   sender: string
   participants: Participant[]
-  startAt: date
-  endAt: date
+  startAt: Date
+  endAt: Date
   commMethod: string
   commUrl: string
   note: string
@@ -41,5 +41,5 @@ export interface Appointment extends mongoose.Document {
 
 export interface Event extends mongoose.Document {
   title: string
-  date: date
+  date: Date
 }

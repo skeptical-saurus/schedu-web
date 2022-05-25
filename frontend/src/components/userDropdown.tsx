@@ -2,11 +2,11 @@ import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { ContactInformation } from 'types/contact'
+import { useState } from 'react'
+import { Account } from 'types'
 
 type Props = {
-  user: ContactInformation
+  user?: Account
 }
 
 const UserDropdown: React.FC<Props> = ({ user }) => {
@@ -27,7 +27,7 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
   }
 
   const haveimage = () => {
-    if (user.image) {
+    if (user?.image) {
       return (
         <img
           className='w-16 text-gray-600 rounded-full'

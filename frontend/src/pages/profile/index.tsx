@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AppointmentInformation } from 'types/appointment'
-import { ContactInformation } from 'types/contact'
+import { Appointment, Query } from 'types'
 import { GET_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
@@ -15,12 +14,11 @@ import DenyModal from './components/denyModal'
 import mockedAppointments from 'mock/appointments.json'
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<ContactInformation>()
-  const { loading, data } = useQuery(GET_CURRENT_ACCOUNT)
+  const { loading, data } = useQuery<Query>(GET_CURRENT_ACCOUNT)
 
-  const [requests, setRequests] = useState<AppointmentInformation[]>()
-  const [ongoings, setOngoings] = useState<AppointmentInformation[]>()
-  const [selected, setSelected] = useState<AppointmentInformation>()
+  const [requests, setRequests] = useState<Appointment[]>()
+  const [ongoings, setOngoings] = useState<Appointment[]>()
+  const [selected, setSelected] = useState<Appointment>()
 
   const [isDetailOpen, setDetailOpen] = useState(false)
   const [isApproveOpen, setApproveOpen] = useState(false)
@@ -31,18 +29,12 @@ const Profile: React.FC = () => {
     setRequests(mockedAppointments)
   }, [])
 
-  useEffect(() => {
-    if (!loading) {
-      setUser(data.currentAccount)
-    }
-  }, [loading, data])
-
-  const openDetailModal = (apm: AppointmentInformation) => {
+  const openDetailModal = (apm: Appointment) => {
     setSelected(apm)
     setDetailOpen(true)
   }
 
-  const openConfirmModal = (apm: AppointmentInformation, mode: string) => {
+  const openConfirmModal = (apm: Appointment, mode: string) => {
     setSelected(apm)
     switch (mode) {
       case 'APPROVE':
@@ -64,7 +56,7 @@ const Profile: React.FC = () => {
 
   return (
     <>
-      <UserInfo user={user} />
+      <UserInfo user={data?.currentAccount} />
       <div className='mt-24'>
         <div className='flex items-center mb-6'>
           <span className='material-icons text-3xl'>calendar_month</span>

@@ -1,10 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import dayjs from 'dayjs'
 import { Fragment } from 'react'
-import { AppointmentInformation } from 'types/appointment'
+import { CreateOneAppointmentInput } from 'types'
 
 type Props = {
-  appointment?: AppointmentInformation
+  appointment?: CreateOneAppointmentInput
   isOpen: boolean
   close: () => void
 }

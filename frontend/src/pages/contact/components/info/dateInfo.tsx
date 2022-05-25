@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import TimeInput from './timeInput'
-import { AppointmentInformation } from 'types/appointment'
+import { CreateOneAppointmentInput } from 'types'
 import CommInput from './commInput'
 
 type Props = {
   date?: Date
-  appoint: (apm: AppointmentInformation) => void
+  appoint: (apm: CreateOneAppointmentInput) => void
 }
 
 const commChoices = [
