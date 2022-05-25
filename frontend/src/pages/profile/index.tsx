@@ -4,7 +4,7 @@ import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
-import RequestList from './components/RequestList'
+import RequestList from './components/requestList'
 import PersonalCalendar from './components/personalCalendar'
 import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'

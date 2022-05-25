@@ -58,7 +58,7 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
     <>
       <div className='border rounded-xl p-8 mb-8'>
         <div className='text-xl font-bold mb-4'>รายการร้องขอ</div>
-        <div>{appointments ? renderList() : renderEmpty()}</div>
+        <div>{appointments?.length ? renderList() : renderEmpty()}</div>
       </div>
     </>
   )
