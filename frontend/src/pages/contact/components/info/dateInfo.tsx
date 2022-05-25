@@ -62,7 +62,6 @@ const DateInfo: React.FC<Props> = ({ date, appoint }) => {
   }, [date, subject, note, hour, minute, range])
 
   const submit = () => {
-    // TODO: Submit appointment request
     if (!hour || !minute || !range) return
     let startAt = dayjs(date).set('hour', hour).set('minute', minute).set('second', 0)
     let endAt = startAt.add(range, 'minutes')

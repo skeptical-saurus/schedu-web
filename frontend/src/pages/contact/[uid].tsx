@@ -21,10 +21,15 @@ const ContactInfo: React.FC<Props> = () => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
 
   const { loading, data } = useQuery<Query, QueryAccountArgs>(GET_ACCOUNT_BY_ID, {
-    variables: { _id: uid },
+    variables: { _id: uid as string },
   })
 
   const handleAppoint = (apm: CreateOneAppointmentInput) => {
+    apm.participants = [
+      {
+        userId: uid as string,
+      },
+    ]
     setNewAppointment(apm)
     setIsConfirmOpen(true)
   }
@@ -55,11 +60,13 @@ const ContactInfo: React.FC<Props> = () => {
           <DateInfo date={selectedDate} appoint={handleAppoint} />
         </div>
       </div>
-      <ConfirmModal
-        appointment={newAppointment}
-        isOpen={isConfirmOpen}
-        close={handleConfirmClose}
-      />
+      {newAppointment && (
+        <ConfirmModal
+          appointment={newAppointment}
+          isOpen={isConfirmOpen}
+          close={handleConfirmClose}
+        />
+      )}
     </>
   )
 }
