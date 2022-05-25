@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Appointment, Query, Account } from 'types'
+import { Appointment, Query } from 'types'
 import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
@@ -12,11 +12,6 @@ import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
 
 const Profile: React.FC = () => {
-  // const [user, setUser] = useState<ContactInformation>()
-  // const [appointments, setAppointments] = useState<Appointment[]>()
-
-  // const userQuery = useQuery(GET_CURRENT_ACCOUNT)
-  // const appointmentQuery = useQuery(GET_APPOINTMENTS)
   const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
 
   const [requests, setRequests] = useState<Appointment[]>()
@@ -27,35 +22,29 @@ const Profile: React.FC = () => {
   const [isApproveOpen, setApproveOpen] = useState(false)
   const [isDenyOpen, setDenyOpen] = useState(false)
 
-  // useEffect(() => {
-  //   setOngoings(mockedAppointments)
-  //   setRequests(mockedAppointments)
-  // }, [])
-
   useEffect(() => {
     const appointmentFilter = () => {
-      const ongoingsFiltered = data?.appointments
-      // ?.filter(
-      //   (appointment) => appointment.sender === user?._id
-      // )
+      const ongoingsFiltered = data?.appointments?.filter(
+        (appointment) => appointment.sender === data.currentAccount?._id
+      )
 
-      const requestsFiltered = data?.appointments
-      // ?.filter((appointment) => {
-      //   const isParticipant = appointment.participants?.find(({ userId }) => userId === user?._id)
+      const requestsFiltered = data?.appointments?.filter((appointment) => {
+        console.log(appointment)
+        const isParticipant = appointment.participants?.find(
+          (userId) => userId === data.currentAccount?._id
+        )
 
-      //   return appointment.sender !== user?._id && isParticipant
-      // })
+        return appointment.sender !== data.currentAccount?._id && isParticipant
+      })
 
       setOngoings(ongoingsFiltered)
       setRequests(requestsFiltered)
-      
-      console.log('requests', requestsFiltered)
     }
 
-    if (loading) {
+    if (!loading) {
       appointmentFilter()
     }
-  }, [loading, data?.appointments])
+  }, [loading, data])
 
   const openDetailModal = (apm: Appointment) => {
     setSelected(apm)

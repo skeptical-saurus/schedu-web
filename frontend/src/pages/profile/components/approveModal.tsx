@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Appointment } from 'types'
+import { formatTime, apmDuration } from 'lib/timeFormatter'
 
 type Props = {
   appointment?: Appointment
@@ -48,8 +49,8 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     <div className='text-sm mb-6'>
                       {apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}
                     </div>
-                    <div className='mb-1'>11 Aug 2022 เวลา 10:30AM - 11:00AM</div>
-                    <div className='text-sm'>(ระยะเวลา: 30 นาที)</div>
+                    <div className='mb-1'>{formatTime(apm)}</div>
+                    <div className='text-sm'>{apmDuration(apm)}</div>
                   </div>
                   <div className='mt-4 text-right'>
                     <button
