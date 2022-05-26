@@ -11,7 +11,11 @@ export const createAppointment = AppointmentTC.mongooseResolvers
     const googleId = rp.context.user.uid
     const self = await AccountModel.findOne({ googleId }).lean()
 
-    rp.args.record.sender = self?._id
+    rp.args.record = {
+      ...rp.args.record,
+      sender: self?._id,
+      status: 'pending',
+    }
 
     return next(rp)
   })
