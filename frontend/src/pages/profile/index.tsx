@@ -24,6 +24,7 @@ const Profile: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [onDateEvents, setOnDateEvents] = useState<Event[]>()
 
+  const [onDateAppointments, setOnDateAppointments] = useState<Appointment[]>([])
   const [requests, setRequests] = useState<Appointment[]>()
   const [ongoings, setOngoings] = useState<Appointment[]>()
   const [selected, setSelected] = useState<Appointment>()
@@ -33,12 +34,19 @@ const Profile: React.FC = () => {
   const [isDenyOpen, setDenyOpen] = useState(false)
 
   useEffect(() => {
-    console.log(eventData?.events)
+
     let eventsOnDate = eventData?.events?.filter(event => {
       return !dayjs(event.date).diff(dayjs(selectedDate), 'days')
     })
     if (!eventsOnDate) eventsOnDate = []
     setOnDateEvents(eventsOnDate)
+
+    let appointmentsOnDate = data?.appointments?.filter(appointment => {
+      return !dayjs(appointment.startAt).startOf('day').diff(dayjs(selectedDate), 'days')
+    })
+    if (!appointmentsOnDate) appointmentsOnDate = []
+    setOnDateAppointments(appointmentsOnDate)
+
   }, [selectedDate])
 
   // Filter appointments
@@ -123,7 +131,7 @@ const Profile: React.FC = () => {
         <div className='grid grid-cols-2 gap-8'>
           <div>
             <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} />
-            <EventInDate selected={selectedDate} events={onDateEvents} />
+            <EventInDate selected={selectedDate} events={onDateEvents} appointments={onDateAppointments} />
           </div>
           <div>
             <RequestList
