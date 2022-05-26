@@ -20,7 +20,10 @@ const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
         </div>
         <div className={`${events?.length ? 'mt-3' : ''}`}>
           {events?.map((event, index) => (
-            <span key={`onevent-${index}`} className='px-5 py-1 font-light text-xs rounded-full mr-2 bg-amber-300'>
+            <span
+              key={`onevent-${index}`}
+              className='px-5 py-1 font-light text-xs rounded-full mr-2 bg-amber-300'
+            >
               {event.title}
             </span>
           ))}

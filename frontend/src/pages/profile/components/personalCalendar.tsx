@@ -5,19 +5,17 @@ import { Appointment, Event } from 'types'
 
 type Props = {
   selected: Date
-  setSelected: Function,
-  events?: Event[],
+  setSelected: Function
+  events?: Event[]
   appointments?: Appointment[]
 }
 
 const PersonalCalendar: React.FC<Props> = ({ selected, setSelected, events, appointments }) => {
-  
   useEffect(() => {
     generateTags()
   }, [events])
 
   const generateTags = () => {
-
     const getDateElement = (dateString: string) => {
       let date = dayjs(dateString).format('MMMM DD, YYYY')
       let dateElement = document.querySelector(`[aria-label="${date}"]`)
@@ -26,7 +24,7 @@ const PersonalCalendar: React.FC<Props> = ({ selected, setSelected, events, appo
 
     const initiateDotContainer = (dateElement: Element) => {
       let isRelativeParent = dateElement.classList.contains('relative')
-      if (!isRelativeParent) dateElement.classList.add('relative') 
+      if (!isRelativeParent) dateElement.classList.add('relative')
 
       let dotContainer = dateElement.getElementsByClassName('dot-container')[0]
       if (dotContainer) return dotContainer
@@ -35,20 +33,19 @@ const PersonalCalendar: React.FC<Props> = ({ selected, setSelected, events, appo
       return dateElement.getElementsByClassName('dot-container')[0]
     }
 
-    events?.forEach(event => {
+    events?.forEach((event) => {
       let dateElement = getDateElement(event.date as string)
       if (!dateElement) return
       let dotContainer = initiateDotContainer(dateElement)
       dotContainer.innerHTML = `<div class="w-2 h-2 rounded-full bg-amber-600 mx-0.5">&nbsp;</div>`
     })
 
-    appointments?.forEach(apm => {
+    appointments?.forEach((apm) => {
       let dateElement = getDateElement(apm.startAt as string)
       if (!dateElement) return
       let dotContainer = initiateDotContainer(dateElement)
       dotContainer.innerHTML = `<div class="w-2 h-2 rounded-full bg-[color:var(--light-blue)] mx-0.5">&nbsp;</div>`
     })
-
   }
 
   const handleDateChange = (date: Date) => {
@@ -58,7 +55,11 @@ const PersonalCalendar: React.FC<Props> = ({ selected, setSelected, events, appo
   return (
     <>
       <div className='p-6 rounded-2xl border'>
-        <Calendar onActiveStartDateChange={generateTags} onChange={handleDateChange} value={selected} />
+        <Calendar
+          onActiveStartDateChange={generateTags}
+          onChange={handleDateChange}
+          value={selected}
+        />
       </div>
     </>
   )
