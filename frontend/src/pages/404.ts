@@ -1,9 +1,11 @@
-import { useRouter } from "next/router"
-import { useEffect } from "react"
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const Custom404 = () => {
   const router = useRouter()
-  useEffect(() => { router.replace('/profile') })
+  useEffect(() => {
+    router.replace('/profile')
+  })
 }
 
 export default Custom404
