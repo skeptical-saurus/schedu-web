@@ -1,12 +1,11 @@
 import Calendar from 'react-calendar'
 
 type Props = {
-  selected: Date,
+  selected: Date
   setSelected: Function
 }
 
 const PersonalCalendar: React.FC<Props> = ({ selected, setSelected }) => {
-
   const handleDateChange = (date: Date) => {
     setSelected(date)
   }
