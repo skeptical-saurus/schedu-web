@@ -592,14 +592,23 @@ export interface MongoError extends ErrorInterface {
 
 export interface Mutation {
   __typename?: 'Mutation'
+  /** Update one document: 1) Retrieve one document by findById. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
+  approveAppointment?: Maybe<UpdateByIdAppointmentPayload>
   /** Create one document with mongoose defaults, setters, hooks and validation */
   createAppointment?: Maybe<CreateOneAppointmentPayload>
   /** Remove one document: 1) Retrieve one document and remove with hooks via findByIdAndRemove. 2) Return removed document. */
   deleteAppointment?: Maybe<RemoveByIdAppointmentPayload>
+  /** Update one document: 1) Retrieve one document by findById. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
+  rejectAppointment?: Maybe<UpdateByIdAppointmentPayload>
   /** Update one document: 1) Retrieve one document via findOne. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
   updateAccount?: Maybe<UpdateOneAccountPayload>
   /** Update one document: 1) Retrieve one document via findOne. 2) Apply updates to mongoose document. 3) Mongoose applies defaults, setters, hooks and validation. 4) And save it. */
   updateAppointment?: Maybe<UpdateOneAppointmentPayload>
+}
+
+export interface MutationApproveAppointmentArgs {
+  _id: Scalars['MongoID']
+  record?: InputMaybe<UpdateByIdAppointmentInput>
 }
 
 export interface MutationCreateAppointmentArgs {
@@ -608,6 +617,11 @@ export interface MutationCreateAppointmentArgs {
 
 export interface MutationDeleteAppointmentArgs {
   _id: Scalars['MongoID']
+}
+
+export interface MutationRejectAppointmentArgs {
+  _id: Scalars['MongoID']
+  record?: InputMaybe<UpdateByIdAppointmentInput>
 }
 
 export interface MutationUpdateAccountArgs {
@@ -750,6 +764,38 @@ export enum SortUpdateOneAccountInput {
 export enum SortUpdateOneAppointmentInput {
   IdAsc = '_ID_ASC',
   IdDesc = '_ID_DESC',
+}
+
+export interface UpdateByIdAppointmentInput {
+  commMethod?: InputMaybe<Scalars['String']>
+  commUrl?: InputMaybe<Scalars['String']>
+  createdAt?: InputMaybe<Scalars['Date']>
+  endAt?: InputMaybe<Scalars['Date']>
+  note?: InputMaybe<Scalars['String']>
+  participants?: InputMaybe<Array<InputMaybe<UpdateByIdAppointmentParticipantsInput>>>
+  sender?: InputMaybe<Scalars['String']>
+  startAt?: InputMaybe<Scalars['Date']>
+  status?: InputMaybe<Scalars['String']>
+  subject?: InputMaybe<Scalars['String']>
+  updatedAt?: InputMaybe<Scalars['Date']>
+}
+
+export interface UpdateByIdAppointmentParticipantsInput {
+  _id?: InputMaybe<Scalars['MongoID']>
+  confirmed?: InputMaybe<Scalars['Boolean']>
+  join?: InputMaybe<Scalars['Boolean']>
+  main?: InputMaybe<Scalars['Boolean']>
+  userId?: InputMaybe<Scalars['String']>
+}
+
+export interface UpdateByIdAppointmentPayload {
+  __typename?: 'UpdateByIdAppointmentPayload'
+  /** Error that may occur during operation. If you request this field in GraphQL query, you will receive typed error in payload; otherwise error will be provided in root `errors` field of GraphQL response. */
+  error?: Maybe<ErrorInterface>
+  /** Updated document */
+  record?: Maybe<Appointment>
+  /** Document ID */
+  recordId?: Maybe<Scalars['MongoID']>
 }
 
 export interface UpdateOneAccountContactInput {
