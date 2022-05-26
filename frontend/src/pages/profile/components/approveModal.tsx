@@ -1,7 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { Appointment } from 'types'
+import { Appointment, Mutation, MutationApproveAppointmentArgs } from 'types'
 import { formatTime, apmDuration } from 'lib/timeFormatter'
+
+import { APPROVE_APPOINTMENT } from 'lib/mutations'
+import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
+import { useMutation } from '@apollo/client'
 
 type Props = {
   appointment?: Appointment
@@ -10,8 +14,12 @@ type Props = {
 }
 
 const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
+  const [approve] = useMutation<Mutation, MutationApproveAppointmentArgs>(APPROVE_APPOINTMENT, {
+    refetchQueries: [GET_APPOINTMENTS_AND_CURRENT_ACCOUNT],
+  })
+
   const handleSubmit = () => {
-    // TODO: do submit approval
+    approve({ variables: { _id: apm?._id as string } })
     close()
   }
 

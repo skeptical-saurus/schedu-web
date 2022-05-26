@@ -48,7 +48,7 @@ const Profile: React.FC = () => {
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
-  }, [selectedDate])
+  }, [data, eventData, selectedDate])
 
   useEffect(() => {
     if (apmId?.length === 1) {
@@ -66,6 +66,7 @@ const Profile: React.FC = () => {
   // Filter appointments
   useEffect(() => {
     const appointmentFilter = () => {
+      console.log(data)
       let requestsFiltered = data?.appointments?.filter((appointment) => {
         // status matched with requested statuses
         let isRequestStatus = appointment.status
@@ -77,7 +78,7 @@ const Profile: React.FC = () => {
         let isNotSender = appointment.sender !== data.currentAccount?._id
         // user is a participant of this appointment
         let isParticipant = appointment.participants?.find(
-          (participant) => participant?.userId === data.currentAccount?._id
+          (participant) => participant?.userId === data.currentAccount?._id && !participant?.confirmed 
         )
         return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })
