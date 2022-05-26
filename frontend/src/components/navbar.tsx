@@ -10,8 +10,8 @@ const TRIGGER_DIFF = 64
 let lastPos = 0
 
 const navigators = [
-  { path: '/profile', title: 'Profile' },
-  { path: '/contact', title: 'Contact' },
+  { path: '/profile', title: 'โปรไฟล์' },
+  { path: '/contact', title: 'รายชื่อติดต่อ' },
 ]
 
 const Navbar: React.FC = () => {
