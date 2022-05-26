@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 
 const REQUEST_STATUS = ['pending', 'ongoing']
-const ONGOING_STATUS = ['pending', 'ongoing', 'starting']
+const ONGOING_STATUS = ['pending', 'ongoing']
 const DONE_STATUS = ['abandoned', 'done']
 
 const Profile: React.FC = () => {
@@ -48,7 +48,7 @@ const Profile: React.FC = () => {
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
-  }, [selectedDate])
+  }, [data?.appointments, eventData?.events, selectedDate])
 
   useEffect(() => {
     if (apmId?.length === 1) {
