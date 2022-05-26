@@ -15,6 +15,9 @@ import { validateToken, decodeTokenToUser } from 'middlewares/auth'
 import schema from 'graphql-schema'
 import { getCorsOptions } from 'config/cors'
 
+import { rescheduleOnStart } from 'helpers/schedule'
+rescheduleOnStart()
+
 const app = express()
 app.disable('x-powered-by')
 app.use(express.json())
