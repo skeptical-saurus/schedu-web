@@ -10,6 +10,7 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
+import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 
 const REQUEST_STATUS = ['pending', 'ongoing']
@@ -17,6 +18,8 @@ const ONGOING_STATUS = ['pending', 'ongoing', 'starting']
 const DONE_STATUS = ['abandoned', 'done']
 
 const Profile: React.FC = () => {
+  const router = useRouter()
+  const { apmId } = router.query
   const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
 
   const [requests, setRequests] = useState<Appointment[]>()
@@ -26,6 +29,19 @@ const Profile: React.FC = () => {
   const [isDetailOpen, setDetailOpen] = useState(false)
   const [isApproveOpen, setApproveOpen] = useState(false)
   const [isDenyOpen, setDenyOpen] = useState(false)
+
+  useEffect(() => {
+    if (apmId?.length === 1) {
+      if (!isDetailOpen) {
+        const createdAppointment = data?.appointments?.find(
+          (appointment) => appointment._id === apmId[0]
+        )
+        if (createdAppointment) openDetailModal(createdAppointment)
+      } else {
+        router.replace('/profile')
+      }
+    }
+  }, [apmId, data?.appointments, router, isDetailOpen])
 
   useEffect(() => {
     const appointmentFilter = () => {

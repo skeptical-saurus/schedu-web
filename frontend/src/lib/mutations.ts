@@ -14,3 +14,13 @@ export const UPDATE_USER_PROFILE = gql`
     }
   }
 `
+
+export const CREATE_APPOINTMENT = gql`
+  mutation createAppointment($record: CreateOneAppointmentInput!) {
+    createAppointment(record: $record) {
+      record {
+        _id
+      }
+    }
+  }
+`
