@@ -12,7 +12,7 @@ export const colorizeStatus = (status: string) => {
     case 'abandoned':
       console.log('4')
       return 'border-rose-500'
-    default: 
+    default:
       console.log('5')
       return 'border-gray-700'
   }
