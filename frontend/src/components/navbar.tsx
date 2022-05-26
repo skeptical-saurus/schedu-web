@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
     <div className={`fixed w-full z-50 duration-300 ${!shown ? '-translate-y-32' : ''}`}>
       <div className='container mx-auto p-8'>
         <div className='shadow-xl bg-gray-50 rounded-full px-8 py-4 flex items-center justify-between'>
-          <div className='text-xl'>
+          <div className='text-xl hover:animate-spin'>
             <span className='text-[color:var(--blue)]'>Sch</span>
             <span className='text-gray-800 font-light'>edu</span>
           </div>

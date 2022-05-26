@@ -9,7 +9,7 @@ type Props = {
 const HighlightCard: React.FC<Props> = ({ contact }) => {
   return (
     <Link href={`/contact/${contact._id}`} passHref>
-      <div className='px-6 py-8 rounded-xl shadow-xl text-center bg-gray-50'>
+      <div className='px-6 py-8 rounded-xl shadow-xl text-center bg-gray-50 cursor-pointer'>
         <div>
           <span className='material-icons text-7xl text-gray-600 mb-4'>assignment_ind</span>
         </div>
