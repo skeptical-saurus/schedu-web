@@ -144,8 +144,8 @@ const Profile: React.FC = () => {
           <span className='material-icons text-3xl'>calendar_month</span>
           <span className='ml-2 text-2xl font-light'>ปฏิทินของคุณ</span>
         </div>
-        <div className='grid grid-cols-2 gap-8'>
-          <div>
+        <div className='grid grid-cols-12 gap-8'>
+          <div className='col-span-12 xl:col-span-5 2xl:col-span-6'>
             <PersonalCalendar
               selected={selectedDate}
               setSelected={setSelectedDate}
@@ -158,7 +158,7 @@ const Profile: React.FC = () => {
               appointments={onDateAppointments}
             />
           </div>
-          <div>
+          <div className='col-span-12 xl:col-span-7 2xl:col-span-6'>
             <RequestList
               appointments={requests}
               moreDetail={openDetailModal}

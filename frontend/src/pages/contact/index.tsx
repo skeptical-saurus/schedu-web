@@ -36,7 +36,7 @@ const Contact: React.FC<Props> = () => {
         <span className='text-3xl'>ติดต่อล่าสุด</span>
       </div>
       {data?.recentContacts?.length ? (
-        <div className='grid grid-cols-4 gap-4 mb-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12'>
           {data.recentContacts.map((recentContact: Account) => (
             <HighlightCard key={`recent-${recentContact._id}`} contact={recentContact} />
           ))}
@@ -47,8 +47,8 @@ const Contact: React.FC<Props> = () => {
           <div className='font-light text-lg text-gray-400'>ไม่พบรายชื่อผู้ติดต่อล่าสุด</div>
         </div>
       )}
-      <div className='flex justify-between items-center mb-6'>
-        <div className='font-bold flex items-center'>
+      <div className='md:flex justify-between items-center mb-6'>
+        <div className='font-bold flex items-center mb-4 md:mb-0'>
           <span className='material-icons text-4xl mr-3'>connect_without_contact</span>
           <span className='text-3xl'>รายชื่อผู้ติดต่อ</span>
         </div>

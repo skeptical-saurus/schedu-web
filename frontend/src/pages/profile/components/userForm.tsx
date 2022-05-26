@@ -103,7 +103,7 @@ const UserForm: React.FC<Props> = ({ user }) => {
   return (
     <>
       <div className='flex justify-center my-8'>
-        <div className='relative p-8 border shadow-2xl w-2/5 rounded-2xl'>
+        <div className='relative p-8 border shadow-2xl rounded-2xl'>
           <div className='flex items-center'>
             {haveimage()}
             <div className='ml-6 text-2xl font-bold'>แก้ไขข้อมูลโปรไฟล์</div>
@@ -178,15 +178,15 @@ const UserForm: React.FC<Props> = ({ user }) => {
             </div>
           )}
 
-          <div className='grid grid-cols-2 gap-8'>
+          <div className='grid grid-cols-2 gap-x-8 gap-y-2'>
             <Link href='/profile' passHref={true}>
-              <button className='w-full p-3 rounded-xl bg-gray-300 hover:bg-gray-400 duration-100'>
+              <button className='col-span-2 md:col-span-1 w-full p-3 rounded-xl bg-gray-300 hover:bg-gray-400 duration-100'>
                 ยกเลิก
               </button>
             </Link>
             <button
               onClick={submit}
-              className='w-full p-3 rounded-xl bg-green-300 hover:bg-green-400 duration-100'
+              className='col-span-2 md:col-span-1 w-full p-3 rounded-xl bg-green-300 hover:bg-green-400 duration-100'
             >
               บันทึก
             </button>

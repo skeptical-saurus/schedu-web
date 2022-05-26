@@ -134,8 +134,8 @@ const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
           />
         </div>
       </div>
-      <div className='grid grid-cols-3 gap-8 my-8'>
-        <div>
+      <div className='grid grid-cols-12 gap-8 my-8'>
+        <div className='col-span-6 md:col-span-4 lg:col-span-6 xl:col-span-4'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>schedule</span>
             <span className='ml-1'>ช่วงเวลา (เริ่มต้น)</span>
@@ -148,7 +148,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
             </div>
           </div>
         </div>
-        <div>
+        <div className='col-span-6'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>more_horiz</span>
             <span className='ml-1'>ระยะเวลา</span>
@@ -171,7 +171,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
         </div>
       </div>
       <div className='grid grid-cols-5 gap-8 my-8'>
-        <div className='col-span-2'>
+        <div className='col-span-5 md:col-span-2'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>email</span>
             <span className='ml-1'>ช่องทางสื่อสาร</span>
@@ -182,7 +182,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
             setMethod={handleMethodChange}
           />
         </div>
-        <div className='col-span-3'>
+        <div className='col-span-5 md:col-span-3'>
           <div className='text-sm mb-2 text-gray-500 flex items-center'>
             <span className='material-icons text-lg'>link</span>
             <span className='ml-1'>ลิงก์แนบ (ถ้ามี)</span>

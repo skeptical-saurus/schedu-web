@@ -52,10 +52,10 @@ const ContactInfo: React.FC<Props> = () => {
   return (
     <>
       <div className='grid grid-cols-5 gap-16'>
-        <div className='col-span-2'>
+        <div className='col-span-5 lg:col-span-2'>
           <PersonalInfo contact={data?.account} />
         </div>
-        <div className='col-span-3'>
+        <div className='col-span-5 lg:col-span-3'>
           <EventCalendar onChangeDate={setSelectedDate} />
           <DateInfo
             date={selectedDate}

@@ -26,7 +26,7 @@ const UserInfo: React.FC<Props> = ({ user }) => {
   return (
     <>
       <div className='flex justify-center my-8'>
-        <div className='relative text-center p-8 border shadow-2xl w-1/3 rounded-2xl'>
+        <div className='relative text-center p-8 border shadow-2xl rounded-2xl'>
           <span className='absolute top-0 right-0 m-4'>
             <Link href='/profile/edit' passHref>
               <button className='group w-10 h-10 flex justify-center items-center rounded-xl border hover:border-[color:var(--blue)] duration-100'>
