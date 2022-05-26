@@ -42,6 +42,13 @@ export const GET_ACCOUNT_BY_ID = gql`
         email
         tel
       }
+      setting {
+        weekendReceive
+        activeTime {
+          startAt
+          endAt
+        }
+      }
     }
   }
 `

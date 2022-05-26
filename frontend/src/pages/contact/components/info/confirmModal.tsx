@@ -1,17 +1,34 @@
 import { Dialog, Transition } from '@headlessui/react'
 import dayjs from 'dayjs'
 import { Fragment } from 'react'
-import { CreateOneAppointmentInput } from 'types'
+import { CreateOneAppointmentInput, Mutation, MutationCreateAppointmentArgs } from 'types'
+import { useMutation } from '@apollo/client'
+import { CREATE_APPOINTMENT } from 'lib/mutations'
+import { useRouter } from 'next/router'
 
 type Props = {
-  appointment?: CreateOneAppointmentInput
+  appointment: CreateOneAppointmentInput
   isOpen: boolean
   close: () => void
 }
 
 const ConfirmModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
+  const router = useRouter()
+  const [createAppointment] = useMutation<Mutation, MutationCreateAppointmentArgs>(
+    CREATE_APPOINTMENT,
+    {
+      onCompleted: (data) => {
+        router.push(`/profile/${data.createAppointment?.record?._id ?? ''}`)
+      },
+    }
+  )
+
   const handleSubmit = () => {
-    // TODO: do submit approval
+    createAppointment({
+      variables: {
+        record: apm,
+      },
+    })
     close()
   }
 
