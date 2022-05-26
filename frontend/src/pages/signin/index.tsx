@@ -12,7 +12,7 @@ const SignIn: React.FC = () => {
   useEffect(() => {
     if (authenticated) {
       updateSignState(authenticated)
-      router.push('/')
+      router.push('/profile')
     }
   }, [authenticated, router])
 
@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
         <>
           <div className='mb-6'>กำลังอยู่ในระบบ ต้องการเข้าสู่หน้าหลักหรือไม่</div>
           <div className='flex items-center'>
-            <Link href='/'>
+            <Link href='/profile'>
               <a>
                 <button className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'>
                   เข้าสู่หน้าหลัก

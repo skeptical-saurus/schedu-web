@@ -11,7 +11,7 @@ let lastPos = 0
 
 const Navbar: React.FC = () => {
   const navigators = [
-    { path: '/', title: 'Home' },
+    { path: '/profile', title: 'Profile' },
     { path: '/contact', title: 'Contact' },
   ]
 
