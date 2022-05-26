@@ -1,14 +1,19 @@
 import Calendar from 'react-calendar'
 
-const PersonalCalendar: React.FC = () => {
+type Props = {
+  selected: Date
+  setSelected: Function
+}
+
+const PersonalCalendar: React.FC<Props> = ({ selected, setSelected }) => {
   const handleDateChange = (date: Date) => {
-    console.log(date)
+    setSelected(date)
   }
 
   return (
     <>
       <div className='p-6 rounded-2xl border'>
-        <Calendar onChange={handleDateChange} />
+        <Calendar onChange={handleDateChange} value={selected} />
       </div>
     </>
   )

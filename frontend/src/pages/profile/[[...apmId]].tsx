@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Appointment, Query } from 'types'
-import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
+import { Appointment, Event, Query } from 'types'
+import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT, GET_EVENTS } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
@@ -10,6 +10,7 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
+import EventInDate from './components/eventInDate'
 import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 
@@ -21,7 +22,12 @@ const Profile: React.FC = () => {
   const router = useRouter()
   const { apmId } = router.query
   const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
+  const { loading: eventLoading, data: eventData } = useQuery<Query>(GET_EVENTS)
 
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [onDateEvents, setOnDateEvents] = useState<Event[]>()
+
+  const [onDateAppointments, setOnDateAppointments] = useState<Appointment[]>([])
   const [requests, setRequests] = useState<Appointment[]>()
   const [ongoings, setOngoings] = useState<Appointment[]>()
   const [selected, setSelected] = useState<Appointment>()
@@ -29,6 +35,20 @@ const Profile: React.FC = () => {
   const [isDetailOpen, setDetailOpen] = useState(false)
   const [isApproveOpen, setApproveOpen] = useState(false)
   const [isDenyOpen, setDenyOpen] = useState(false)
+
+  useEffect(() => {
+    let eventsOnDate = eventData?.events?.filter((event) => {
+      return !dayjs(event.date).diff(dayjs(selectedDate), 'days')
+    })
+    if (!eventsOnDate) eventsOnDate = []
+    setOnDateEvents(eventsOnDate)
+
+    let appointmentsOnDate = data?.appointments?.filter((appointment) => {
+      return !dayjs(appointment.startAt).startOf('day').diff(dayjs(selectedDate), 'days')
+    })
+    if (!appointmentsOnDate) appointmentsOnDate = []
+    setOnDateAppointments(appointmentsOnDate)
+  }, [selectedDate])
 
   useEffect(() => {
     if (apmId?.length === 1) {
@@ -43,6 +63,7 @@ const Profile: React.FC = () => {
     }
   }, [apmId, data?.appointments, router, isDetailOpen])
 
+  // Filter appointments
   useEffect(() => {
     const appointmentFilter = () => {
       let requestsFiltered = data?.appointments?.filter((appointment) => {
@@ -123,7 +144,12 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <div>
-            <PersonalCalendar />
+            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} />
+            <EventInDate
+              selected={selectedDate}
+              events={onDateEvents}
+              appointments={onDateAppointments}
+            />
           </div>
           <div>
             <RequestList
