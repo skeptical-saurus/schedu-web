@@ -10,6 +10,7 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
+import dayjs from 'dayjs'
 
 const REQUEST_STATUS = ['pending', 'ongoing']
 const ONGOING_STATUS = ['pending', 'ongoing', 'starting']
@@ -28,8 +29,8 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     const appointmentFilter = () => {
-      console.log(data?.appointments)
-      const requestsFiltered = data?.appointments?.filter(appointment => {
+
+      let requestsFiltered = data?.appointments?.filter(appointment => {
         // status matched with requested statuses
         let isRequestStatus = appointment.status ? REQUEST_STATUS.includes(appointment.status) : false
         // status not in done statuses
@@ -43,7 +44,7 @@ const Profile: React.FC = () => {
         return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })
 
-      const ongoingsFiltered = data?.appointments?.filter(appointment => {
+      let ongoingsFiltered = data?.appointments?.filter(appointment => {
         // status matched with ongoing statuses
         let isOngoingStatus = appointment.status ? ONGOING_STATUS.includes(appointment.status) : false
         // status not in done statuses
@@ -59,8 +60,8 @@ const Profile: React.FC = () => {
         return isOngoingStatus && isNotDoneYet && (isSender || isAcceptedAsParticipant)
       })
 
-      setOngoings(ongoingsFiltered)
       setRequests(requestsFiltered)
+      setOngoings(ongoingsFiltered)
     }
 
     if (!loading) {
