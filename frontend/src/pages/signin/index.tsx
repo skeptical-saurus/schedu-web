@@ -47,7 +47,8 @@ const SignIn: React.FC = () => {
         onClick={signIn}
         className='rounded-full px-8 py-2 text-sm font-light border hover:border-blue-200 hover:text-blue-200 duration-100'
       >
-        เข้าสู่ระบบด้วยบัญชี ITKMITL
+        <span>เข้าสู่ระบบ</span>
+        <span className='hidden sm:inline'>ด้วยบัญชี ITKMITL</span>
       </button>
     )
   }
@@ -56,7 +57,7 @@ const SignIn: React.FC = () => {
     <div className='min-h-screen bg-[color:var(--blue)] text-white'>
       <div className='container min-h-screen mx-auto px-8 flex flex-col'>
         <div className='my-auto flex flex-col justify-center items-center'>
-          <div className='text-8xl font-thin mb-8'>
+          <div className='text-6xl md:text-8xl font-thin mb-8'>
             <span className='text-[color:var(--lighter-blue)]'>Sch</span>edu
           </div>
           {renderActionPanel()}
