@@ -9,11 +9,12 @@ import { useQuery } from '@apollo/client'
 const TRIGGER_DIFF = 64
 let lastPos = 0
 
+const navigators = [
+  { path: '/profile', title: 'Profile' },
+  { path: '/contact', title: 'Contact' },
+]
+
 const Navbar: React.FC = () => {
-  const navigators = [
-    { path: '/profile', title: 'Profile' },
-    { path: '/contact', title: 'Contact' },
-  ]
 
   const [shown, setShown] = useState(true)
 
@@ -26,7 +27,7 @@ const Navbar: React.FC = () => {
           {navigators.map((nav, index) => {
             return (
               <Link key={index} href={nav.path}>
-                <a className='mr-6 font-light hover:text-[color:var(--light-blue)] duration-100'>
+                <a className='hidden md:inline mr-6 font-light hover:text-[color:var(--light-blue)] duration-100'>
                   {nav.title}
                 </a>
               </Link>

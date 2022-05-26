@@ -9,8 +9,13 @@ type Props = {
   user?: Account
 }
 
+const menus = [
+  { title: 'Contact', icon: 'format_list_bulleted', link: '/contact', smDisplay: true },
+  { title: 'Profile', icon: 'badge', link: '/profile', smDisplay: true },
+  { title: 'Edit Profile', icon: 'edit_note', link: '/profile/edit' }
+]
+
 const UserDropdown: React.FC<Props> = ({ user }) => {
-  const menus = [{ title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' }]
 
   const router = useRouter()
   const { signOut } = useAuth()
@@ -54,8 +59,11 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
             className='text-[color:var(--light-blue)] font-bold flex items-center'
           >
             <span className='material-icons mr-1'>person</span>
-            <span>
+            <span className='hidden md:inline'>
               {user?.firstName} {user?.lastName}
+            </span>
+            <span className='inline md:hidden'>
+              บัญชีผู้ใช้
             </span>
           </Menu.Button>
           {mount && (
@@ -76,7 +84,7 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
               </div>
               {menus.map((menu, index) => (
                 <Link href={menu.link} key={index}>
-                  <a className='px-4 py-3 flex items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]'>
+                  <a className={`${menu.smDisplay ? 'flex md:hidden' : 'flex'} px-4 py-3 items-center border-t cursor-pointer duration-100 text-grey-800 hover:text-[color:var(--light-blue)]`}>
                     <span className='material-icons text-xl mr-2'>{menu.icon}</span>
                     <span>{menu.title}</span>
                   </a>
