@@ -97,7 +97,7 @@ const DateInfo: React.FC<Props> = ({ date, appoint, activeTime }) => {
   }, [date, subject, note, hour, minute, range, activeTime])
 
   const submit = () => {
-    if (!hour || !minute || !range || !startAt || !endAt) return
+    if (hour == undefined || minute == undefined || range == undefined || !startAt || !endAt) return
     appoint({
       subject,
       note,
