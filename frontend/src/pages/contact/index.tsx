@@ -36,7 +36,7 @@ const Contact: React.FC<Props> = () => {
         <span className='text-3xl'>ติดต่อล่าสุด</span>
       </div>
       {data?.recentContacts?.length ? (
-        <div className='grid grid-cols-4 gap-4 mb-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-12'>
           {data.recentContacts.map((recentContact: Account) => (
             <HighlightCard key={`recent-${recentContact._id}`} contact={recentContact} />
           ))}
