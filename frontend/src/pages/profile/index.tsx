@@ -10,6 +10,11 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
+import dayjs from 'dayjs'
+
+const REQUEST_STATUS = ['pending', 'ongoing']
+const ONGOING_STATUS = ['pending', 'ongoing', 'starting']
+const DONE_STATUS = ['abandoned', 'done']
 
 const Profile: React.FC = () => {
   const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
@@ -24,21 +29,42 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     const appointmentFilter = () => {
-      const ongoingsFiltered = data?.appointments?.filter(
-        (appointment) => appointment.sender === data.currentAccount?._id
-      )
-
-      const requestsFiltered = data?.appointments?.filter((appointment) => {
-        console.log(appointment)
-        const isParticipant = appointment.participants?.find(
-          (userId) => userId === data.currentAccount?._id
+      let requestsFiltered = data?.appointments?.filter((appointment) => {
+        // status matched with requested statuses
+        let isRequestStatus = appointment.status
+          ? REQUEST_STATUS.includes(appointment.status)
+          : false
+        // status not in done statuses
+        let isNotDoneYet = appointment.status ? !DONE_STATUS.includes(appointment.status) : false
+        // user is not a sender
+        let isNotSender = appointment.sender !== data.currentAccount?._id
+        // user is a participant of this appointment
+        let isParticipant = appointment.participants?.find(
+          (participant) => participant?.userId === data.currentAccount?._id
         )
-
-        return appointment.sender !== data.currentAccount?._id && isParticipant
+        return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })
 
-      setOngoings(ongoingsFiltered)
+      let ongoingsFiltered = data?.appointments?.filter((appointment) => {
+        // status matched with ongoing statuses
+        let isOngoingStatus = appointment.status
+          ? ONGOING_STATUS.includes(appointment.status)
+          : false
+        // status not in done statuses
+        let isNotDoneYet = appointment.status ? !DONE_STATUS.includes(appointment.status) : false
+        // user is a sender
+        let isSender = appointment.sender === data.currentAccount?._id
+        // user, as a participant, is accepted
+        let isAcceptedAsParticipant = appointment.participants?.find((participant) => {
+          let matchUserId = participant?.userId === data.currentAccount?._id
+          let isConfirmed = participant?.confirmed
+          return matchUserId && isConfirmed
+        })
+        return isOngoingStatus && isNotDoneYet && (isSender || isAcceptedAsParticipant)
+      })
+
       setRequests(requestsFiltered)
+      setOngoings(ongoingsFiltered)
     }
 
     if (!loading) {
