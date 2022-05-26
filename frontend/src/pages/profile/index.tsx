@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Appointment, Query } from 'types'
-import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
+import { Appointment, Event, Query } from 'types'
+import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT, GET_EVENTS,  } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
@@ -10,6 +10,7 @@ import UserInfo from './components/userInfo'
 import DetailModal from './components/detailModal'
 import ApproveModal from './components/approveModal'
 import DenyModal from './components/denyModal'
+import EventInDate from './components/eventInDate'
 import dayjs from 'dayjs'
 
 const REQUEST_STATUS = ['pending', 'ongoing']
@@ -18,6 +19,10 @@ const DONE_STATUS = ['abandoned', 'done']
 
 const Profile: React.FC = () => {
   const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
+  const { loading:eventLoading, data:eventData } = useQuery<Query>(GET_EVENTS)
+
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [onDateEvents, setOnDateEvents] = useState<Event[]>()
 
   const [requests, setRequests] = useState<Appointment[]>()
   const [ongoings, setOngoings] = useState<Appointment[]>()
@@ -27,6 +32,16 @@ const Profile: React.FC = () => {
   const [isApproveOpen, setApproveOpen] = useState(false)
   const [isDenyOpen, setDenyOpen] = useState(false)
 
+  useEffect(() => {
+    console.log(eventData?.events)
+    let eventsOnDate = eventData?.events?.filter(event => {
+      return !dayjs(event.date).diff(dayjs(selectedDate), 'days')
+    })
+    if (!eventsOnDate) eventsOnDate = []
+    setOnDateEvents(eventsOnDate)
+  }, [selectedDate])
+
+  // Filter appointments
   useEffect(() => {
     const appointmentFilter = () => {
       let requestsFiltered = data?.appointments?.filter((appointment) => {
@@ -107,7 +122,8 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <div>
-            <PersonalCalendar />
+            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} />
+            <EventInDate selected={selectedDate} events={onDateEvents} />
           </div>
           <div>
             <RequestList

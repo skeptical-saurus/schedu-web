@@ -118,3 +118,13 @@ export const GET_APPOINTMENTS_AND_CURRENT_ACCOUNT = gql`
     }
   }
 `
+
+export const GET_EVENTS = gql`
+  query events {
+    events {
+      _id
+      title
+      date
+    }
+  }
+`
