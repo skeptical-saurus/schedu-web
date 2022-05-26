@@ -145,7 +145,7 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <div>
-            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} events={eventData?.events} />
+            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} events={eventData?.events} appointments={data?.appointments} />
             <EventInDate
               selected={selectedDate}
               events={onDateEvents}
