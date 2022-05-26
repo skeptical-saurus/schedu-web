@@ -78,7 +78,8 @@ const Profile: React.FC = () => {
         let isNotSender = appointment.sender !== data.currentAccount?._id
         // user is a participant of this appointment
         let isParticipant = appointment.participants?.find(
-          (participant) => participant?.userId === data.currentAccount?._id && !participant?.confirmed 
+          (participant) =>
+            participant?.userId === data.currentAccount?._id && !participant?.confirmed
         )
         return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })

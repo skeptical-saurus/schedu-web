@@ -33,9 +33,9 @@ export const APPROVE_APPOINTMENT = gql`
 `
 
 export const REJECT_APPOINTMENT = gql`
-mutation rejectAppointment($_id: MongoID!) {
-  rejectAppointment(_id: $_id) {
-    recordId
+  mutation rejectAppointment($_id: MongoID!) {
+    rejectAppointment(_id: $_id) {
+      recordId
+    }
   }
-}
 `
