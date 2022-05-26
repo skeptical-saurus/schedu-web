@@ -38,7 +38,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     let eventsOnDate = eventData?.events?.filter((event) => {
-      return !dayjs(event.date).diff(dayjs(selectedDate), 'days')
+      return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate), 'days')
     })
     if (!eventsOnDate) eventsOnDate = []
     setOnDateEvents(eventsOnDate)
@@ -48,7 +48,7 @@ const Profile: React.FC = () => {
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
-  }, [data?.appointments, eventData?.events, selectedDate])
+  }, [data, eventData, selectedDate])
 
   useEffect(() => {
     if (apmId?.length === 1) {
@@ -66,6 +66,7 @@ const Profile: React.FC = () => {
   // Filter appointments
   useEffect(() => {
     const appointmentFilter = () => {
+      console.log(data)
       let requestsFiltered = data?.appointments?.filter((appointment) => {
         // status matched with requested statuses
         let isRequestStatus = appointment.status
@@ -77,7 +78,8 @@ const Profile: React.FC = () => {
         let isNotSender = appointment.sender !== data.currentAccount?._id
         // user is a participant of this appointment
         let isParticipant = appointment.participants?.find(
-          (participant) => participant?.userId === data.currentAccount?._id
+          (participant) =>
+            participant?.userId === data.currentAccount?._id && !participant?.confirmed
         )
         return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })
@@ -144,7 +146,12 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <div>
-            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} />
+            <PersonalCalendar
+              selected={selectedDate}
+              setSelected={setSelectedDate}
+              events={eventData?.events}
+              appointments={data?.appointments}
+            />
             <EventInDate
               selected={selectedDate}
               events={onDateEvents}
