@@ -10,9 +10,9 @@ type Props = {
 }
 
 const menus = [
-  { title: 'Contact', icon: 'format_list_bulleted', link: '/contact', smDisplay: true },
-  { title: 'Profile', icon: 'badge', link: '/profile', smDisplay: true },
-  { title: 'Edit Profile', icon: 'edit_note', link: '/profile/edit' },
+  { title: 'รายชื่อติดต่อ', icon: 'format_list_bulleted', link: '/contact', smDisplay: true },
+  { title: 'โปรไฟล์', icon: 'badge', link: '/profile', smDisplay: true },
+  { title: 'แก้ไขโปรไฟล์', icon: 'edit_note', link: '/profile/edit' },
 ]
 
 const UserDropdown: React.FC<Props> = ({ user }) => {

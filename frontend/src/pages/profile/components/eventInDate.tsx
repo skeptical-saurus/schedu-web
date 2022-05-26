@@ -1,5 +1,7 @@
 import dayjs from 'dayjs'
+import { colorizeStatus } from 'lib/statusColor'
 import { apmDuration, formatTime } from 'lib/timeFormatter'
+import { useEffect } from 'react'
 import { Appointment, Event } from 'types'
 
 type Props = {
@@ -9,6 +11,11 @@ type Props = {
 }
 
 const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
+
+  useEffect(() => {
+    console.log(appointments)
+  }, [appointments])
+
   return (
     <>
       <div className='border rounded-xl p-8 mt-8'>
@@ -31,7 +38,7 @@ const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
         <div>
           {appointments?.map((apm) => (
             <div key={`onapm-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
-              <div className='col-span-4'>
+              <div className={`col-span-5 border-l-4 pl-3 ${colorizeStatus(apm.status as string)}`}>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>
                   <div className='sm:flex items-center flex-wrap font-light text-sm text-gray-600'>
