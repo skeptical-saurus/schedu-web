@@ -12,7 +12,7 @@ const EventCalendar: React.FC<Props> = ({ onChangeDate }) => {
   return (
     <>
       <div className='p-6 rounded-2xl border'>
-        <Calendar onChange={handleDateChange} />
+        <Calendar onChange={handleDateChange} minDate={new Date()} />
       </div>
     </>
   )
