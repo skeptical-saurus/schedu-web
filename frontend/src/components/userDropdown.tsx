@@ -63,7 +63,7 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
               {user?.firstName} {user?.lastName}
             </span>
             <span className='inline md:hidden'>
-              บัญชีผู้ใช้
+              Account
             </span>
           </Menu.Button>
           {mount && (
