@@ -38,7 +38,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     let eventsOnDate = eventData?.events?.filter((event) => {
-      return !dayjs(event.date).diff(dayjs(selectedDate), 'days')
+      return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate), 'days')
     })
     if (!eventsOnDate) eventsOnDate = []
     setOnDateEvents(eventsOnDate)
@@ -144,7 +144,12 @@ const Profile: React.FC = () => {
         </div>
         <div className='grid grid-cols-2 gap-8'>
           <div>
-            <PersonalCalendar selected={selectedDate} setSelected={setSelectedDate} />
+            <PersonalCalendar
+              selected={selectedDate}
+              setSelected={setSelectedDate}
+              events={eventData?.events}
+              appointments={data?.appointments}
+            />
             <EventInDate
               selected={selectedDate}
               events={onDateEvents}

@@ -18,16 +18,19 @@ const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
             {appointments ? appointments?.length : 0} รายการในวันนี้
           </div>
         </div>
-        <div>
-          {events?.map((event) => (
-            <span className='px-5 py-1 font-light text-xs rounded-full mr-2 mt-4 bg-amber-300'>
+        <div className={`${events?.length ? 'mt-3' : ''}`}>
+          {events?.map((event, index) => (
+            <span
+              key={`onevent-${index}`}
+              className='px-5 py-1 font-light text-xs rounded-full mr-2 bg-amber-300'
+            >
               {event.title}
             </span>
           ))}
         </div>
         <div>
           {appointments?.map((apm) => (
-            <div key={`ondate-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
+            <div key={`onapm-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
               <div className='col-span-4'>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>
