@@ -29,10 +29,11 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     const appointmentFilter = () => {
-
-      let requestsFiltered = data?.appointments?.filter(appointment => {
+      let requestsFiltered = data?.appointments?.filter((appointment) => {
         // status matched with requested statuses
-        let isRequestStatus = appointment.status ? REQUEST_STATUS.includes(appointment.status) : false
+        let isRequestStatus = appointment.status
+          ? REQUEST_STATUS.includes(appointment.status)
+          : false
         // status not in done statuses
         let isNotDoneYet = appointment.status ? !DONE_STATUS.includes(appointment.status) : false
         // user is not a sender
@@ -44,9 +45,11 @@ const Profile: React.FC = () => {
         return isRequestStatus && isNotDoneYet && isNotSender && isParticipant
       })
 
-      let ongoingsFiltered = data?.appointments?.filter(appointment => {
+      let ongoingsFiltered = data?.appointments?.filter((appointment) => {
         // status matched with ongoing statuses
-        let isOngoingStatus = appointment.status ? ONGOING_STATUS.includes(appointment.status) : false
+        let isOngoingStatus = appointment.status
+          ? ONGOING_STATUS.includes(appointment.status)
+          : false
         // status not in done statuses
         let isNotDoneYet = appointment.status ? !DONE_STATUS.includes(appointment.status) : false
         // user is a sender
