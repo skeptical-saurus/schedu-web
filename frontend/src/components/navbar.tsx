@@ -15,7 +15,6 @@ const navigators = [
 ]
 
 const Navbar: React.FC = () => {
-
   const [shown, setShown] = useState(true)
 
   const { loading, data } = useQuery<Query>(GET_CURRENT_ACCOUNT)

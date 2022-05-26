@@ -59,7 +59,9 @@ const RequestList: React.FC<Props> = ({ appointments, moreDetail, submit }) => {
     <>
       <div className='border rounded-xl p-8 mb-8'>
         <div className='text-xl font-bold mb-4'>รายการร้องขอ</div>
-        <div className='max-h-96 overflow-y-scroll'>{appointments?.length ? renderList() : renderEmpty()}</div>
+        <div className='max-h-96 overflow-y-scroll'>
+          {appointments?.length ? renderList() : renderEmpty()}
+        </div>
       </div>
     </>
   )

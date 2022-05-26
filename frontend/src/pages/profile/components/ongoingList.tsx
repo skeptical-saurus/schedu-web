@@ -45,7 +45,9 @@ const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
     <>
       <div className='border rounded-xl p-8'>
         <div className='text-xl font-bold mb-4'>รายการที่ยังดำเนินอยู่</div>
-        <div className='max-h-96 overflow-y-scroll'>{appointments?.length ? renderList() : renderEmpty()}</div>
+        <div className='max-h-96 overflow-y-scroll'>
+          {appointments?.length ? renderList() : renderEmpty()}
+        </div>
       </div>
     </>
   )
