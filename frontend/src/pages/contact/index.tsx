@@ -47,8 +47,8 @@ const Contact: React.FC<Props> = () => {
           <div className='font-light text-lg text-gray-400'>ไม่พบรายชื่อผู้ติดต่อล่าสุด</div>
         </div>
       )}
-      <div className='flex justify-between items-center mb-6'>
-        <div className='font-bold flex items-center'>
+      <div className='md:flex justify-between items-center mb-6'>
+        <div className='font-bold flex items-center mb-4 md:mb-0'>
           <span className='material-icons text-4xl mr-3'>connect_without_contact</span>
           <span className='text-3xl'>รายชื่อผู้ติดต่อ</span>
         </div>
