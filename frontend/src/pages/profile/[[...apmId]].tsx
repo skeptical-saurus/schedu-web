@@ -40,7 +40,6 @@ const Profile: React.FC = () => {
     let eventsOnDate = eventData?.events?.filter((event) => {
       return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate), 'days')
     })
-    console.log(eventsOnDate)
     if (!eventsOnDate) eventsOnDate = []
     setOnDateEvents(eventsOnDate)
 
