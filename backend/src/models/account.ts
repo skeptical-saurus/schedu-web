@@ -19,6 +19,10 @@ const accountSchema = new mongoose.Schema<Account>({
     tel: String,
   },
   image: String,
+  role: {
+    type: String,
+    required: true,
+  },
   setting: {
     type: {
       displayTel: Boolean,
