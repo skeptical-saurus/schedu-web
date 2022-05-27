@@ -1,11 +1,13 @@
+import Link from 'next/link'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { Appointment, Mutation, MutationApproveAppointmentArgs } from 'types'
-import { formatTime, apmDuration } from 'lib/timeFormatter'
+import { Fragment, useEffect, useState } from 'react'
+import { Account, Appointment, Mutation, MutationApproveAppointmentArgs } from 'types'
+import { useMutation, useQuery } from '@apollo/client'
 
+import { formatTime, apmDuration } from 'lib/timeFormatter'
 import { APPROVE_APPOINTMENT } from 'lib/mutations'
-import { GET_PROFILE_DATA } from 'lib/queries'
-import { useMutation } from '@apollo/client'
+import { GET_PROFILE_DATA, GET_ACCOUNT_BY_ID } from 'lib/queries'
+import { commMethodStatus } from 'lib/helpers'
 
 type Props = {
   appointment?: Appointment
@@ -17,6 +19,17 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   const [approve] = useMutation<Mutation, MutationApproveAppointmentArgs>(APPROVE_APPOINTMENT, {
     refetchQueries: [GET_PROFILE_DATA],
   })
+
+  const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, {
+    variables: { _id: apm?.sender as string },
+  })
+  const [sender, setSender] = useState<Account>()
+
+  useEffect(() => {
+    if (!loading) {
+      setSender(data?.account)
+    }
+  }, [data, loading])
 
   const handleSubmit = () => {
     approve({ variables: { _id: apm?._id as string } })
@@ -56,6 +69,30 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     <div className='text-lg font-medium mb-2'>{apm?.subject}</div>
                     <div className='text-sm mb-6'>
                       {apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}
+                    </div>
+                    <div className='flex items-center gap-1 mb-1'>
+                      <span>ผู้นัดหมาย:</span>
+                      <Link href={`/contact/${sender?._id}`} passHref>
+                        <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                          {sender?.firstName} {sender?.lastName}
+                        </span>
+                      </Link>
+                    </div>
+                    <div className='mb-1'>ช่องทางสื่อสาร: {commMethodStatus(apm?.commMethod!)}</div>
+                    <div className='mb-6'>
+                      ลิงก์แนบ:{' '}
+                      {apm?.commUrl ? (
+                        <a
+                          href={apm?.commUrl}
+                          target='_blank'
+                          rel='noreferrer'
+                          className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100'
+                        >
+                          {apm?.commUrl}
+                        </a>
+                      ) : (
+                        '-'
+                      )}
                     </div>
                     <div className='mb-1'>{formatTime(apm)}</div>
                     <div className='text-sm'>{apmDuration(apm)}</div>

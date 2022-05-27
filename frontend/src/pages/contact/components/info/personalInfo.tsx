@@ -9,7 +9,7 @@ const PersonalInfo: React.FC<Props> = ({ contact }) => {
     if (contact?.image) {
       return (
         <img
-          className='w-24 text-gray-600 rounded-full'
+          className='w-24 text-gray-600 rounded-full hover:animate-spin'
           src={contact.image}
           alt={`${contact.firstName} ${contact.lastName}`}
         />

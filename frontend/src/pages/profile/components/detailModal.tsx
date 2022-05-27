@@ -1,7 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { Appointment } from 'types'
+import { Fragment, useEffect, useState } from 'react'
+import { Account, Appointment } from 'types'
 import { formatTime, apmDuration } from 'lib/timeFormatter'
+import { GET_ACCOUNT_BY_ID } from 'lib/queries'
+import { useQuery } from '@apollo/client'
 
 type Props = {
   appointment?: Appointment
@@ -10,10 +12,17 @@ type Props = {
 }
 
 const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
-  const handleSubmit = () => {
-    // TODO: do submit approval
-    close()
-  }
+  const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, {
+    variables: { _id: apm?.sender as string },
+  })
+
+  const [sender, setSender] = useState<Account>()
+
+  useEffect(() => {
+    if (!loading) {
+      setSender(data?.account)
+    }
+  }, [data, loading])
 
   return (
     <>
@@ -53,6 +62,7 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     </button>
                   </Dialog.Title>
                   <div className='font-light'>
+                    <div className='mb-6'>ผู้นัดหมาย: {sender?.firstName} {sender?.lastName}</div>
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
                     <div className='mb-6'>ช่องทางสื่อสาร: {apm?.commMethod}</div>
                     <div className='mb-6'>ลิงก์แนบ: {apm?.commUrl ? apm?.commUrl : '-'}</div>

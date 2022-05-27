@@ -10,7 +10,7 @@ const UserInfo: React.FC<Props> = ({ user }) => {
     if (user?.image) {
       return (
         <img
-          className='w-24 text-gray-600 rounded-full mx-auto'
+          className='w-24 text-gray-600 rounded-full mx-auto hover:animate-spin'
           src={user?.image}
           alt={`${user?.firstName} ${user.lastName}`}
         />
