@@ -34,14 +34,14 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
     if (user?.image) {
       return (
         <img
-          className='w-16 text-gray-600 rounded-full'
+          className='w-16 text-gray-600 rounded-full hover:animate-spin'
           src={user.image}
           alt={`${user.firstName} ${user.lastName}`}
         />
       )
     }
     return (
-      <span className='w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full'>
+      <span className='w-16 h-16 flex items-center justify-center bg-gray-200 rounded-full hover:animate-spin'>
         <span className='material-icons'>account_circle</span>
       </span>
     )

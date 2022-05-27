@@ -1,6 +1,7 @@
 import { Appointment } from 'types'
 import { formatTime, apmDuration } from 'lib/timeFormatter'
 import { colorizeStatus } from 'lib/statusColor'
+import { mapStatus } from 'lib/helpers'
 
 type Props = {
   appointments?: Appointment[]
@@ -22,7 +23,7 @@ const OngoingList: React.FC<Props> = ({ appointments, moreDetail }) => {
               <div className='mr-2'>{formatTime(apm)}</div>
               <div>{apmDuration(apm)}</div>
             </div>
-            <div>สถานะ: {apm.status}</div>
+            <div>สถานะ: {mapStatus(apm.status!)}</div>
           </div>
         </div>
         <div className='col-span-5 md:col-span-1 flex items-center justify-end ml-8'>

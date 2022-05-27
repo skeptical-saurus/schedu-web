@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Account } from 'types'
-import { mapRoleTitle } from 'lib/contact'
+import { mapRoleTitle } from 'lib/helpers'
 
 type Props = {
   contact: Account

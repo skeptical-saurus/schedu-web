@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 import { colorizeStatus } from 'lib/statusColor'
 import { apmDuration, formatTime } from 'lib/timeFormatter'
-import { useEffect } from 'react'
 import { Appointment, Event } from 'types'
+import { mapStatus } from 'lib/helpers'
 
 type Props = {
   selected: Date
@@ -11,10 +11,6 @@ type Props = {
 }
 
 const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
-  useEffect(() => {
-    console.log(appointments)
-  }, [appointments])
-
   return (
     <>
       <div className='border rounded-xl p-8 mt-8'>
@@ -44,7 +40,7 @@ const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
                     <div className='mr-2'>{formatTime(apm)}</div>
                     <div>{apmDuration(apm)}</div>
                   </div>
-                  <div>สถานะ: {apm.status}</div>
+                  <div>สถานะ: {mapStatus(apm.status!)}</div>
                 </div>
               </div>
             </div>

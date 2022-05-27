@@ -87,14 +87,14 @@ const UserForm: React.FC<Props> = ({ user }) => {
     if (image) {
       return (
         <img
-          className='w-24 text-gray-600 rounded-full'
+          className='w-24 text-gray-600 rounded-full hover:animate-spin'
           src={image}
           alt={`${firstname} ${lastname}`}
         />
       )
     }
     return (
-      <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full'>
+      <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full hover:animate-spin'>
         <span className='material-icons text-8xl text-gray-600'>account_circle</span>
       </span>
     )
