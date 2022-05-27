@@ -16,9 +16,7 @@ const HighlightCard: React.FC<Props> = ({ contact }) => {
         <div className='mb-1'>
           {contact.firstName} {contact.lastName}
         </div>
-        <div className='font-light text-sm text-gray-700'>
-          {mapRoleTitle(contact.role)}
-        </div>
+        <div className='font-light text-sm text-gray-700'>{mapRoleTitle(contact.role)}</div>
       </div>
     </Link>
   )
