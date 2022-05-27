@@ -4,7 +4,7 @@ import { Appointment, Mutation, MutationApproveAppointmentArgs } from 'types'
 import { formatTime, apmDuration } from 'lib/timeFormatter'
 
 import { APPROVE_APPOINTMENT } from 'lib/mutations'
-import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
+import { GET_PROFILE_DATA } from 'lib/queries'
 import { useMutation } from '@apollo/client'
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 
 const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   const [approve] = useMutation<Mutation, MutationApproveAppointmentArgs>(APPROVE_APPOINTMENT, {
-    refetchQueries: [GET_APPOINTMENTS_AND_CURRENT_ACCOUNT],
+    refetchQueries: [GET_PROFILE_DATA],
   })
 
   const handleSubmit = () => {

@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { Appointment, Mutation, MutationRejectAppointmentArgs } from 'types'
 import { REJECT_APPOINTMENT } from 'lib/mutations'
-import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT } from 'lib/queries'
+import { GET_PROFILE_DATA } from 'lib/queries'
 import { useMutation } from '@apollo/client'
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 
 const DenyModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   const [deny] = useMutation<Mutation, MutationRejectAppointmentArgs>(REJECT_APPOINTMENT, {
-    refetchQueries: [GET_APPOINTMENTS_AND_CURRENT_ACCOUNT],
+    refetchQueries: [GET_PROFILE_DATA],
   })
 
   const handleSubmit = () => {
