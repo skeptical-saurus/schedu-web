@@ -1,9 +1,12 @@
+import Link from 'next/link'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
+
 import { Account, Appointment } from 'types'
 import { formatTime, apmDuration } from 'lib/timeFormatter'
 import { GET_ACCOUNT_BY_ID } from 'lib/queries'
-import { useQuery } from '@apollo/client'
+import { commMethodStatus } from 'lib/helpers'
 
 type Props = {
   appointment?: Appointment
@@ -62,12 +65,31 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     </button>
                   </Dialog.Title>
                   <div className='font-light'>
-                    <div className='mb-6'>
-                      ผู้นัดหมาย: {sender?.firstName} {sender?.lastName}
-                    </div>
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
-                    <div className='mb-6'>ช่องทางสื่อสาร: {apm?.commMethod}</div>
-                    <div className='mb-6'>ลิงก์แนบ: {apm?.commUrl ? apm?.commUrl : '-'}</div>
+                    <div className='flex items-center gap-1 mb-1'>
+                      <span>ผู้นัดหมาย:</span>
+                      <Link href={`/contact/${sender?._id}`} passHref>
+                        <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                          {sender?.firstName} {sender?.lastName}
+                        </span>
+                      </Link>
+                    </div>
+                    <div className='mb-1'>ช่องทางสื่อสาร: {commMethodStatus(apm?.commMethod!)}</div>
+                    <div className='mb-6'>
+                      ลิงก์แนบ:{' '}
+                      {apm?.commUrl ? (
+                        <a
+                          href={apm?.commUrl}
+                          target='_blank'
+                          rel='noreferrer'
+                          className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100'
+                        >
+                          {apm?.commUrl}
+                        </a>
+                      ) : (
+                        '-'
+                      )}
+                    </div>
                     <div className='mb-1'>ช่วงเวลา: {formatTime(apm)}</div>
                     <div className='text-sm'>{apmDuration(apm)}</div>
                   </div>
