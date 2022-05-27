@@ -92,8 +92,8 @@ export const GET_APPOINTMENTS = gql`
   }
 `
 
-export const GET_APPOINTMENTS_AND_CURRENT_ACCOUNT = gql`
-  query appointmentsAndCurrentAccount {
+export const GET_PROFILE_DATA = gql`
+  query profileData {
     appointments {
       _id
       subject
@@ -123,11 +123,6 @@ export const GET_APPOINTMENTS_AND_CURRENT_ACCOUNT = gql`
         tel
       }
     }
-  }
-`
-
-export const GET_EVENTS = gql`
-  query events {
     events {
       _id
       title

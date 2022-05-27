@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { CreateOneAppointmentInput, Mutation, MutationCreateAppointmentArgs } from 'types'
 import { useMutation } from '@apollo/client'
 import { CREATE_APPOINTMENT } from 'lib/mutations'
+import { GET_PROFILE_DATA } from 'lib/queries'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -17,6 +18,7 @@ const ConfirmModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
   const [createAppointment] = useMutation<Mutation, MutationCreateAppointmentArgs>(
     CREATE_APPOINTMENT,
     {
+      refetchQueries: [GET_PROFILE_DATA],
       onCompleted: (data) => {
         router.push(`/profile/${data.createAppointment?.record?._id ?? ''}`)
       },

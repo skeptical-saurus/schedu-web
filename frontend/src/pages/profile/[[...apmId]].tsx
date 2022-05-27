@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Appointment, Event, Query } from 'types'
-import { GET_APPOINTMENTS_AND_CURRENT_ACCOUNT, GET_EVENTS } from 'lib/queries'
+import { GET_PROFILE_DATA } from 'lib/queries'
 import { useQuery } from '@apollo/client'
 
 import OngoingList from './components/ongoingList'
@@ -21,8 +21,7 @@ const DONE_STATUS = ['abandoned', 'done']
 const Profile: React.FC = () => {
   const router = useRouter()
   const { apmId } = router.query
-  const { loading, data } = useQuery<Query>(GET_APPOINTMENTS_AND_CURRENT_ACCOUNT)
-  const { loading: eventLoading, data: eventData } = useQuery<Query>(GET_EVENTS)
+  const { loading, data } = useQuery<Query>(GET_PROFILE_DATA)
 
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [onDateEvents, setOnDateEvents] = useState<Event[]>()
@@ -37,7 +36,20 @@ const Profile: React.FC = () => {
   const [isDenyOpen, setDenyOpen] = useState(false)
 
   useEffect(() => {
-    let eventsOnDate = eventData?.events?.filter((event) => {
+    if (apmId?.length === 1 && !loading) {
+      if (!isDetailOpen) {
+        const createdAppointment = data?.appointments?.find((appointment) => {
+          return appointment._id === apmId[0]
+        })
+        if (createdAppointment) openDetailModal(createdAppointment)
+      } else {
+        router.replace('/profile')
+      }
+    }
+  }, [apmId, data?.appointments, router, isDetailOpen, loading])
+
+  useEffect(() => {
+    let eventsOnDate = data?.events?.filter((event) => {
       return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate), 'days')
     })
     if (!eventsOnDate) eventsOnDate = []
@@ -48,25 +60,11 @@ const Profile: React.FC = () => {
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
-  }, [data, eventData, selectedDate])
-
-  useEffect(() => {
-    if (apmId?.length === 1) {
-      if (!isDetailOpen) {
-        const createdAppointment = data?.appointments?.find(
-          (appointment) => appointment._id === apmId[0]
-        )
-        if (createdAppointment) openDetailModal(createdAppointment)
-      } else {
-        router.replace('/profile')
-      }
-    }
-  }, [apmId, data?.appointments, router, isDetailOpen])
+  }, [data?.appointments, data?.events, selectedDate])
 
   // Filter appointments
   useEffect(() => {
     const appointmentFilter = () => {
-      console.log(data)
       let requestsFiltered = data?.appointments?.filter((appointment) => {
         // status matched with requested statuses
         let isRequestStatus = appointment.status
@@ -149,7 +147,7 @@ const Profile: React.FC = () => {
             <PersonalCalendar
               selected={selectedDate}
               setSelected={setSelectedDate}
-              events={eventData?.events}
+              events={data?.events}
               appointments={data?.appointments}
             />
             <EventInDate
