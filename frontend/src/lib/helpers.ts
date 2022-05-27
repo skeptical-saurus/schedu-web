@@ -1,7 +1,6 @@
 const roleDictionary: Record<string, string> = {
   std: 'นักศึกษา',
-  prof: 'อาจารย์',
-  ofc: 'ธุรการ',
+  'prof/ofc': 'อาจารย์/ธุรการ'
 }
 
 const statusDictionary: Record<string, string> = {
