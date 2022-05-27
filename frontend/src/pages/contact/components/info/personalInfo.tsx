@@ -31,8 +31,7 @@ const PersonalInfo: React.FC<Props> = ({ contact }) => {
           <div className='text-lg'>
             {contact?.firstName} {contact?.lastName}
           </div>
-          {/* Comment until contact have role */}
-          {/* <div className='text-sm text-gray-600'>{mapRoleTitle(contact?.role)}</div> */}
+          <div className='text-sm text-gray-600'>{mapRoleTitle(contact?.role)}</div>
         </div>
       </div>
       <div className='grid grid-cols-5'>

@@ -1,7 +1,6 @@
 const roleDictionary: Record<string, string> = {
-  std: 'นักศึกษา',
-  prof: 'อาจารย์',
-  ofc: 'ธุรการ',
+  'std': 'นักศึกษา',
+  'prof/ofc': 'อาจารย์/ธุรการ',
 }
 
 const statusDictionary: Record<string, string> = {
@@ -19,8 +18,8 @@ const commMethodDictionary: Record<string, string> = {
   MT: 'Microsoft Teams',
 }
 
-export const mapRoleTitle = (role: string) => {
-  return roleDictionary[role] ? roleDictionary[role] : '—'
+export const mapRoleTitle = (role: string | undefined) => {
+  return role && roleDictionary[role] ? roleDictionary[role] : '—'
 }
 
 export const mapStatus = (status: string) => {

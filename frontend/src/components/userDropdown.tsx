@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react'
 import { useAuth } from 'context/AuthContext'
+import { mapRoleTitle } from 'lib/helpers'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -76,7 +77,7 @@ const UserDropdown: React.FC<Props> = ({ user }) => {
                       {user?.firstName} {user?.lastName}
                     </a>
                   </Link>
-                  <div className='text-sm font-light text-gray-500'>นักศึกษา</div>
+                  <div className='text-sm font-light text-gray-500'>{mapRoleTitle(user?.role)}</div>
                 </div>
               </div>
               {menus.map((menu, index) => (

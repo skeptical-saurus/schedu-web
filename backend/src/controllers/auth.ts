@@ -8,7 +8,7 @@ export const createNewUser = async (data: DecodedIdToken) => {
   const emailAccount = data.email?.split('@')[0]
   const isStudent = !isNaN(Number(emailAccount))
   const businessId = isStudent ? emailAccount : ''
-  const role = isStudent ? 'student' : 'professor'
+  const role = isStudent ? 'std' : 'prof/ofc'
   const [firstName, lastName] = data.name.split(' ')
 
   const user = new AccountModel({

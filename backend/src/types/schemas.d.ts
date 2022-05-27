@@ -10,6 +10,7 @@ export interface Account extends mongoose.Document {
     tel: string
   }
   image: string
+  role: string
   setting: {
     displayTel: boolean
     weekendReceive: boolean
