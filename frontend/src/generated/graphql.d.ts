@@ -28,6 +28,7 @@ export interface Account {
   googleId?: Maybe<Scalars['String']>
   image?: Maybe<Scalars['String']>
   lastName?: Maybe<Scalars['String']>
+  role: Scalars['String']
   setting: AccountSetting
 }
 
@@ -209,6 +210,7 @@ export interface FilterFindManyAccountInput {
   googleId?: InputMaybe<Scalars['String']>
   image?: InputMaybe<Scalars['String']>
   lastName?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   setting?: InputMaybe<FilterFindManyAccountSettingInput>
 }
 
@@ -357,6 +359,7 @@ export interface FilterFindOneAccountInput {
   googleId?: InputMaybe<Scalars['String']>
   image?: InputMaybe<Scalars['String']>
   lastName?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   setting?: InputMaybe<FilterFindOneAccountSettingInput>
 }
 
@@ -505,6 +508,7 @@ export interface FilterUpdateOneAccountInput {
   googleId?: InputMaybe<Scalars['String']>
   image?: InputMaybe<Scalars['String']>
   lastName?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   setting?: InputMaybe<FilterUpdateOneAccountSettingInput>
 }
 
@@ -810,6 +814,7 @@ export interface UpdateOneAccountInput {
   googleId?: InputMaybe<Scalars['String']>
   image?: InputMaybe<Scalars['String']>
   lastName?: InputMaybe<Scalars['String']>
+  role?: InputMaybe<Scalars['String']>
   setting?: InputMaybe<UpdateOneAccountSettingInput>
 }
 

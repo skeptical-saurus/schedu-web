@@ -18,8 +18,8 @@ const commMethodDictionary: Record<string, string> = {
   MT: 'Microsoft Teams',
 }
 
-export const mapRoleTitle = (role: string) => {
-  return roleDictionary[role] ? roleDictionary[role] : '—'
+export const mapRoleTitle = (role: string | undefined) => {
+  return role && roleDictionary[role] ? roleDictionary[role] : '—'
 }
 
 export const mapStatus = (status: string) => {

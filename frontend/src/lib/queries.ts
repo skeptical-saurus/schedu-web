@@ -9,6 +9,7 @@ export const GET_ACCOUNTS_AND_CONTACTS = gql`
       firstName
       lastName
       image
+      role
       contact {
         email
         tel
@@ -21,6 +22,7 @@ export const GET_ACCOUNTS_AND_CONTACTS = gql`
       firstName
       lastName
       image
+      role
       contact {
         email
         tel
@@ -38,6 +40,7 @@ export const GET_ACCOUNT_BY_ID = gql`
       firstName
       lastName
       image
+      role
       contact {
         email
         tel
@@ -62,6 +65,7 @@ export const GET_CURRENT_ACCOUNT = gql`
       firstName
       lastName
       image
+      role
       contact {
         email
         tel
@@ -118,6 +122,7 @@ export const GET_PROFILE_DATA = gql`
       firstName
       lastName
       image
+      role
       contact {
         email
         tel
