@@ -1,4 +1,5 @@
 import { Account } from 'types'
+import { mapRoleTitle } from 'lib/helpers'
 
 type Props = {
   contact?: Account
@@ -15,7 +16,11 @@ const PersonalInfo: React.FC<Props> = ({ contact }) => {
         />
       )
     }
-    return <span className='material-icons text-8xl text-gray-600'>account_circle</span>
+    return (
+      <span className='material-icons text-8xl text-gray-600 hover:animate-spin'>
+        account_circle
+      </span>
+    )
   }
 
   return (

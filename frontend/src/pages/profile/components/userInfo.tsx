@@ -17,7 +17,7 @@ const UserInfo: React.FC<Props> = ({ user }) => {
       )
     }
     return (
-      <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full mx-auto'>
+      <span className='w-28 h-28 flex items-center justify-center bg-gray-200 rounded-full mx-auto hover:animate-spin'>
         <span className='material-icons text-8xl text-gray-600'>account_circle</span>
       </span>
     )
