@@ -62,7 +62,9 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     </button>
                   </Dialog.Title>
                   <div className='font-light'>
-                    <div className='mb-6'>ผู้นัดหมาย: {sender?.firstName} {sender?.lastName}</div>
+                    <div className='mb-6'>
+                      ผู้นัดหมาย: {sender?.firstName} {sender?.lastName}
+                    </div>
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
                     <div className='mb-6'>ช่องทางสื่อสาร: {apm?.commMethod}</div>
                     <div className='mb-6'>ลิงก์แนบ: {apm?.commUrl ? apm?.commUrl : '-'}</div>
