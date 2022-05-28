@@ -11,7 +11,6 @@ type Props = {
 }
 
 const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
-
   const setColor = (status: string) => {
     return colorizeStatus(status)
   }
