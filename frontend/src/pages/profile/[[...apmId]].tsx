@@ -56,7 +56,9 @@ const Profile: React.FC = () => {
     setOnDateEvents(eventsOnDate)
 
     let appointmentsOnDate = data?.appointments?.filter((appointment) => {
-      return !dayjs(appointment.startAt).startOf('day').diff(dayjs(selectedDate).startOf('day'), 'days')
+      return !dayjs(appointment.startAt)
+        .startOf('day')
+        .diff(dayjs(selectedDate).startOf('day'), 'days')
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
