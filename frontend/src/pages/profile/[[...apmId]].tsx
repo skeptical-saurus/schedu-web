@@ -168,8 +168,18 @@ const Profile: React.FC = () => {
       </div>
       {selected && (
         <>
-          <DetailModal currentAccount={data?.currentAccount} appointment={selected} isOpen={isDetailOpen} close={handleDetailClose} />
-          <ApproveModal currentAccount={data?.currentAccount} appointment={selected} isOpen={isApproveOpen} close={handleApproveClose} />
+          <DetailModal
+            currentAccount={data?.currentAccount}
+            appointment={selected}
+            isOpen={isDetailOpen}
+            close={handleDetailClose}
+          />
+          <ApproveModal
+            currentAccount={data?.currentAccount}
+            appointment={selected}
+            isOpen={isApproveOpen}
+            close={handleApproveClose}
+          />
         </>
       )}
       <DenyModal appointment={selected} isOpen={isDenyOpen} close={handleDenyClose} />
