@@ -11,6 +11,10 @@ type Props = {
 }
 
 const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
+  const setColor = (status: string) => {
+    return colorizeStatus(status)
+  }
+
   return (
     <>
       <div className='border rounded-xl p-8 mt-8'>
@@ -33,7 +37,7 @@ const EventInDate: React.FC<Props> = ({ selected, events, appointments }) => {
         <div>
           {appointments?.map((apm) => (
             <div key={`onapm-${apm._id}`} className='grid grid-cols-5 py-3 border-b'>
-              <div className={`col-span-5 border-l-4 pl-3 ${colorizeStatus(apm.status as string)}`}>
+              <div className={`col-span-5 pl-3 ${setColor(apm.status as string)}`}>
                 <div className='truncate w-full mb-1'>{apm.subject}</div>
                 <div className='font-light text-sm text-gray-600'>
                   <div className='sm:flex items-center flex-wrap font-light text-sm text-gray-600'>
