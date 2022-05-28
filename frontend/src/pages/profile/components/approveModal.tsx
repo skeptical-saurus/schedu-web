@@ -10,12 +10,13 @@ import { GET_PROFILE_DATA, GET_ACCOUNT_BY_ID } from 'lib/queries'
 import { commMethodStatus } from 'lib/helpers'
 
 type Props = {
+  currentAccount?: Account
   appointment?: Appointment
   isOpen: boolean
   close: () => void
 }
 
-const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
+const ApproveModal: React.FC<Props> = ({ currentAccount, appointment: apm, isOpen, close }) => {
   const [approve] = useMutation<Mutation, MutationApproveAppointmentArgs>(APPROVE_APPOINTMENT, {
     refetchQueries: [GET_PROFILE_DATA],
   })
@@ -72,11 +73,17 @@ const ApproveModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     </div>
                     <div className='flex items-center gap-1 mb-1'>
                       <span>ผู้นัดหมาย:</span>
-                      <Link href={`/contact/${sender?._id}`} passHref>
-                        <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                      {currentAccount?._id !== apm?.sender ? (
+                        <Link href={`/contact/${sender?._id}`} passHref>
+                          <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                            {sender?.firstName} {sender?.lastName}
+                          </span>
+                        </Link>
+                      ) : (
+                        <>
                           {sender?.firstName} {sender?.lastName}
-                        </span>
-                      </Link>
+                        </>
+                      )}
                     </div>
                     <div className='mb-1'>ช่องทางสื่อสาร: {commMethodStatus(apm?.commMethod!)}</div>
                     <div className='mb-6'>

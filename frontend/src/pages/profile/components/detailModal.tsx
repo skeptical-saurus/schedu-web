@@ -9,12 +9,13 @@ import { GET_ACCOUNT_BY_ID } from 'lib/queries'
 import { commMethodStatus } from 'lib/helpers'
 
 type Props = {
+  currentAccount?: Account
   appointment?: Appointment
   isOpen: boolean
   close: () => void
 }
 
-const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
+const DetailModal: React.FC<Props> = ({ currentAccount, appointment: apm, isOpen, close }) => {
   const { loading, data } = useQuery(GET_ACCOUNT_BY_ID, {
     variables: { _id: apm?.sender as string },
   })
@@ -68,11 +69,17 @@ const DetailModal: React.FC<Props> = ({ appointment: apm, isOpen, close }) => {
                     <div className='mb-6'>{apm?.note ? apm?.note : '[ไม่มีคำอธิบายเพิ่มเติม]'}</div>
                     <div className='flex items-center gap-1 mb-1'>
                       <span>ผู้นัดหมาย:</span>
-                      <Link href={`/contact/${sender?._id}`} passHref>
-                        <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                      {currentAccount?._id !== apm?.sender ? (
+                        <Link href={`/contact/${sender?._id}`} passHref>
+                          <span className='text-[color:var(--light-blue)] hover:cursor-pointer hover:text-[color:var(--blue)] duration-100 pl-2 pr-3 flex items-center'>
+                            {sender?.firstName} {sender?.lastName}
+                          </span>
+                        </Link>
+                      ) : (
+                        <>
                           {sender?.firstName} {sender?.lastName}
-                        </span>
-                      </Link>
+                        </>
+                      )}
                     </div>
                     <div className='mb-1'>ช่องทางสื่อสาร: {commMethodStatus(apm?.commMethod!)}</div>
                     <div className='mb-6'>
