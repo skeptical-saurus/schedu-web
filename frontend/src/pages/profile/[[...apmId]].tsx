@@ -50,13 +50,13 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     let eventsOnDate = data?.events?.filter((event) => {
-      return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate), 'days')
+      return !dayjs(event.date).startOf('day').diff(dayjs(selectedDate).startOf('day'), 'days')
     })
     if (!eventsOnDate) eventsOnDate = []
     setOnDateEvents(eventsOnDate)
 
     let appointmentsOnDate = data?.appointments?.filter((appointment) => {
-      return !dayjs(appointment.startAt).startOf('day').diff(dayjs(selectedDate), 'days')
+      return !dayjs(appointment.startAt).startOf('day').diff(dayjs(selectedDate).startOf('day'), 'days')
     })
     if (!appointmentsOnDate) appointmentsOnDate = []
     setOnDateAppointments(appointmentsOnDate)
